@@ -32,7 +32,7 @@ export const content: ContentData = {
   },
   hero: {
     title: "L'Art de la Rénovation",
-    subtitle: "De la préparation des murs à la pose du parquet, l'Atelier Alexei sublime vos intérieurs avec une exigence absolue.",
+    subtitle: "Spécialiste en travaux de rénovation générale и rénovation intérieure. De la création des cloisons à la pose du parquet, nous sublimons vos espaces avec une exigence absolue.",
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
@@ -47,26 +47,33 @@ export const content: ContentData = {
   },
   services: {
     title: "Nos Pôles d'Expertise",
-    subtitle: "Un savoir-faire artisanal au service de votre intérieur parisien.",
+    subtitle: "Votre partenaire d'excellence pour tous vos travaux de rénovation intérieure à Paris.",
     items: [
       {
-        id: 'painting',
-        title: "Peinture & Décoration",
-        description: "Application de peintures haut de gamme et finitions décoratives soignées pour sublimer vos espaces de vie.",
+        id: 'general',
+        title: "Rénovation Générale",
+        description: "Travaux de rénovation générale : peinture, plomberie, électricité, menuiserie, carrelage sol et murs.",
         image: "/assets/services/painting-service.webp",
         iconName: 'Paintbrush'
       },
       {
         id: 'plastering',
-        title: "Plâtrerie & Cloisons",
-        description: "Création de cloisons, faux plafonds, doublages et travaux de plâtrerie traditionnelle. Restructuration complète.",
+        title: "Plâtrerie & Aménagement",
+        description: "Création des cloisons, plafonds suspendus et plâtrerie. Restructuration complète de vos espaces intérieurs.",
         image: "/assets/services/plastering-service.webp",
         iconName: 'Home'
       },
       {
+        id: 'spaces',
+        title: "Cuisines & Bains",
+        description: "Restauration des salles de bains и cuisine. Une expertise technique pour vos pièces les plus exigeantes.",
+        image: "/assets/services/bathroom-service.webp",
+        iconName: 'Droplets'
+      },
+      {
         id: 'flooring',
         title: "Parquets & Sols",
-        description: "Pose, ponçage et vitrification de parquets massifs et contrecollés. Point de Hongrie et bâton rompu.",
+        description: "Couverture des sols parquet, pose и restauration. Finitions artisanales pour un sol d'exception.",
         image: "/assets/services/parquet-service.webp",
         iconName: 'Layers'
       }
@@ -182,12 +189,12 @@ export const content: ContentData = {
   ctaBanner: {
     title: "Prêt à Transformer",
     titleHighlight: "Votre Intérieur?",
-    subtitle: "Bénéficiez d'un devis gratuit et personnalisé pour votre projet de rénovation parisien.",
+    subtitle: "Bénéficiez d'un devis gratuit et personnalisé pour votre projet de travaux de rénovation générale à Paris.",
     ctaPrimary: "Demander un devis gratuit",
     ctaSecondary: "+33 6 01 99 76 59"
   },
   footer: {
-    description: "L'excellence artisanale au service de votre intérieur parisien. Peinture, plâtrerie et parquets depuis 2008.",
+    description: "Expert en travaux de rénovation générale et intérieure : peinture, plomberie, électricité, menuiserie, carrelage et parquet. Excellence artisanale depuis 2008.",
     navigation: "Navigation",
     services: "Savoir-faire",
     legal: "Mentions Légales",

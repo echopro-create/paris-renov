@@ -20,8 +20,8 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Cards Grid - 3 columns */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Cards Grid - 4 columns */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.items.map((service, index) => (
             <motion.div
               key={service.id}
