@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ContentData } from '../types';
 import { MoveHorizontal } from 'lucide-react';
+import SkeletonImage from './SkeletonImage';
 
 interface BeforeAfterProps {
   content: ContentData['beforeAfter'];
@@ -99,10 +100,10 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ content, common }) => {
 
           {/* AFTER Image (Background - Base Layer) */}
           <div className="absolute inset-0">
-            <img
-              src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+            <SkeletonImage
+              src="/assets/images/after_salon.png"
               alt="Après rénovation - Salon parisien luxueux"
-              loading="lazy"
+              containerClassName="w-full h-full"
               className="w-full h-full object-cover select-none pointer-events-none"
             />
             <div className="absolute top-4 right-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded text-sm font-bold z-10">
@@ -115,10 +116,10 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ content, common }) => {
             className="absolute inset-0 overflow-hidden border-r-2 border-white"
             style={{ width: `${sliderPosition}%` }}
           >
-            <img
-              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+            <SkeletonImage
+              src="/assets/images/before_salon.png"
               alt="Avant rénovation - État initial de l'appartement"
-              loading="lazy"
+              containerClassName="h-full"
               className="h-full object-cover absolute top-0 left-0 max-w-none select-none pointer-events-none"
               // CRITICAL FIX: Explicitly set width to container width so image doesn't shrink
               style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}

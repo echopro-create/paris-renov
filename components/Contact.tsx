@@ -4,9 +4,10 @@ import { Phone, Mail, MapPin, Clock, AlertCircle, ArrowRight } from 'lucide-reac
 
 interface ContactProps {
   content: ContentData['contact'];
+  common: ContentData['common'];
 }
 
-const Contact: React.FC<ContactProps> = ({ content }) => {
+const Contact: React.FC<ContactProps> = ({ content, common }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -65,7 +66,7 @@ const Contact: React.FC<ContactProps> = ({ content }) => {
         <div className="flex flex-col lg:flex-row gap-20">
 
           <div className="lg:w-5/12 pt-10">
-            <div className="inline-block px-3 py-1 bg-gold-500/10 text-gold-500 text-xs font-bold uppercase tracking-widest rounded mb-6">Contact</div>
+            <div className="inline-block px-3 py-1 bg-gold-500/10 text-gold-500 text-xs font-bold uppercase tracking-widest rounded mb-6">{common.contactBadge}</div>
             <h3 className="font-serif text-5xl font-bold mb-6 leading-tight">{content.title}</h3>
             <p className="text-slate-400 text-lg mb-12 max-w-md">{content.subtitle}</p>
 
@@ -197,8 +198,8 @@ const Contact: React.FC<ContactProps> = ({ content }) => {
                     type="submit"
                     disabled={isSubmitting || isSuccess}
                     className={`w-full py-4 rounded-sm font-bold text-white transition-all shadow-xl flex items-center justify-center gap-3 uppercase tracking-wider text-sm ${isSuccess
-                        ? 'bg-green-600'
-                        : 'bg-slate-900 hover:bg-gold-500 hover:shadow-gold-500/30'
+                      ? 'bg-green-600'
+                      : 'bg-slate-900 hover:bg-gold-500 hover:shadow-gold-500/30'
                       }`}
                   >
                     {isSubmitting ? content.form.submitting : isSuccess ? content.form.success : (

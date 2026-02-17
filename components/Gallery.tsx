@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ContentData } from '../types';
 import { X, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SkeletonImage from './SkeletonImage';
 
 interface GalleryProps {
   content: ContentData['gallery'];
@@ -11,14 +12,14 @@ interface GalleryProps {
 const Gallery: React.FC<GalleryProps> = ({ content, common }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
-  // Using curated Unsplash IDs with varying aspect ratios for Masonry feel
+  // Using curated local images and Unsplash fallback
   const images = [
-    { src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Salon Paris 16e", type: "Rénovation", ratio: "aspect-[3/4]" },
+    { src: "/assets/images/gallery_1_after.png", title: "Salon Eiffel", type: "Rénovation Complète", ratio: "aspect-square" },
+    { src: "/assets/images/after_salon.png", title: "Salon Haussmann", type: "Rénovation", ratio: "aspect-[3/4]" },
     { src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Cuisine Moderne", type: "Agencement", ratio: "aspect-square" },
     { src: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Salle de Bain Marbre", type: "Sanitaire", ratio: "aspect-[3/4]" },
     { src: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Chambre Parentale", type: "Décoration", ratio: "aspect-[4/3]" },
-    { src: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Escalier Bois", type: "Menuiserie", ratio: "aspect-[3/4]" },
-    { src: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Appartement Haussmannien", type: "Rénovation Complète", ratio: "aspect-square" }
+    { src: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Escalier Bois", type: "Menuiserie", ratio: "aspect-[3/4]" }
   ];
 
   const handleNext = (e: React.MouseEvent) => {
@@ -61,10 +62,9 @@ const Gallery: React.FC<GalleryProps> = ({ content, common }) => {
               onClick={() => setSelectedImageIndex(idx)}
               className="group relative break-inside-avoid overflow-hidden rounded-sm cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
             >
-              <img
+              <SkeletonImage
                 src={img.src}
                 alt={img.title}
-                loading="lazy"
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
@@ -127,7 +127,7 @@ const Gallery: React.FC<GalleryProps> = ({ content, common }) => {
               className="relative max-w-[90vw] max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
+              <SkeletonImage
                 src={images[selectedImageIndex].src}
                 alt={images[selectedImageIndex].title}
                 className="max-w-full max-h-[85vh] object-contain rounded-sm shadow-2xl"
