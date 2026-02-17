@@ -149,6 +149,8 @@ export interface ContentData {
   beforeAfter: {
     title: string;
     subtitle: string;
+    beforeImage: string;
+    afterImage: string;
     labelBefore: string;
     labelAfter: string;
   };

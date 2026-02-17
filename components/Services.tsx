@@ -54,11 +54,19 @@ export default function Services() {
               </div>
 
               {/* Glassmorphism Content Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white backdrop-blur-md bg-white/10 dark:bg-black/20 border-t border-white/20">
-                <h3 className="font-serif text-xl font-bold mb-2 group-hover:text-gold-300 transition-colors">{service.title}</h3>
-                <p className="text-sm text-slate-200 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  {service.description}
-                </p>
+              <div className="absolute bottom-0 left-0 right-0 py-3 px-4 text-white backdrop-blur-sm bg-gradient-to-t from-black/80 via-black/20 to-transparent border-t border-white/10 flex flex-col justify-end text-center transition-all duration-500 group-hover:bg-black/60 group-hover:backdrop-blur-md">
+                <div className="min-h-[3.5rem] flex items-center justify-center">
+                  <h3 className="font-serif text-xl font-bold group-hover:text-gold-300 transition-colors leading-tight drop-shadow-lg">
+                    {service.title}
+                  </h3>
+                </div>
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                  <div className="overflow-hidden">
+                    <p className="text-sm text-slate-200 leading-relaxed pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

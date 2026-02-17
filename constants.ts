@@ -66,8 +66,8 @@ export const content: ContentData = {
       {
         id: 'spaces',
         title: "Cuisines & Bains",
-        description: "Restauration des salles de bains и cuisine. Une expertise technique pour vos pièces les plus exigeantes.",
-        image: "/assets/services/bathroom-service.webp",
+        description: "Restauration des salles de bains et cuisine. Une expertise technique pour vos pièces les plus exigeantes.",
+        image: "/assets/services/bathroom-service.png",
         iconName: 'Droplets'
       },
       {
@@ -94,6 +94,8 @@ export const content: ContentData = {
   beforeAfter: {
     title: "Transformation",
     subtitle: "Faites glisser pour découvrir la métamorphose d'un salon Haussmannien.",
+    beforeImage: "/assets/before-after/salon-before-hd.jpg",
+    afterImage: "/assets/before-after/salon-after-hd.jpg",
     labelBefore: "Avant",
     labelAfter: "Après"
   },

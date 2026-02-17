@@ -87,7 +87,7 @@ export default function BeforeAfter() {
           {/* AFTER Image */}
           <div className="absolute inset-0">
             <SkeletonImage
-              src="/assets/images/after_salon.webp"
+              src={beforeAfter.afterImage}
               alt="Après rénovation - Salon parisien luxueux"
               containerClassName="w-full h-full"
               className="w-full h-full object-cover select-none pointer-events-none"
@@ -102,11 +102,10 @@ export default function BeforeAfter() {
             className="absolute inset-0 overflow-hidden border-r-2 border-white"
             style={{ width: `${sliderPosition}%` }}
           >
-            <SkeletonImage
-              src="/assets/images/before_salon.webp"
-              alt="Avant rénovation - État initial de l'appartement"
-              containerClassName="h-full"
-              className="h-full object-cover absolute top-0 left-0 max-w-none select-none pointer-events-none"
+            <img
+              src={beforeAfter.beforeImage}
+              alt="Avant rénovation"
+              className="absolute top-0 left-0 h-full max-w-none object-cover select-none pointer-events-none"
               style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}
             />
             <div className="absolute inset-0 bg-sepia/30 mix-blend-multiply pointer-events-none"></div>
