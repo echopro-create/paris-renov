@@ -51,7 +51,7 @@ export const content: ContentData = {
       {
         id: 'painting',
         title: "Peinture & Menuiserie",
-        description: "Application de peintures haut de gamme, travaux de menuiserie sur mesure et finitions декоративные soignées.",
+        description: "Application de peintures haut de gamme, travaux de menuiserie sur mesure et finitions décoratives soignées.",
         benefits: ["Finitions impeccables", "Matériaux écologiques", "Meubles sur mesure"],
         iconName: 'Paintbrush'
       },
@@ -80,12 +80,12 @@ export const content: ContentData = {
   },
   whyUs: {
     title: "L'Art de la Précision",
-    subtitle: "Nous не только rénovons, nous transcendons votre patrimoine parisien avec une rigueur absolue.",
+    subtitle: "Nous ne faisons pas que rénover, nous transcendons votre patrimoine parisien avec une rigueur absolue.",
     features: [
       { title: "Garantie Décennale", desc: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
-      { title: "Devis Transparent", desc: "Prix fermes и définitifs. Aucune surprise sur la facture finale.", icon: "Award" },
-      { title: "Respect des Délais", desc: "Planning rigoureux и rapports hebdomadaires sur l'avancement.", icon: "Clock" },
-      { title: "Expertise Locale", desc: "Connaissance parfaite des normes parisiennes и règlements de copropriété.", icon: "MapPin" }
+      { title: "Devis Transparent", desc: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "Award" },
+      { title: "Respect des Délais", desc: "Planning rigoureux et rapports hebdomadaires sur l'avancement.", icon: "Clock" },
+      { title: "Expertise Locale", desc: "Connaissance parfaite des normes parisiennes et règlements de copropriété.", icon: "MapPin" }
     ]
   },
   beforeAfter: {
@@ -98,10 +98,10 @@ export const content: ContentData = {
     title: "Notre Processus",
     subtitle: "Une méthodologie éprouvée pour une rénovation sans stress.",
     steps: [
-      { number: "01", title: "Premier Contact", description: "Visite sur place pour évaluer vos besoins и prendre les mesures." },
-      { number: "02", title: "Devis Détaillé", description: "Réception d'un chiffrage précis и transparent sous 48h." },
-      { number: "03", title: "Planification", description: "Validation du planning и choix des matériaux de qualité." },
-      { number: "04", title: "Réalisation", description: "Exécution des travaux avec protection des lieux и nettoyage final." }
+      { number: "01", title: "Premier Contact", description: "Visite sur place pour évaluer vos besoins et prendre les mesures." },
+      { number: "02", title: "Devis Détaillé", description: "Réception d'un chiffrage précis et transparent sous 48h." },
+      { number: "03", title: "Planification", description: "Validation du planning et choix des matériaux de qualité." },
+      { number: "04", title: "Réalisation", description: "Exécution des travaux avec protection des lieux et nettoyage final." }
     ]
   },
   gallery: {
@@ -116,14 +116,14 @@ export const content: ContentData = {
         id: 1,
         name: "Marc Dubreuil",
         location: "Paris 16e",
-        text: "Une équipe professionnelle и méticuleuse. La rénovation de mon appartement haussmannien a été réalisée dans les délais avec une qualité de finition exceptionnelle.",
+        text: "Une équipe professionnelle et méticuleuse. La rénovation de mon appartement haussmannien a été réalisée dans les délais avec une qualité de finition exceptionnelle.",
         role: "Propriétaire"
       },
       {
         id: 2,
         name: "Sophie Laurent",
         location: "Neuilly-sur-Seine",
-        text: "Excellent travail pour la rénovation complète de notre cuisine и salle de bain. Les artisans sont discrets, propres и très compétents.",
+        text: "Excellent travail pour la rénovation complète de notre cuisine et salle de bain. Les artisans sont discrets, propres et très compétents.",
         role: "Particulier"
       }
     ]
@@ -144,7 +144,7 @@ export const content: ContentData = {
         name: "Le nom est requis",
         email: "L'email est requis",
         emailInvalid: "Email invalide",
-        phone: "Le телефон est requis",
+        phone: "Le téléphone est requis",
         message: "Le message est requis"
       },
       options: {
@@ -168,7 +168,7 @@ export const content: ContentData = {
     }
   },
   footer: {
-    description: "Votre partenaire de confiance pour tous travaux de rénovation à Paris et en Îле-де-Франс. Excellence, précision et savoir-faire français depuis 2008.",
+    description: "Votre partenaire de confiance pour tous travaux de rénovation à Paris et en Île-de-France. Excellence, précision et savoir-faire français depuis 2008.",
     navigation: "Navigation",
     services: "Services",
     legal: "Mentions Légales",
@@ -177,6 +177,6 @@ export const content: ContentData = {
     areas: "Zones d'intervention : Paris (75), Hauts-de-Seine (92), Val-de-Marne (94)",
     designedBy: "Savoir-faire et Précision.",
     legalBody: "ParisRenov SAS\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nRCS Paris B 123 456 789\nCapital social : 50 000 €\nDirecteur de la publication : Jean Dupont\nHébergeur : Vercel Inc.",
-    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par ParisRenov pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous можете exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@parisrenov.fr"
+    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par ParisRenov pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@parisrenov.fr"
   }
 };
