@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { content } from '../constants';
 import { ArrowRight, ShieldCheck, Clock, Users, Award } from 'lucide-react';
@@ -71,35 +72,32 @@ export default function Hero() {
       </div>
 
       {/* Stats Bar */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-5xl px-4">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-4xl px-4">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 overflow-hidden"
+          className="bg-slate-900/80 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5 overflow-hidden"
         >
           {hero.stats.map((stat, i) => {
             const isNumeric = /^[0-9+]+$/.test(stat.value);
             return (
               <div
                 key={i}
-                className="group px-6 py-5 text-center transition-all duration-300 hover:bg-white/5 cursor-default flex flex-col items-center justify-center"
+                className="group px-4 py-3 text-center transition-all duration-300 hover:bg-white/5 cursor-default flex flex-col items-center justify-center"
               >
-                <motion.div
-                  whileHover={{ y: -3 }}
-                  className="flex flex-col items-center"
-                >
-                  {statIcons[i]}
-                  <div className={`
-                    ${isNumeric ? 'text-3xl md:text-4xl font-serif' : 'text-xl md:text-2xl font-sans font-semibold tracking-tight'} 
-                    text-white mb-1.5 transition-colors group-hover:text-gold-200
-                  `}>
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] md:text-xs text-gold-400/80 font-medium tracking-[0.15em] uppercase leading-tight max-w-[120px]">
+                <div className="flex items-center gap-2 mb-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                  {statIcons[i] && React.cloneElement(statIcons[i] as React.ReactElement, { className: 'w-3.5 h-3.5 text-gold-400/90' })}
+                  <div className="text-[9px] md:text-[10px] text-gold-400 font-medium tracking-[0.2em] uppercase leading-none">
                     {stat.label}
                   </div>
-                </motion.div>
+                </div>
+                <div className={`
+                  ${isNumeric ? 'text-xl md:text-2xl font-serif' : 'text-base md:text-lg font-sans font-medium tracking-tight'} 
+                  text-white leading-none transition-colors group-hover:text-gold-200
+                `}>
+                  {stat.value}
+                </div>
               </div>
             );
           })}
