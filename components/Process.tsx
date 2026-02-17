@@ -3,14 +3,15 @@ import { ContentData } from '../types';
 
 interface ProcessProps {
   content: ContentData['process'];
+  common: ContentData['common'];
 }
 
-const Process: React.FC<ProcessProps> = ({ content }) => {
+const Process: React.FC<ProcessProps> = ({ content, common }) => {
   return (
     <section id="process" className="py-24 bg-slate-50">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">Workflow</h2>
+          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">{common.workflow}</h2>
           <h3 className="font-serif text-4xl text-slate-900 font-bold mb-4">{content.title}</h3>
           <p className="text-slate-600">{content.subtitle}</p>
         </div>

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type Language = 'fr' | 'ru';
+
 
 export interface NavItem {
   label: string;
@@ -29,7 +29,79 @@ export interface ProcessStep {
   description: string;
 }
 
+export interface ContactForm {
+  name: string;
+  email: string;
+  phone: string;
+  type: string;
+  message: string;
+  submit: string;
+  submitting: string;
+  success: string;
+  errors: {
+    name: string;
+    email: string;
+    emailInvalid: string;
+    phone: string;
+    message: string;
+  };
+  options: {
+    full: string;
+    painting: string;
+    plumbing: string;
+    flooring: string;
+    other: string;
+  };
+}
+
+export interface ContactInfo {
+  address: string;
+  phone: string;
+  email: string;
+  hours: string;
+  labels: {
+    phone: string;
+    email: string;
+    address: string;
+  };
+}
+
+export interface FooterData {
+  description: string;
+  navigation: string;
+  services: string;
+  legal: string;
+  privacy: string;
+  rights: string;
+  areas: string;
+  designedBy: string;
+  legalBody: string;
+  privacyBody: string;
+}
+
+export interface CommonData {
+  learnMore: string;
+  getQuote: string;
+  whatWeOffer: string;
+  detailedQuote: string;
+  respectNorms: string;
+  expertBadge: string;
+  viewAll: string;
+  openMenu: string;
+  closeMenu: string;
+  portfolio: string;
+  workflow: string;
+  metamorphose: string;
+  dragToCompare: string;
+  clientReviews: string;
+  contactBadge: string;
+  whatsappTooltip: string;
+  callAriaLabel: string;
+  whatsappAriaLabel: string;
+}
+
 export interface ContentData {
+  common: CommonData;
   nav: {
     home: string;
     services: string;
@@ -82,27 +154,8 @@ export interface ContentData {
   contact: {
     title: string;
     subtitle: string;
-    form: {
-      name: string;
-      email: string;
-      phone: string;
-      type: string;
-      message: string;
-      submit: string;
-      submitting: string;
-      success: string;
-    };
-    info: {
-      address: string;
-      phone: string;
-      email: string;
-      hours: string;
-    };
+    form: ContactForm;
+    info: ContactInfo;
   };
-  footer: {
-    legal: string;
-    privacy: string;
-    rights: string;
-    areas: string;
-  };
+  footer: FooterData;
 }

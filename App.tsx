@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustBadges from './components/TrustBadges';
@@ -12,30 +12,27 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import CustomCursor from './components/CustomCursor';
-import { CONTENT } from './constants';
-import { Language } from './types';
-
+import { content as translations } from './constants';
 const App: React.FC = () => {
-  const [lang, setLang] = useState<Language>('fr');
-  const content = CONTENT[lang];
+  const currentContent = translations;
 
   return (
-    <div className="font-sans antialiased text-slate-900 bg-white selection:bg-gold-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 selection:bg-gold-200 selection:text-slate-900">
       <CustomCursor />
-      <Navbar lang={lang} setLang={setLang} content={content.nav} />
+      <Navbar content={currentContent.nav} common={currentContent.common} />
       <main>
-        <Hero content={content.hero} />
-        <TrustBadges content={content.trustBadges} />
-        <Services content={content.services} />
-        <WhyUs content={content.whyUs} />
-        <BeforeAfter content={content.beforeAfter} />
-        <Process content={content.process} />
-        <Gallery content={content.gallery} />
-        <Testimonials content={content.testimonials} />
-        <Contact content={content.contact} />
+        <Hero content={currentContent.hero} common={currentContent.common} />
+        <TrustBadges content={currentContent.trustBadges} />
+        <Services content={currentContent.services} common={currentContent.common} />
+        <WhyUs content={currentContent.whyUs} common={currentContent.common} />
+        <BeforeAfter content={currentContent.beforeAfter} common={currentContent.common} />
+        <Process content={currentContent.process} common={currentContent.common} />
+        <Gallery content={currentContent.gallery} common={currentContent.common} />
+        <Testimonials content={currentContent.testimonials} common={currentContent.common} />
+        <Contact content={currentContent.contact} common={currentContent.common} />
       </main>
-      <Footer content={content.footer} />
-      <WhatsAppButton />
+      <Footer content={currentContent.footer} common={currentContent.common} />
+      <WhatsAppButton common={currentContent.common} />
     </div>
   );
 };

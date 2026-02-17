@@ -4,14 +4,15 @@ import { Quote } from 'lucide-react';
 
 interface TestimonialsProps {
   content: ContentData['testimonials'];
+  common: ContentData['common'];
 }
 
-const Testimonials: React.FC<TestimonialsProps> = ({ content }) => {
+const Testimonials: React.FC<TestimonialsProps> = ({ content, common }) => {
   return (
     <section id="testimonials" className="py-24 bg-slate-50">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">Avis Clients</h2>
+          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">{common.clientReviews}</h2>
           <h3 className="font-serif text-4xl text-slate-900 font-bold mb-4">{content.title}</h3>
           <p className="text-slate-600">{content.subtitle}</p>
         </div>
