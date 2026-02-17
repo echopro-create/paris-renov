@@ -68,12 +68,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white rounded-2xl shadow-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-100"
+          className="bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10"
         >
           {hero.stats.map((stat, i) => (
-            <div key={i} className="px-6 py-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-slate-900 font-serif">{stat.value}</div>
-              <div className="text-xs text-slate-500 mt-1 font-medium tracking-wide uppercase">{stat.label}</div>
+            <div key={i} className="px-6 py-6 text-center group hover:bg-white/5 transition-colors duration-300 first:rounded-l-2xl last:rounded-r-2xl">
+              <div className="text-3xl md:text-4xl font-bold text-white font-serif mb-1">{stat.value}</div>
+              <div className="text-xs text-gold-400 font-medium tracking-widest uppercase">{stat.label}</div>
             </div>
           ))}
         </motion.div>
