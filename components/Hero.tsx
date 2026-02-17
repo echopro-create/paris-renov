@@ -20,25 +20,25 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-40 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 pb-32 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold-400/30 bg-white/5 backdrop-blur-sm mb-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold-400/30 bg-white/5 backdrop-blur-sm mb-6">
             <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
             <span className="text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{common.expertBadge}</span>
           </div>
 
           {/* Title */}
-          <h1 className="font-serif text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[1.05] mb-8 tracking-tight text-white text-balance">
+          <h1 className="font-serif text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[1.05] mb-6 tracking-tight text-white text-balance">
             {hero.title} <span className="italic text-gold-400">Parisienne.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-slate-300 mb-12 leading-relaxed max-w-2xl mx-auto font-light text-balance">
+          <p className="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto font-light text-balance">
             {hero.subtitle.split('exigence absolue')[0]}
             <span className="text-gold-400 font-medium">exigence absolue</span>.
           </p>
@@ -63,7 +63,7 @@ export default function Hero() {
       </div>
 
       {/* Stats Bar */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-4xl px-4">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-full max-w-5xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
