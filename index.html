@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ParisRenov | Travaux de Rénovation Générale & Intérieur à Paris</title>
-    <meta name="description" content="Expert en travaux de rénovation générale et intérieur à Paris. Peinture, plomberie, électricité, menuiserie, carrelage, création de cloisons et plafonds suspendus. Restauration salles de bains et cuisines." />
-    <meta name="keywords" content="travaux de rénovation générale, travaux rénovation intérieur, peinture paris, plomberie, électricité, menuiserie, carrelage sol et murs, restauration des salles de bains, rénovation cuisine, couverture de sols parquet, création des cloisons, plafonds suspendus, plâtrerie, entreprise batiment paris" />
-    
-    <!-- SEO Schema Markup (JSON-LD) -->
-    <script type="application/ld+json">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParisRenov | Travaux de Rénovation Générale & Intérieur à Paris</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="ParisRenov | Travaux de Rénovation Générale & Intérieur à Paris" />
+  <meta name="description"
+    content="Expert en travaux de rénovation générale et intérieur à Paris. Peinture, plomberie, électricité, menuiserie, carrelage, création de cloisons et plafonds suspendus. Devis gratuit sous 48h." />
+  <meta name="keywords"
+    content="travaux de rénovation générale, renovation appartement paris, peinture paris, plomberie paris, électricité, menuiserie, carrelage paris, rénovation cuisine, rénovation salle de bain, entreprise batiment paris" />
+  <meta name="author" content="ParisRenov" />
+  <meta name="theme-color" content="#BD9B60" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://parisrenov.fr/" />
+  <meta property="og:title" content="ParisRenov | Travaux de Rénovation Générale & Intérieur à Paris" />
+  <meta property="og:description"
+    content="Transformez votre espace de vie avec l'excellence du savoir-faire français. Rénovation complète et aménagement intérieur à Paris." />
+  <meta property="og:image" content="https://parisrenov.fr/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://parisrenov.fr/" />
+  <meta property="twitter:title" content="ParisRenov | Travaux de Rénovation Générale & Intérieur à Paris" />
+  <meta property="twitter:description"
+    content="Transformez votre espace de vie avec l'excellence du savoir-faire français. Rénovation complète et aménagement intérieur à Paris." />
+  <meta property="twitter:image" content="https://parisrenov.fr/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- SEO Schema Markup (JSON-LD) -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "GeneralContractor",
@@ -32,92 +59,56 @@
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "19:00"
       },
-      "priceRange": "€€€",
-      "sameAs": [
-        "https://www.instagram.com/parisrenov",
-        "https://www.facebook.com/parisrenov",
-        "https://www.linkedin.com/company/parisrenov"
-      ]
+      "priceRange": "€€€"
     }
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      /* Native Smooth Scrolling */
-      html {
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-      }
-      
-      body {
-        overflow-x: hidden;
-      }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
 
-      /* Custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
-      
-      /* Film Grain Noise Overlay */
-      .bg-noise {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 50;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "framer-motion": "https://esm.sh/framer-motion@^12.34.1"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  <style>
+    /* Native Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #BD9B60;
+    }
+  </style>
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-gold-500 selection:text-white">
-    <div class="bg-noise"></div>
-    <div id="root"></div>
+
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-gold-500 selection:text-white">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

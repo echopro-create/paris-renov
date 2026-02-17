@@ -101,7 +101,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ content, common }) => {
           <div className="absolute inset-0">
             <img
               src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-              alt="After renovation"
+              alt="Après rénovation - Salon parisien luxueux"
+              loading="lazy"
               className="w-full h-full object-cover select-none pointer-events-none"
             />
             <div className="absolute top-4 right-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded text-sm font-bold z-10">
@@ -116,7 +117,8 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ content, common }) => {
           >
             <img
               src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-              alt="Before renovation"
+              alt="Avant rénovation - État initial de l'appartement"
+              loading="lazy"
               className="h-full object-cover absolute top-0 left-0 max-w-none select-none pointer-events-none"
               // CRITICAL FIX: Explicitly set width to container width so image doesn't shrink
               style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}
@@ -132,6 +134,11 @@ const BeforeAfter: React.FC<BeforeAfterProps> = ({ content, common }) => {
           <div
             className="absolute top-0 bottom-0 w-1 bg-transparent z-20 flex items-center justify-center"
             style={{ left: `${sliderPosition}%` }}
+            role="slider"
+            aria-label={common.dragToCompare}
+            aria-valuenow={Math.round(sliderPosition)}
+            aria-valuemin={0}
+            aria-valuemax={100}
           >
             <div className="w-10 h-10 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-gold-600 -ml-[2px] transition-transform transform hover:scale-110 active:scale-95">
               <MoveHorizontal size={20} />
