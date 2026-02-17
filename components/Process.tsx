@@ -1,40 +1,55 @@
-import React from 'react';
-import { ContentData } from '../types';
+import { motion } from 'framer-motion';
+import { content } from '../constants';
 
-interface ProcessProps {
-  content: ContentData['process'];
-  common: ContentData['common'];
-}
+export default function Process() {
+  const { process } = content;
 
-const Process: React.FC<ProcessProps> = ({ content, common }) => {
   return (
-    <section id="process" className="py-24 bg-slate-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">{common.workflow}</h2>
-          <h3 className="font-serif text-4xl text-slate-900 font-bold mb-4">{content.title}</h3>
-          <p className="text-slate-600">{content.subtitle}</p>
+    <section id="process" className="py-24 md:py-32 bg-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/30 bg-gold-500/10 mb-6">
+            <span className="text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{process.badge}</span>
+          </div>
+          <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-4">
+            {process.title}
+          </h2>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            {process.subtitle}
+          </p>
         </div>
 
-        <div className="relative">
-          {/* Connector Line (Desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 z-0"></div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-            {content.steps.map((step, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative">
-                <div className="w-12 h-12 bg-paris-dark text-white rounded-lg flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-paris-dark/20">
-                  {step.number}
+        {/* Steps Grid */}
+        <div className="grid md:grid-cols-4 gap-6">
+          {process.steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative group"
+            >
+              <div className="bg-slate-800/50 rounded-2xl p-8 border border-slate-700/50 hover:border-gold-400/30 transition-all duration-300 h-full">
+                {/* Step Number */}
+                <div className="w-12 h-12 rounded-full bg-gold-500/10 border border-gold-400/30 flex items-center justify-center mb-6">
+                  <span className="text-gold-400 font-bold text-sm">{step.number}</span>
                 </div>
-                <h4 className="font-serif text-xl font-bold text-slate-900 mb-3">{step.title}</h4>
-                <p className="text-slate-600 text-sm leading-relaxed">{step.description}</p>
+
+                {/* Content */}
+                <h3 className="font-serif text-lg font-bold text-white mb-3">{step.title}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">{step.description}</p>
               </div>
-            ))}
-          </div>
+
+              {/* Connector Line (desktop only) */}
+              {index < process.steps.length - 1 && (
+                <div className="hidden md:block absolute top-10 -right-3 w-6 h-px bg-gold-400/30" />
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Process;
+}

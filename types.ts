@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-
-
 export interface NavItem {
   label: string;
   href: string;
@@ -11,7 +9,7 @@ export interface ServiceItem {
   id: string;
   title: string;
   description: string;
-  benefits: string[];
+  image: string;
   iconName: string;
 }
 
@@ -21,6 +19,7 @@ export interface Testimonial {
   location: string;
   text: string;
   role?: string;
+  avatar?: string;
 }
 
 export interface ProcessStep {
@@ -79,6 +78,20 @@ export interface FooterData {
   privacyBody: string;
 }
 
+export interface WhyUsFeature {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+export interface CtaBanner {
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+}
+
 export interface CommonData {
   learnMore: string;
   getQuote: string;
@@ -129,7 +142,9 @@ export interface ContentData {
   whyUs: {
     title: string;
     subtitle: string;
-    features: { title: string; desc: string; icon: string }[];
+    features: WhyUsFeature[];
+    quote?: string;
+    quoteAuthor?: string;
   };
   beforeAfter: {
     title: string;
@@ -138,24 +153,31 @@ export interface ContentData {
     labelAfter: string;
   };
   process: {
+    badge: string;
     title: string;
     subtitle: string;
     steps: ProcessStep[];
   };
   gallery: {
+    badge: string;
     title: string;
     subtitle: string;
   };
   testimonials: {
+    badge: string;
     title: string;
     subtitle: string;
     items: Testimonial[];
   };
   contact: {
+    badge: string;
     title: string;
     subtitle: string;
+    formHeading: string;
+    formSubheading: string;
     form: ContactForm;
     info: ContactInfo;
   };
+  ctaBanner: CtaBanner;
   footer: FooterData;
 }

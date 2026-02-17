@@ -7,7 +7,7 @@ export const content: ContentData = {
     whatWeOffer: "Ce que nous proposons :",
     detailedQuote: "Devis détaillé et gratuit",
     respectNorms: "Respect des normes en vigueur",
-    expertBadge: "Atelier Alexei — Paris",
+    expertBadge: "ATELIER D'EXCELLENCE",
     viewAll: "Voir tous les projets",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
@@ -25,7 +25,7 @@ export const content: ContentData = {
     home: "Accueil",
     services: "Services",
     whyUs: "Expertise",
-    process: "Méthode",
+    process: "Process",
     gallery: "Réalisations",
     contact: "Contact",
     getQuote: "Devis Gratuit",
@@ -36,9 +36,10 @@ export const content: ContentData = {
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
-      { label: "Années d'expérience", value: "15+" },
-      { label: "Projets réalisés", value: "500+" },
-      { label: "Satisfaction client", value: "100%" },
+      { label: "ANS D'EXPÉRIENCE", value: "15+" },
+      { label: "PROJETS RÉALISÉS", value: "450+" },
+      { label: "GARANTIE DÉCENNALE", value: "Oui" },
+      { label: "DEVIS GRATUIT", value: "24h" },
     ],
   },
   trustBadges: {
@@ -46,47 +47,42 @@ export const content: ContentData = {
   },
   services: {
     title: "Nos Pôles d'Expertise",
-    subtitle: "Un accompagnement complet pour tous vos besoins en rénovation : peinture, plomberie, électricité, menuiserie et carrelage.",
+    subtitle: "Un savoir-faire artisanal au service de votre intérieur parisien.",
     items: [
       {
         id: 'painting',
-        title: "Peinture & Menuiserie",
-        description: "Application de peintures haut de gamme, travaux de menuiserie sur mesure et finitions décoratives soignées.",
-        benefits: ["Finitions impeccables", "Matériaux écologiques", "Meubles sur mesure"],
+        title: "Peinture & Décoration",
+        description: "Application de peintures haut de gamme et finitions décoratives soignées pour sublimer vos espaces de vie.",
+        image: "/assets/services/painting-service.webp",
         iconName: 'Paintbrush'
       },
       {
-        id: 'plumbing',
-        title: "Salles de Bain & Cuisines",
-        description: "Rénovation complète de vos pièces d'eau et cuisines. Plomberie, électricité et pose d'équipements.",
-        benefits: ["Normes NF", "Réseaux électriques", "Étanchéité garantie"],
-        iconName: 'Droplets'
+        id: 'plastering',
+        title: "Plâtrerie & Cloisons",
+        description: "Création de cloisons, faux plafonds, doublages et travaux de plâtrerie traditionnelle. Restructuration complète.",
+        image: "/assets/services/plastering-service.webp",
+        iconName: 'Home'
       },
       {
         id: 'flooring',
-        title: "Sols & Carrelages",
-        description: "Pose de parquets (massifs, point de Hongrie) et carrelages professionnels pour sols et murs.",
-        benefits: ["Restauration d'ancien", "Pose de précision", "Pierre & Céramique"],
+        title: "Parquets & Sols",
+        description: "Pose, ponçage et vitrification de parquets massifs et contrecollés. Point de Hongrie et bâton rompu.",
+        image: "/assets/services/parquet-service.webp",
         iconName: 'Layers'
-      },
-      {
-        id: 'renovation',
-        title: "Gros Œuvre & Plâtrerie",
-        description: "Création de cloisons, faux plafonds et travaux de plâtrerie. Restructuration complète de vos espaces.",
-        benefits: ["Isolation phonique", "Doublage thermique", "Optimisation d'espace"],
-        iconName: 'Home'
       }
     ]
   },
   whyUs: {
-    title: "L'Art de la Précision",
-    subtitle: "Nous ne faisons pas que rénover, nous transcendons votre patrimoine parisien avec une rigueur absolue.",
+    title: "L'Exigence de l'Atelier Alexei",
+    subtitle: "Chaque projet est une œuvre unique, réalisée avec la rigueur et la passion qui définissent notre atelier.",
     features: [
       { title: "Garantie Décennale", desc: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
-      { title: "Devis Transparent", desc: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "Award" },
-      { title: "Respect des Délais", desc: "Planning rigoureux et rapports hebdomadaires sur l'avancement.", icon: "Clock" },
-      { title: "Expertise Locale", desc: "Connaissance parfaite des normes parisiennes et règlements de copropriété.", icon: "MapPin" }
-    ]
+      { title: "Devis Transparent", desc: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "FileText" },
+      { title: "Respect des Délais", desc: "Planning rigoureux et communication régulière sur l'avancement.", icon: "Clock" },
+      { title: "Artisans Qualifiés", desc: "Une équipe de compagnons expérimentés et passionnés par leur métier.", icon: "Award" }
+    ],
+    quote: "L'excellence n'est pas un acte, c'est une habitude.",
+    quoteAuthor: "— Alexei, Fondateur"
   },
   beforeAfter: {
     title: "Transformation",
@@ -95,50 +91,66 @@ export const content: ContentData = {
     labelAfter: "Après"
   },
   process: {
-    title: "Notre Processus",
-    subtitle: "Une méthodologie éprouvée pour une rénovation sans stress.",
+    badge: "PROCESSUS",
+    title: "Notre Processus d'Excellence",
+    subtitle: "De la première visite à la livraison finale, chaque étape est pensée pour garantir votre satisfaction.",
     steps: [
-      { number: "01", title: "Premier Contact", description: "Visite sur place pour évaluer vos besoins et prendre les mesures." },
-      { number: "02", title: "Devis Détaillé", description: "Réception d'un chiffrage précis et transparent sous 48h." },
-      { number: "03", title: "Planification", description: "Validation du planning et choix des matériaux de qualité." },
-      { number: "04", title: "Réalisation", description: "Exécution des travaux avec protection des lieux et nettoyage final." }
+      { number: "01", title: "Visite & Diagnostic", description: "Évaluation complète de votre bien, prise de mesures et analyse des contraintes techniques." },
+      { number: "02", title: "Devis Détaillé", description: "Proposition chiffrée transparente avec choix des matériaux et planning prévisionnel." },
+      { number: "03", title: "Réalisation", description: "Exécution des travaux par nos artisans qualifiés avec protection des lieux et suivi quotidien." },
+      { number: "04", title: "Livraison", description: "Réception des travaux, nettoyage complet du chantier et remise des clés." }
     ]
   },
   gallery: {
-    title: "Nos Réalisations",
+    badge: "RÉALISATIONS",
+    title: "Nos Derniers Chantiers",
     subtitle: "Découvrez l'excellence de nos finitions à travers nos derniers chantiers parisiens."
   },
   testimonials: {
-    title: "Avis Clients",
+    badge: "TÉMOIGNAGES",
+    title: "Ce Que Disent Nos Clients",
     subtitle: "La satisfaction de nos clients est notre plus belle récompense.",
     items: [
       {
         id: 1,
-        name: "Marc Dubreuil",
+        name: "Sophie Martin",
         location: "Paris 16e",
-        text: "Une équipe professionnelle et méticuleuse. La rénovation de mon appartement haussmannien a été réalisée dans les délais avec une qualité de finition exceptionnelle.",
-        role: "Propriétaire"
+        text: "Un travail absolument remarquable. L'équipe d'Alexei a transformé notre appartement haussmannien avec un souci du détail impressionnant. Les finitions sont parfaites.",
+        role: "Rénovation complète",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
       },
       {
         id: 2,
-        name: "Sophie Laurent",
+        name: "Jean-Philippe Laurent",
         location: "Neuilly-sur-Seine",
-        text: "Excellent travail pour la rénovation complète de notre cuisine et salle de bains. Les artisans sont discrets, propres et très compétents.",
-        role: "Particulier"
+        text: "Professionnalisme exemplaire du début à la fin. Le devis était précis, les délais respectés et la qualité de la peinture est exceptionnelle. Je recommande vivement.",
+        role: "Peinture & Décoration",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+      },
+      {
+        id: 3,
+        name: "Camille Dubois",
+        location: "Paris 7e",
+        text: "Notre parquet en point de Hongrie a retrouvé toute sa splendeur grâce à l'Atelier Alexei. Un savoir-faire rare et une équipe à l'écoute. Merci pour cette belle transformation.",
+        role: "Parquets & Sols",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
       }
     ]
   },
   contact: {
-    title: "Discutons de votre projet",
-    subtitle: "Contactez-nous pour une consultation personnalisée.",
+    badge: "DEVIS & CONTACT",
+    title: "Discutons de Votre Projet",
+    subtitle: "Contactez-nous pour une consultation personnalisée et un devis gratuit.",
+    formHeading: "Demandez votre devis",
+    formSubheading: "Réponse garantie sous 24h",
     form: {
       name: "Nom complet",
-      email: "Email professionnel",
-      phone: "Téléphone mobile",
-      type: "Nature du projet",
-      message: "Détails de votre demande",
-      submit: "Obtenir mon estimation",
-      submitting: "Traitement en cours...",
+      email: "Email",
+      phone: "Téléphone",
+      type: "Type de projet",
+      message: "Décrivez votre projet",
+      submit: "Envoyer ma demande",
+      submitting: "Envoi en cours...",
       success: "Merci ! Nous vous recontacterons sous 24h.",
       errors: {
         name: "Le nom est requis",
@@ -149,9 +161,9 @@ export const content: ContentData = {
       },
       options: {
         full: "Rénovation Complète",
-        painting: "Peinture",
-        plumbing: "Plomberie",
-        flooring: "Sols",
+        painting: "Peinture & Décoration",
+        plumbing: "Plâtrerie & Cloisons",
+        flooring: "Parquets & Sols",
         other: "Autre"
       }
     },
@@ -167,15 +179,22 @@ export const content: ContentData = {
       }
     }
   },
+  ctaBanner: {
+    title: "Prêt à Transformer",
+    titleHighlight: "Votre Intérieur?",
+    subtitle: "Bénéficiez d'un devis gratuit et personnalisé pour votre projet de rénovation parisien.",
+    ctaPrimary: "Demander un devis gratuit",
+    ctaSecondary: "+33 6 01 99 76 59"
+  },
   footer: {
-    description: "Votre partenaire de confiance pour tous travaux de rénovation à Paris et en Île-de-France. Savoir-faire et exigence absolue depuis 2008.",
+    description: "L'excellence artisanale au service de votre intérieur parisien. Peinture, plâtrerie et parquets depuis 2008.",
     navigation: "Navigation",
-    services: "Services",
+    services: "Savoir-faire",
     legal: "Mentions Légales",
     privacy: "Politique de Confidentialité",
     rights: "Tous droits réservés.",
-    areas: "Zones d'intervention : Paris (75), Hauts-de-Seine (92), Val-de-Marne (94)",
-    designedBy: "Savoir-faire et Précision.",
+    areas: "Paris & Île-de-France",
+    designedBy: "Artisanat Français d'Excellence",
     legalBody: "Atelier Alexei SAS\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nRCS Paris B 123 456 789\nCapital social : 50 000 €\nDirecteur de la publication : Alexei [Nom]\nHébergeur : Vercel Inc.",
     privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par l'Atelier Alexei pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@atelier-alexei.fr"
   }

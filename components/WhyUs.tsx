@@ -1,103 +1,88 @@
-import React, { useRef } from 'react';
-import { ContentData } from '../types';
-import * as Icons from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { content } from '../constants';
+import { ShieldCheck, FileText, Clock, Award } from 'lucide-react';
 
-interface WhyUsProps {
-  content: ContentData['whyUs'];
-  common: ContentData['common'];
-}
-
-interface AnimatedWordProps {
-  word: string;
-  scrollYProgress: any;
-  index: number;
-  total: number;
-}
-
-const AnimatedWord: React.FC<AnimatedWordProps> = ({ word, scrollYProgress, index, total }) => {
-  const start = index / total;
-  const end = start + (1 / total);
-  const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
-
-  return (
-    <motion.span
-      style={{ opacity }}
-      className="mr-1.5 transition-colors duration-200"
-    >
-      {word}
-    </motion.span>
-  );
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  ShieldCheck,
+  FileText,
+  Clock,
+  Award,
 };
 
-const WhyUs: React.FC<WhyUsProps> = ({ content }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const words = content.subtitle.split(" ");
+export default function WhyUs() {
+  const { whyUs } = content;
 
   return (
-    <section id="expertise" ref={containerRef} className="py-24 bg-slate-50 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          <div className="lg:w-1/2">
-            <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-6">{content.title}</h2>
-            <div className="font-serif text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-8">
-              {words.map((word, i) => (
-                <AnimatedWord
-                  key={i}
-                  word={word}
-                  scrollYProgress={scrollYProgress}
-                  index={i}
-                  total={words.length}
-                />
-              ))}
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-8 mt-12">
-              {content.features.map((feature, index) => {
-                const Icon = (Icons as any)[feature.icon] || Icons.CheckCircle2;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex gap-4"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center text-gold-600 shrink-0">
-                      <Icon size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed">{feature.desc}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
+    <section id="expertise" className="py-24 md:py-32 bg-paris-light">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 mb-6">
+            <span className="text-gold-600 text-xs font-semibold tracking-[0.2em] uppercase">ENGAGEMENT QUALITÉ</span>
           </div>
+          <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 mb-4">
+            {whyUs.title}
+          </h2>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            {whyUs.subtitle}
+          </p>
+        </div>
 
-          <div className="lg:w-1/2 relative">
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                alt="Expertise Artisanal"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gold-500 rounded-2xl -z-10 animate-pulse"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-gold-200 rounded-2xl -z-10"></div>
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Image with Quote */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=800&auto=format&fit=crop"
+              alt="Artisan au travail"
+              className="rounded-2xl shadow-2xl w-full aspect-[4/5] object-cover"
+            />
+            {/* Quote Overlay */}
+            {whyUs.quote && (
+              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+                <p className="font-serif text-slate-900 italic text-sm leading-relaxed">
+                  "{whyUs.quote}"
+                </p>
+                {whyUs.quoteAuthor && (
+                  <p className="text-gold-600 text-xs mt-2 font-semibold">{whyUs.quoteAuthor}</p>
+                )}
+              </div>
+            )}
+          </motion.div>
+
+          {/* Right: Features */}
+          <div className="space-y-6">
+            {whyUs.features.map((feature, index) => {
+              const Icon = iconMap[feature.icon] || ShieldCheck;
+              return (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="flex gap-4 p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-gold-500/10 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-gold-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 mb-1">{feature.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default WhyUs;
+}

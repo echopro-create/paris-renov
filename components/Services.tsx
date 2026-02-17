@@ -1,154 +1,69 @@
-import React, { useState } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion';
-import { ContentData, ServiceItem } from '../types';
-import * as Icons from 'lucide-react';
-import Modal from './Modal';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { content } from '../constants';
 
-interface ServicesProps {
-  content: ContentData['services'];
-  common: ContentData['common'];
-}
-// Card component with scoped props
-const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
-  const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
-
-  function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    x.set(clientX - left - width / 2);
-    y.set(clientY - top - height / 2);
-  }
-
-  function onMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
+export default function Services() {
+  const { services } = content;
 
   return (
-    <motion.div
-      style={{
-        transformStyle: "preserve-3d",
-        transform: useMotionTemplate`perspective(1000px) rotateX(${mouseY}deg) rotateY(${mouseX}deg)`
-      }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-      className="h-full"
-    >
-      <motion.div
-        style={{ transform: "translateZ(20px)" }}
-        className="group h-full p-8 rounded-2xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-gold-200 hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 flex flex-col relative overflow-hidden"
-      >
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-tr from-transparent via-white/50 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shine" />
-        {children}
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const Services: React.FC<ServicesProps> = ({ content, common }) => {
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-
-  return (
-    <>
-      <section id="services" className="py-24 bg-white relative z-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3 text-center">Expertise</h2>
-            <h3 className="font-serif text-4xl text-slate-900 font-bold mb-4">{content.title}</h3>
-            <p className="text-slate-600">{content.subtitle}</p>
+    <section id="services" className="py-24 md:py-32 bg-white dark:bg-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16 pt-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 dark:bg-gold-500/20 mb-6">
+            <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">SERVICES</span>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {content.items.map((item, index) => {
-              const IconComponent = (Icons as any)[item.iconName] || Icons.Hammer;
-
-              return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="h-full"
-                >
-                  <TiltCard onClick={() => setSelectedService(item)}>
-                    <div className="w-14 h-14 rounded-xl bg-white border border-slate-200 text-gold-600 flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300 shadow-sm relative z-10">
-                      <IconComponent size={28} strokeWidth={1.5} />
-                    </div>
-
-                    <h4 className="font-serif text-xl font-bold text-slate-900 mb-3 relative z-10">{item.title}</h4>
-                    <p className="text-slate-600 text-sm mb-6 leading-relaxed flex-grow relative z-10">{item.description}</p>
-
-                    <ul className="space-y-2 mb-6 relative z-10">
-                      {item.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-center text-xs font-medium text-slate-500">
-                          <div className="w-1.5 h-1.5 rounded-full bg-gold-400 mr-2"></div>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <button
-                      className="w-full py-3 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold group-hover:bg-gold-500 group-hover:text-white group-hover:border-gold-500 transition-all flex items-center justify-center gap-2 relative z-10"
-                    >
-                      {common.learnMore}
-                      <ArrowRight size={16} />
-                    </button>
-                  </TiltCard>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <Modal
-        isOpen={!!selectedService}
-        onClose={() => setSelectedService(null)}
-        title={selectedService?.title}
-      >
-        <div className="space-y-6">
-          <p className="text-lg text-slate-600 leading-relaxed">
-            {selectedService?.description}
+          <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+            {services.title}
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
+            {services.subtitle}
           </p>
-
-          <div className="bg-slate-50 p-6 rounded-xl border border-slate-100">
-            <h4 className="font-bold text-slate-900 mb-4">{common.whatWeOffer}</h4>
-            <ul className="grid sm:grid-cols-2 gap-3">
-              {selectedService?.benefits.map((benefit, i) => (
-                <li key={i} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                  <span>{benefit}</span>
-                </li>
-              ))}
-              <li className="flex items-start gap-3 text-slate-700">
-                <CheckCircle2 className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                <span>{common.detailedQuote}</span>
-              </li>
-              <li className="flex items-start gap-3 text-slate-700">
-                <CheckCircle2 className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
-                <span>{common.respectNorms}</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex justify-end pt-4">
-            <a
-              href="#contact"
-              onClick={() => setSelectedService(null)}
-              className="px-6 py-3 bg-gold-500 text-white rounded-lg font-bold hover:bg-gold-600 transition-colors"
-            >
-              {common.getQuote}
-            </a>
-          </div>
         </div>
-      </Modal>
-    </>
-  );
-};
 
-export default Services;
+        {/* Cards Grid - 3 columns */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {services.items.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.3, ease: 'easeOut' }
+              }}
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+            >
+              {/* Background Image */}
+              <div className="aspect-[4/5] relative overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                {/* Shine Effect on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    backgroundSize: '200% 100%',
+                    animation: 'shine 1.5s infinite',
+                  }}
+                />
+              </div>
+
+              {/* Glassmorphism Content Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white backdrop-blur-md bg-white/10 dark:bg-black/20 border-t border-white/20">
+                <h3 className="font-serif text-xl font-bold mb-2 group-hover:text-gold-300 transition-colors">{service.title}</h3>
+                <p className="text-sm text-slate-200 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  {service.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

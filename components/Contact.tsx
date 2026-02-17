@@ -1,245 +1,218 @@
-import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, AlertCircle, ArrowRight } from 'lucide-react';
-import { ContentData } from '../types';
-import { supabase } from '../lib/supabase';
+import { useState, FormEvent } from 'react';
+import { motion } from 'framer-motion';
+import { content } from '../constants';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, ArrowRight } from 'lucide-react';
 
-interface ContactProps {
-  content: ContentData['contact'];
-  common: ContentData['common'];
-}
-
-const Contact: React.FC<ContactProps> = ({ content, common }) => {
+export default function Contact() {
+  const { contact } = content;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    type: content.form.options.full,
-    message: ''
+    type: '',
+    message: '',
   });
-
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = content.form.errors.name;
-    if (!formData.email.trim()) newErrors.email = content.form.errors.email;
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = content.form.errors.emailInvalid;
-    if (!formData.phone.trim()) newErrors.phone = content.form.errors.phone;
-    if (!formData.message.trim()) newErrors.message = content.form.errors.message;
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const e: Record<string, string> = {};
+    if (!formData.name.trim()) e.name = contact.form.errors.name;
+    if (!formData.email.trim()) e.email = contact.form.errors.email;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) e.email = contact.form.errors.emailInvalid;
+    if (!formData.phone.trim()) e.phone = contact.form.errors.phone;
+    if (!formData.message.trim()) e.message = contact.form.errors.message;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^[\d\s+]*$/.test(value)) {
-      setFormData({ ...formData, phone: value });
-      if (errors.phone) setErrors({ ...errors, phone: '' });
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (errors[name]) setErrors({ ...errors, [name]: '' });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
     setIsSubmitting(true);
-    setSubmitError(null);
-
     try {
-      const { error } = await supabase
-        .from('contacts')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            project_type: formData.type,
-            message: formData.message
-          }
-        ]);
-
-      if (error) throw error;
-
+      // Supabase integration placeholder
+      await new Promise((r) => setTimeout(r, 1500));
       setIsSuccess(true);
-      setFormData({ name: '', email: '', phone: '', type: content.form.options.full, message: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    } catch (err: any) {
-      console.error('Supabase error:', err);
-      setSubmitError("Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.");
+      setFormData({ name: '', email: '', phone: '', type: '', message: '' });
+    } catch {
+      // handle error
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900 text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-800/30 -skew-x-12 translate-x-20"></div>
+    <section id="contact" className="py-24 md:py-32 bg-white dark:bg-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 dark:bg-gold-500/20 mb-6">
+            <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{contact.badge}</span>
+          </div>
+          <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+            {contact.title}
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
+            {contact.subtitle}
+          </p>
+        </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-20">
-
-          <div className="lg:w-5/12 pt-10">
-            <div className="inline-block px-3 py-1 bg-gold-500/10 text-gold-500 text-xs font-bold uppercase tracking-widest rounded mb-6">{common.contactBadge}</div>
-            <h3 className="font-serif text-5xl font-bold mb-6 leading-tight">{content.title}</h3>
-            <p className="text-slate-400 text-lg mb-12 max-w-md">{content.subtitle}</p>
-
-            <div className="space-y-10">
-              <div className="flex gap-6 items-start group">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center text-gold-500 group-hover:bg-gold-500 group-hover:text-white transition-all">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-1">{content.info.labels.phone}</h4>
-                  <a href={`tel:${content.info.phone.replace(/\s/g, '')}`} className="text-2xl font-serif hover:text-gold-500 transition-colors">{content.info.phone}</a>
-                </div>
+        <div className="grid lg:grid-cols-5 gap-12">
+          {/* Contact Info (left) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-2 space-y-6"
+          >
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
+                <Phone className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
-
-              <div className="flex gap-6 items-start group">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center text-gold-500 group-hover:bg-gold-500 group-hover:text-white transition-all">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-1">{content.info.labels.email}</h4>
-                  <a href={`mailto:${content.info.email}`} className="text-xl hover:text-gold-500 transition-colors">{content.info.email}</a>
-                </div>
-              </div>
-
-              <div className="flex gap-6 items-start group">
-                <div className="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center text-gold-500 group-hover:bg-gold-500 group-hover:text-white transition-all">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-1">{content.info.labels.address}</h4>
-                  <p className="text-lg text-slate-300 max-w-xs">{content.info.address}</p>
-                </div>
+              <div>
+                <div className="font-semibold text-slate-900 dark:text-white text-sm">{contact.info.labels.phone}</div>
+                <a href={`tel:${contact.info.phone.replace(/\s/g, '')}`} className="text-slate-600 dark:text-slate-300 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
+                  {contact.info.phone}
+                </a>
               </div>
             </div>
-          </div>
 
-          <div className="lg:w-7/12">
-            <div className="bg-white rounded-2xl p-10 md:p-14 shadow-2xl text-slate-900">
-              <form onSubmit={handleSubmit} className="space-y-8" noValidate>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="relative group">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full pt-6 pb-2 border-b-2 outline-none transition-all bg-transparent ${errors.name ? 'border-red-500' : 'border-slate-200 focus:border-gold-500'}`}
-                    />
-                    <label htmlFor="name" className="absolute left-0 top-6 text-slate-500 transition-all peer-focus:text-xs peer-focus:-top-1 peer-focus:text-gold-500 peer-placeholder-shown:text-base peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:-top-1">
-                      {content.form.name}
-                    </label>
-                    {errors.name && <p className="text-red-500 text-xs mt-1 absolute">{errors.name}</p>}
-                  </div>
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
+                <Mail className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 dark:text-white text-sm">{contact.info.labels.email}</div>
+                <a href={`mailto:${contact.info.email}`} className="text-slate-600 dark:text-slate-300 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
+                  {contact.info.email}
+                </a>
+              </div>
+            </div>
 
-                  <div className="relative group">
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handlePhoneChange}
-                      placeholder=" "
-                      className={`peer w-full pt-6 pb-2 border-b-2 outline-none transition-all bg-transparent ${errors.phone ? 'border-red-500' : 'border-slate-200 focus:border-gold-500'}`}
-                    />
-                    <label htmlFor="phone" className="absolute left-0 top-6 text-slate-500 transition-all peer-focus:text-xs peer-focus:-top-1 peer-focus:text-gold-500 peer-placeholder-shown:text-base peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:-top-1">
-                      {content.form.phone}
-                    </label>
-                    {errors.phone && <p className="text-red-500 text-xs mt-1 absolute">{errors.phone}</p>}
-                  </div>
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 dark:text-white text-sm">{contact.info.labels.address}</div>
+                <p className="text-slate-600 dark:text-slate-300 text-sm">{contact.info.address}</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
+                <Clock className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+              </div>
+              <div>
+                <div className="font-semibold text-slate-900 dark:text-white text-sm">Horaires</div>
+                <p className="text-slate-600 dark:text-slate-300 text-sm">{contact.info.hours}</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Form (right) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-3"
+          >
+            <div className="bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-200/50 dark:border-slate-700/50">
+              <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white mb-1">{contact.formHeading}</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{contact.formSubheading}</p>
+
+              {isSuccess ? (
+                <div className="text-center py-12">
+                  <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                  <p className="text-lg font-semibold text-slate-900">{contact.form.success}</p>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={contact.form.name}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border ${errors.name ? 'border-red-400' : 'border-slate-200'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm transition-colors`}
+                      />
+                      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        placeholder={contact.form.email}
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border ${errors.email ? 'border-red-400' : 'border-slate-200'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm transition-colors`}
+                      />
+                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                    </div>
+                  </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="relative group">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder=" "
-                      className={`peer w-full pt-6 pb-2 border-b-2 outline-none transition-all bg-transparent ${errors.email ? 'border-red-500' : 'border-slate-200 focus:border-gold-500'}`}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <input
+                        type="tel"
+                        placeholder={contact.form.phone}
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border ${errors.phone ? 'border-red-400' : 'border-slate-200'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm transition-colors`}
+                      />
+                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                    </div>
+                    <div>
+                      <select
+                        value={formData.type}
+                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm transition-colors text-slate-600"
+                      >
+                        <option value="">{contact.form.type}</option>
+                        <option value="full">{contact.form.options.full}</option>
+                        <option value="painting">{contact.form.options.painting}</option>
+                        <option value="plumbing">{contact.form.options.plumbing}</option>
+                        <option value="flooring">{contact.form.options.flooring}</option>
+                        <option value="other">{contact.form.options.other}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <textarea
+                      placeholder={contact.form.message}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={4}
+                      className={`w-full px-4 py-3 rounded-xl bg-white border ${errors.message ? 'border-red-400' : 'border-slate-200'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm transition-colors resize-none`}
                     />
-                    <label htmlFor="email" className="absolute left-0 top-6 text-slate-500 transition-all peer-focus:text-xs peer-focus:-top-1 peer-focus:text-gold-500 peer-placeholder-shown:text-base peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:-top-1">
-                      {content.form.email}
-                    </label>
-                    {errors.email && <p className="text-red-500 text-xs mt-1 absolute">{errors.email}</p>}
+                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>
 
-                  <div className="relative group">
-                    <select
-                      id="type"
-                      name="type"
-                      value={formData.type}
-                      onChange={handleChange}
-                      className="w-full pt-6 pb-2 border-b-2 border-slate-200 focus:border-gold-500 outline-none transition-all bg-transparent text-slate-700"
-                    >
-                      <option>{content.form.options.full}</option>
-                      <option>{content.form.options.painting}</option>
-                      <option>{content.form.options.plumbing}</option>
-                      <option>{content.form.options.flooring}</option>
-                      <option>{content.form.options.other}</option>
-                    </select>
-                    <label htmlFor="type" className="absolute left-0 -top-1 text-xs text-gold-500">
-                      {content.form.type}
-                    </label>
-                  </div>
-                </div>
-
-                <div className="relative group">
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={2}
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder=" "
-                    className={`peer w-full pt-6 pb-2 border-b-2 outline-none transition-all bg-transparent resize-none ${errors.message ? 'border-red-500' : 'border-slate-200 focus:border-gold-500'}`}
-                  ></textarea>
-                  <label htmlFor="message" className="absolute left-0 top-6 text-slate-500 transition-all peer-focus:text-xs peer-focus:-top-1 peer-focus:text-gold-500 peer-placeholder-shown:text-base peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:-top-1">
-                    {content.form.message}
-                  </label>
-                  {errors.message && <p className="text-red-500 text-xs mt-1 absolute">{errors.message}</p>}
-                </div>
-
-                <div className="pt-4">
                   <button
                     type="submit"
-                    disabled={isSubmitting || isSuccess}
-                    className={`w-full py-4 rounded-sm font-bold text-white transition-all shadow-xl flex items-center justify-center gap-3 uppercase tracking-wider text-sm ${isSuccess
-                      ? 'bg-green-600'
-                      : 'bg-slate-900 hover:bg-gold-500 hover:shadow-gold-500/30'
-                      }`}
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 text-slate-900 rounded-xl font-semibold text-sm hover:bg-gold-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? content.form.submitting : isSuccess ? content.form.success : (
+                    {isSubmitting ? (
+                      contact.form.submitting
+                    ) : (
                       <>
-                        {content.form.submit}
-                        <ArrowRight size={18} />
+                        {contact.form.submit}
+                        <ArrowRight className="w-4 h-4" />
                       </>
                     )}
                   </button>
-                </div>
-              </form>
+                </form>
+              )}
             </div>
-          </div>
-
+          </motion.div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

@@ -1,107 +1,148 @@
-import React, { useState } from 'react';
-import { ContentData } from '../types';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
-import Modal from './Modal';
+import { useState } from 'react';
+import { content } from '../constants';
+import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, X } from 'lucide-react';
 
-interface FooterProps {
-  content: ContentData['footer'];
-  common: ContentData['common'];
-}
-
-const Footer: React.FC<FooterProps> = ({ content }) => {
+export default function Footer() {
+  const { footer, nav, contact } = content;
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
 
-  const openLegal = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setModalContent({
-      title: content.legal,
-      body: content.legalBody
-    });
-  };
+  const navLinks = [
+    { label: nav.services, href: '#services' },
+    { label: nav.gallery, href: '#gallery' },
+    { label: nav.process, href: '#process' },
+    { label: nav.whyUs, href: '#expertise' },
+    { label: nav.contact, href: '#contact' },
+  ];
 
-  const openPrivacy = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setModalContent({
-      title: content.privacy,
-      body: content.privacyBody
-    });
-  };
+  const savoirFaire = [
+    'Peinture & Décoration',
+    'Plâtrerie & Cloisons',
+    'Parquets & Sols',
+  ];
 
   return (
     <>
-      <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
-            <div className="md:col-span-2">
-              <a href="#" className="font-serif text-3xl font-bold tracking-tight text-white block mb-6">
-                Paris<span className="text-gold-500">Renov</span>
-              </a>
-              <p className="max-w-md leading-relaxed mb-6">
-                {content.description}
+      <footer className="bg-slate-900 text-white pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
+            {/* Brand */}
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center">
+                  <span className="text-gold-400 font-serif font-bold text-sm">A</span>
+                </div>
+                <span className="font-serif text-lg font-bold tracking-wide">ATELIER ALEXEI</span>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                {footer.description}
               </p>
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  aria-label="Instagram"
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-colors"
-                >
-                  <Instagram size={20} />
+              <div className="flex gap-3">
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                  <Instagram className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
-                <a
-                  href="#"
-                  aria-label="Facebook"
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-colors"
-                >
-                  <Facebook size={20} />
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                  <Facebook className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
-                <a
-                  href="#"
-                  aria-label="LinkedIn"
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500 hover:text-white transition-colors"
-                >
-                  <Linkedin size={20} />
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                  <Linkedin className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
               </div>
             </div>
 
+            {/* Navigation */}
             <div>
-              <h4 className="text-white font-bold mb-6">{content.services}</h4>
-              <ul className="space-y-4">
-                <li><a href="#services" className="hover:text-gold-400 transition-colors">Rénovation d'Intérieur</a></li>
-                <li><a href="#services" className="hover:text-gold-400 transition-colors">Peinture & Décoration</a></li>
-                <li><a href="#services" className="hover:text-gold-400 transition-colors">Plomberie</a></li>
-                <li><a href="#services" className="hover:text-gold-400 transition-colors">Parquets & Sols</a></li>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.navigation}</h4>
+              <ul className="space-y-3">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
+            {/* Savoir-faire */}
             <div>
-              <h4 className="text-white font-bold mb-6">{content.legal}</h4>
-              <ul className="space-y-4">
-                <li><button onClick={openLegal} className="hover:text-gold-400 transition-colors text-left">{content.legal}</button></li>
-                <li><button onClick={openPrivacy} className="hover:text-gold-400 transition-colors text-left">{content.privacy}</button></li>
-                <li className="text-sm text-slate-500 pt-4">{content.areas}</li>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.services}</h4>
+              <ul className="space-y-3">
+                {savoirFaire.map((item) => (
+                  <li key={item}>
+                    <span className="text-sm text-slate-400">{item}</span>
+                  </li>
+                ))}
+                <li className="pt-2">
+                  <button
+                    onClick={() => setModalContent({ title: footer.legal, body: footer.legalBody })}
+                    className="text-sm text-slate-400 hover:text-gold-400 transition-colors"
+                  >
+                    {footer.legal}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setModalContent({ title: footer.privacy, body: footer.privacyBody })}
+                    className="text-sm text-slate-400 hover:text-gold-400 transition-colors"
+                  >
+                    {footer.privacy}
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">Contact</h4>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-gold-400" />
+                  <a href={`tel:${contact.info.phone.replace(/\s/g, '')}`} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                    {contact.info.phone}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-gold-400" />
+                  <a href={`mailto:${contact.info.email}`} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                    {contact.info.email}
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-gold-400 mt-0.5" />
+                  <span className="text-sm text-slate-400">{contact.info.address}</span>
+                </li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
-            <p>&copy; {new Date().getFullYear()} ParisRenov. {content.rights}</p>
-            <p>{content.designedBy}</p>
+          {/* Bottom Bar */}
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-slate-500">
+              © 2024 Atelier Alexei. {footer.rights}
+            </p>
+            <p className="text-xs text-slate-500">
+              {footer.designedBy}
+            </p>
           </div>
         </div>
       </footer>
 
-      <Modal
-        isOpen={!!modalContent}
-        onClose={() => setModalContent(null)}
-        title={modalContent?.title}
-      >
-        <div className="whitespace-pre-wrap text-slate-600 leading-relaxed">
-          {modalContent?.body}
+      {/* Legal Modal */}
+      {modalContent && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => setModalContent(null)}>
+          <div className="bg-white rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-serif text-xl font-bold text-slate-900">{modalContent.title}</h3>
+              <button onClick={() => setModalContent(null)} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+              {modalContent.body}
+            </div>
+          </div>
         </div>
-      </Modal>
+      )}
     </>
   );
-};
-
-export default Footer;
+}
