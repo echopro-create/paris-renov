@@ -1,9 +1,17 @@
 import { motion } from 'framer-motion';
 import { content } from '../constants';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock, Users, Award } from 'lucide-react';
 
 export default function Hero() {
   const { hero, common } = content;
+
+  // Custom icons for stats
+  const statIcons = [
+    <Award className="w-5 h-5 text-gold-400/80 mb-2" />,
+    <Users className="w-5 h-5 text-gold-400/80 mb-2" />,
+    <ShieldCheck className="w-5 h-5 text-gold-400/80 mb-2" />,
+    <Clock className="w-5 h-5 text-gold-400/80 mb-2" />,
+  ];
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center">
@@ -68,14 +76,33 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10"
+          className="bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-black/50 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 overflow-hidden"
         >
-          {hero.stats.map((stat, i) => (
-            <div key={i} className="px-6 py-6 text-center group hover:bg-white/5 transition-colors duration-300 first:rounded-l-2xl last:rounded-r-2xl">
-              <div className="text-3xl md:text-4xl font-bold text-white font-serif mb-1">{stat.value}</div>
-              <div className="text-xs text-gold-400 font-medium tracking-widest uppercase">{stat.label}</div>
-            </div>
-          ))}
+          {hero.stats.map((stat, i) => {
+            const isNumeric = /^[0-9+]+$/.test(stat.value);
+            return (
+              <div
+                key={i}
+                className="group px-6 py-5 text-center transition-all duration-300 hover:bg-white/5 cursor-default flex flex-col items-center justify-center"
+              >
+                <motion.div
+                  whileHover={{ y: -3 }}
+                  className="flex flex-col items-center"
+                >
+                  {statIcons[i]}
+                  <div className={`
+                    ${isNumeric ? 'text-3xl md:text-4xl font-serif' : 'text-xl md:text-2xl font-sans font-semibold tracking-tight'} 
+                    text-white mb-1.5 transition-colors group-hover:text-gold-200
+                  `}>
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] md:text-xs text-gold-400/80 font-medium tracking-[0.15em] uppercase leading-tight max-w-[120px]">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
