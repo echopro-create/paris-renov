@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ContentData } from '../types';
 import { Phone, Mail, MapPin, Clock, AlertCircle, ArrowRight } from 'lucide-react';
+import { ContentData } from '../types';
+import { supabase } from '../lib/supabase';
 
 interface ContactProps {
   content: ContentData['contact'];
@@ -19,6 +20,7 @@ const Contact: React.FC<ContactProps> = ({ content, common }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -45,17 +47,37 @@ const Contact: React.FC<ContactProps> = ({ content, common }) => {
     if (errors[name]) setErrors({ ...errors, [name]: '' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+
     setIsSubmitting(true);
-    // Simulating API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      const { error } = await supabase
+        .from('contacts')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            project_type: formData.type,
+            message: formData.message
+          }
+        ]);
+
+      if (error) throw error;
+
       setIsSuccess(true);
       setFormData({ name: '', email: '', phone: '', type: content.form.options.full, message: '' });
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    } catch (err: any) {
+      console.error('Supabase error:', err);
+      setSubmitError("Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

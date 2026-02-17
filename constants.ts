@@ -7,7 +7,7 @@ export const content: ContentData = {
     whatWeOffer: "Ce que nous proposons :",
     detailedQuote: "Devis détaillé et gratuit",
     respectNorms: "Respect des normes en vigueur",
-    expertBadge: "Premium Renovations Paris",
+    expertBadge: "Atelier Alexei — Paris",
     viewAll: "Voir tous les projets",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
@@ -31,9 +31,9 @@ export const content: ContentData = {
     getQuote: "Devis Gratuit",
   },
   hero: {
-    title: "Rénovation d'Excellence à Paris",
-    subtitle: "Artisans experts en rénovation complète et aménagement intérieur. Transformez votre espace de vie avec le savoir-faire français, du gros œuvre aux finitions les plus raffinées.",
-    ctaPrimary: "Estimer mon projet",
+    title: "L'Art de la Rénovation",
+    subtitle: "De la préparation des murs à la pose du parquet, l'Atelier Alexei sublime vos intérieurs avec une exigence absolue.",
+    ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
       { label: "Années d'expérience", value: "15+" },
@@ -123,7 +123,7 @@ export const content: ContentData = {
         id: 2,
         name: "Sophie Laurent",
         location: "Neuilly-sur-Seine",
-        text: "Excellent travail pour la rénovation complète de notre cuisine et salle de bain. Les artisans sont discrets, propres et très compétents.",
+        text: "Excellent travail pour la rénovation complète de notre cuisine et salle de bains. Les artisans sont discrets, propres et très compétents.",
         role: "Particulier"
       }
     ]
@@ -158,7 +158,7 @@ export const content: ContentData = {
     info: {
       address: "12 Avenue des Champs-Élysées, 75008 Paris",
       phone: "+33 6 01 99 76 59",
-      email: "contact@parisrenov.fr",
+      email: "contact@atelier-alexei.fr",
       hours: "Lun - Ven: 8h00 - 19h00",
       labels: {
         phone: "Téléphone",
@@ -168,7 +168,7 @@ export const content: ContentData = {
     }
   },
   footer: {
-    description: "Votre partenaire de confiance pour tous travaux de rénovation à Paris et en Île-de-France. Excellence, précision et savoir-faire français depuis 2008.",
+    description: "Votre partenaire de confiance pour tous travaux de rénovation à Paris et en Île-de-France. Savoir-faire et exigence absolue depuis 2008.",
     navigation: "Navigation",
     services: "Services",
     legal: "Mentions Légales",
@@ -176,7 +176,7 @@ export const content: ContentData = {
     rights: "Tous droits réservés.",
     areas: "Zones d'intervention : Paris (75), Hauts-de-Seine (92), Val-de-Marne (94)",
     designedBy: "Savoir-faire et Précision.",
-    legalBody: "ParisRenov SAS\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nRCS Paris B 123 456 789\nCapital social : 50 000 €\nDirecteur de la publication : Jean Dupont\nHébergeur : Vercel Inc.",
-    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par ParisRenov pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@parisrenov.fr"
+    legalBody: "Atelier Alexei SAS\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nRCS Paris B 123 456 789\nCapital social : 50 000 €\nDirecteur de la publication : Alexei [Nom]\nHébergeur : Vercel Inc.",
+    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par l'Atelier Alexei pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@atelier-alexei.fr"
   }
 };
