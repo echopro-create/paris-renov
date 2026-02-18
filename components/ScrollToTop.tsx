@@ -55,10 +55,10 @@ export default function ScrollToTop() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-24 right-6 z-[60] w-12 h-12 bg-gold-500 text-slate-900 rounded-full shadow-lg hover:bg-gold-400 transition-colors flex items-center justify-center focus-ring"
+                    className="fixed bottom-[7.5rem] right-6 z-[60] w-14 h-14 bg-gold-500 text-slate-900 rounded-full shadow-lg hover:bg-gold-400 transition-colors flex items-center justify-center focus-ring"
                     aria-label="Retour en haut"
                 >
-                    <ArrowUp size={20} className="stroke-[2.5]" />
+                    <ArrowUp size={22} className="stroke-[2.5]" />
                 </motion.button>
             )}
         </AnimatePresence>

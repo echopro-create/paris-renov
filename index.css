@@ -1,5 +1,7 @@
 @import "tailwindcss";
+@import "./performance.css";
 
+/* stylelint-disable-next-line at-rule-no-unknown */
 @theme {
   /* === Colors === */
   /* Gold/Accent Colors */
@@ -118,6 +120,7 @@
 
   /* Accessibility: Focus Ring Utility (WCAG 2.2) */
   .focus-ring {
+    /* stylelint-disable-next-line at-rule-no-unknown */
     @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold-500/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 transition-shadow;
   }
 

@@ -9,10 +9,10 @@ export default function WhatsAppButton() {
       {/* Mobile Only Call Button */}
       <a
         href="tel:+33601997659"
-        className="md:hidden w-12 h-12 bg-white text-slate-900 rounded-full flex items-center justify-center shadow-lg hover:bg-slate-50 transition-all active:scale-95 border border-slate-200"
+        className="md:hidden w-14 h-14 bg-white text-slate-900 rounded-full flex items-center justify-center shadow-lg hover:bg-slate-50 transition-all active:scale-95 border border-slate-200"
         aria-label={common.callAriaLabel}
       >
-        <Phone size={20} className="fill-slate-900" />
+        <Phone size={22} className="fill-slate-900" />
       </a>
 
       <a

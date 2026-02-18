@@ -28,9 +28,9 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
 
     // Optimize image URL if enabled
     const optimizedSrc = optimize ? optimizeUnsplashUrl(src, { width, height, quality }) : src;
-    
+
     // Generate srcset for responsive images
-    const srcSet = optimize && src.includes('unsplash.com') 
+    const srcSet = optimize && src.includes('unsplash.com')
         ? getSrcSet(optimizedSrc.split('?')[1] || '')
         : undefined;
 
@@ -48,10 +48,12 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
                 srcSet={srcSet}
                 sizes={width <= 400 ? '(max-width: 640px) 100vw, 400px' : '(max-width: 1024px) 50vw, 33vw'}
                 alt={alt}
+                width={width}
+                height={height}
                 onLoad={() => setIsLoaded(true)}
                 loading={priority ? 'eager' : 'lazy'}
                 fetchPriority={priority ? 'high' : 'auto'}
-                decoding={priority ? 'sync' : 'async'}
+                decoding="async"
                 className={`${className} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
         </div>

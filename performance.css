@@ -1,0 +1,60 @@
+/* === Performance Optimizations === */
+
+/* Optimize scroll performance */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Will-change для анимируемых элементов */
+.group:hover img,
+[class*="hover:scale"],
+[class*="group-hover:scale"] {
+    will-change: transform;
+}
+
+[class*="hover:opacity"],
+[class*="group-hover:opacity"] {
+    will-change: opacity;
+}
+
+/* Content visibility для off-screen секций */
+section:not(#hero) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+}
+
+/* Оптимизация для мобильных устройств */
+@media (max-width: 768px) {
+
+    /* Упростить сложные анимации на мобильных */
+    * {
+        animation-duration: 0.3s !important;
+    }
+
+    /* Reduce blur complexity на слабых устройствах */
+    [class*="backdrop-blur"] {
+        backdrop-filter: blur(8px) !important;
+    }
+}
+
+/* GPU acceleration для transform элементов */
+[class*="translate"],
+[class*="scale"],
+[class*="rotate"] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
