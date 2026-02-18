@@ -40,7 +40,7 @@ export default function Services() {
                 y: -8,
                 transition: { duration: 0.3, ease: 'easeOut' }
               }}
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-gold-500/30 transition-all duration-500 cursor-pointer"
             >
               {/* Background Image with Optimization */}
               <div className="aspect-[4/5] relative overflow-hidden">

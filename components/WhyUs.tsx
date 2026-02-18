@@ -1,9 +1,34 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { content } from '../constants';
 import { Check } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function WhyUs() {
   const { whyUs } = content;
+  const [count, setCount] = useState(0);
+  const counterRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(counterRef, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const end = 15;
+      const duration = 2000; // 2 seconds
+      const increment = end / (duration / 16); // 60fps
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          setCount(end);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(start));
+        }
+      }, 16);
+
+      return () => clearInterval(timer);
+    }
+  }, [isInView]);
 
   return (
     <section id="why-us" className="py-24 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden">
@@ -77,10 +102,10 @@ export default function WhyUs() {
             </div>
 
             {/* Decorative Elements */}
-            <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-slate-50 dark:bg-slate-800 p-4 hidden md:block">
+            <div ref={counterRef} className="absolute -bottom-8 -left-8 w-48 h-48 bg-white dark:bg-slate-900 p-4 hidden md:block">
               <div className="w-full h-full border border-gold-500/30 flex items-center justify-center p-6 text-center">
                 <div>
-                  <span className="block text-3xl font-serif font-bold text-gold-600 mb-1">15+</span>
+                  <span className="block text-3xl font-serif font-bold text-gold-600 mb-1">{count}+</span>
                   <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Années d'Expérience</span>
                 </div>
               </div>

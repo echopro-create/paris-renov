@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { content } from '../constants';
-import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Instagram, Facebook, Linkedin, X, MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   const { footer, nav, contact } = content;
@@ -37,15 +38,33 @@ export default function Footer() {
                 {footer.description}
               </p>
               <div className="flex gap-3">
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur Instagram">
+                <motion.a
+                  href="#"
+                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  aria-label="Suivez-nous sur Instagram"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Instagram className="w-4 h-4 text-slate-400 hover:text-gold-400" />
-                </a>
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur Facebook">
+                </motion.a>
+                <motion.a
+                  href="#"
+                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  aria-label="Suivez-nous sur Facebook"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Facebook className="w-4 h-4 text-slate-400 hover:text-gold-400" />
-                </a>
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur LinkedIn">
+                </motion.a>
+                <motion.a
+                  href="#"
+                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  aria-label="Suivez-nous sur LinkedIn"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Linkedin className="w-4 h-4 text-slate-400 hover:text-gold-400" />
-                </a>
+                </motion.a>
               </div>
             </div>
 

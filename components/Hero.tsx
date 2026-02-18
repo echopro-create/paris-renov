@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { content } from '../constants';
-import { ArrowRight, ShieldCheck, Clock, Users, Award } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock, Users, Award, ChevronRight } from 'lucide-react';
 import { useParallax } from '../lib/hooks/useParallax';
 
 export default function Hero() {
@@ -72,14 +72,16 @@ export default function Hero() {
           </p>
 
           {/* CTA Buttons - Mobile Optimized */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
-            <a
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <motion.a
               href="#contact"
-              className="group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-gold-500 text-slate-900 rounded-full font-semibold text-sm sm:text-base hover:bg-gold-400 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 active:shadow-md"
+              animate={{ scale: [1, 1.02, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-white rounded-full font-bold text-base shadow-xl hover:bg-gold-600 hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               {hero.ctaPrimary}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+              <ChevronRight className="w-5 h-5" />
+            </motion.a>
             <a
               href="#gallery"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-white/20 text-white rounded-full font-medium text-sm sm:text-base hover:bg-white/10 transition-all active:bg-white/15"
@@ -122,7 +124,7 @@ export default function Hero() {
                 </div>
 
                 {/* Label - small & muted */}
-                <div className="text-[8px] sm:text-[9px] text-slate-500 dark:text-slate-500 font-medium tracking-wide uppercase leading-tight px-1 line-clamp-2">
+                <div className="text-[9px] sm:text-[10px] md:text-xs text-slate-500 dark:text-slate-500 font-medium tracking-wide uppercase leading-tight px-1 line-clamp-2">
                   {stat.label}
                 </div>
               </div>

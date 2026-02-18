@@ -61,7 +61,12 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 100
+              }}
               className={`group relative rounded-2xl overflow-hidden cursor-pointer ${item.span}`}
               onClick={() => setLightboxIdx(index)}
               whileHover={{ scale: 1.02 }}

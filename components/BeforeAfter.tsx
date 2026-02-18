@@ -134,36 +134,36 @@ export default function BeforeAfter() {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         >
-          {/* AFTER Image */}
+          {/* BEFORE Image (Background - Full Width) */}
           <div className="absolute inset-0">
-            <SkeletonImage
-              src={beforeAfter.afterImage}
-              alt="Après rénovation - Salon parisien luxueux"
-              containerClassName="w-full h-full"
-              className="w-full h-full object-cover select-none pointer-events-none"
-              style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}
-            />
-            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded text-sm font-bold z-10">
-              {beforeAfter.labelAfter}
-            </div>
-          </div>
-
-          {/* BEFORE Image */}
-          <div
-            className="absolute inset-0 overflow-hidden border-r-2 border-white"
-            style={{ width: `${sliderPosition}%` }}
-          >
             <SkeletonImage
               src={beforeAfter.beforeImage}
               alt="Avant rénovation"
-              containerClassName="absolute top-0 left-0 h-full max-w-none"
-              className="h-full object-cover select-none pointer-events-none"
-              style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}
+              containerClassName="w-full h-full"
+              className="w-full h-full object-cover select-none pointer-events-none"
               priority={true}
             />
             <div className="absolute inset-0 bg-sepia/30 mix-blend-multiply pointer-events-none"></div>
             <div className="absolute top-4 left-4 bg-white/80 backdrop-blur text-slate-900 px-3 py-1 rounded text-sm font-bold z-10">
               {beforeAfter.labelBefore}
+            </div>
+          </div>
+
+          {/* AFTER Image (Clipped by slider position) */}
+          <div
+            className="absolute inset-0"
+            style={{
+              clipPath: `inset(0 0 0 ${sliderPosition}%)`
+            }}
+          >
+            <SkeletonImage
+              src={beforeAfter.afterImage}
+              alt="Après rénovation - Salon parisien luxueux"
+              containerClassName="w-full h-full"
+              className="w-full h-full object-cover select-none pointer-events-none"
+            />
+            <div className="absolute top-4 right-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded text-sm font-bold z-10">
+              {beforeAfter.labelAfter}
             </div>
           </div>
 

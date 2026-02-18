@@ -40,7 +40,7 @@ export default function Testimonials() {
                 y: -6,
                 transition: { duration: 0.3, ease: 'easeOut' }
               }}
-              className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 dark:border-slate-700/50"
+              className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 dark:border-slate-700/50 before:absolute before:inset-0 before:rounded-2xl before:p-[1px] before:bg-gradient-to-br before:from-gold-400/50 before:to-transparent before:-z-10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-4">

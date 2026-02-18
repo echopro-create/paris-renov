@@ -2,10 +2,11 @@
 
 @theme {
   /* === Colors === */
-  /* Gold shades (same in both themes) */
-  --color-gold-200: #E8D48B;
+  /* Gold/Accent Colors */
   --color-gold-400: #D4AF37;
+  --color-gold-450: #CFAA2F;
   --color-gold-500: #C5A028;
+  --color-gold-550: #B7952F;
   --color-gold-600: #A88B1E;
   --color-gold-700: #8A7218;
 
