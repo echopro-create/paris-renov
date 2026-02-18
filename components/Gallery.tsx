@@ -67,7 +67,7 @@ export default function Gallery() {
                 type: "spring",
                 stiffness: 100
               }}
-              className={`group relative rounded - 2xl overflow - hidden cursor - pointer ${item.span} `}
+              className={`group relative rounded-2xl overflow-hidden cursor-pointer ${item.span} `}
               onClick={() => setLightboxIdx(index)}
               whileHover={{ scale: 1.02 }}
             >
