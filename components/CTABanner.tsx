@@ -6,7 +6,7 @@ export default function CTABanner() {
     const { ctaBanner } = content;
 
     return (
-        <section className="py-24 md:py-32 bg-slate-900 relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-gray-100 dark:bg-slate-900 relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-500/5 rounded-full blur-3xl" />
@@ -19,11 +19,11 @@ export default function CTABanner() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">
+                    <h2 className="font-serif text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
                         {ctaBanner.title}{' '}
                         <span className="text-gold-400">{ctaBanner.titleHighlight}</span>
                     </h2>
-                    <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
                         {ctaBanner.subtitle}
                     </p>
                 </motion.div>
@@ -37,7 +37,7 @@ export default function CTABanner() {
                     </a>
                     <a
                         href={`tel:${ctaBanner.ctaSecondary.replace(/\s/g, '')}`}
-                        className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white rounded-full font-medium text-base hover:bg-white/10 transition-all"
+                        className="inline-flex items-center gap-2 px-8 py-4 border border-slate-300 dark:border-white/20 text-slate-900 dark:text-white rounded-full font-medium text-base hover:bg-slate-100 dark:hover:bg-white/10 transition-all"
                     >
                         <Phone className="w-4 h-4" />
                         {ctaBanner.ctaSecondary}

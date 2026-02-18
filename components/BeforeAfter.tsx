@@ -106,7 +106,7 @@ export default function BeforeAfter() {
   }, []);
 
   return (
-    <section className="py-24 bg-white dark:bg-slate-900 overflow-hidden">
+    <section className="py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

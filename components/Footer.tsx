@@ -23,9 +23,9 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-slate-900 text-white pt-16 pb-8">
+      <footer className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
+          <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
@@ -34,36 +34,36 @@ export default function Footer() {
                 </div>
                 <span className="font-serif text-lg font-bold tracking-wide">ATELIER ALEXEI</span>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed mb-6">
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                 {footer.description}
               </p>
               <div className="flex gap-3">
                 <motion.a
                   href="#"
-                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
                   aria-label="Suivez-nous sur Instagram"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Instagram className="w-4 h-4 text-slate-400 hover:text-gold-400" />
+                  <Instagram className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
                 </motion.a>
                 <motion.a
                   href="#"
-                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
                   aria-label="Suivez-nous sur Facebook"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Facebook className="w-4 h-4 text-slate-400 hover:text-gold-400" />
+                  <Facebook className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
                 </motion.a>
                 <motion.a
                   href="#"
-                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
                   aria-label="Suivez-nous sur LinkedIn"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Linkedin className="w-4 h-4 text-slate-400 hover:text-gold-400" />
+                  <Linkedin className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
                 </motion.a>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.href}>
-                    <a href={link.href} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                    <a href={link.href} className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors">
                       {link.label}
                     </a>
                   </li>
@@ -88,13 +88,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {savoirFaire.map((item) => (
                   <li key={item}>
-                    <span className="text-sm text-slate-400">{item}</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400">{item}</span>
                   </li>
                 ))}
                 <li className="pt-2">
                   <button
                     onClick={() => setModalContent({ title: footer.legal, body: footer.legalBody })}
-                    className="text-sm text-slate-400 hover:text-gold-400 transition-colors"
+                    className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors"
                   >
                     {footer.legal}
                   </button>
@@ -102,7 +102,7 @@ export default function Footer() {
                 <li>
                   <button
                     onClick={() => setModalContent({ title: footer.privacy, body: footer.privacyBody })}
-                    className="text-sm text-slate-400 hover:text-gold-400 transition-colors"
+                    className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors"
                   >
                     {footer.privacy}
                   </button>
@@ -116,19 +116,19 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-gold-400" />
-                  <a href={`tel:${contact.info.phone.replace(/\s/g, '')}`} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                  <a href={`tel:${contact.info.phone.replace(/\s/g, '')}`} className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors">
                     {contact.info.phone}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-gold-400" />
-                  <a href={`mailto:${contact.info.email}`} className="text-sm text-slate-400 hover:text-gold-400 transition-colors">
+                  <a href={`mailto:${contact.info.email}`} className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors">
                     {contact.info.email}
                   </a>
                 </li>
                 <li className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-gold-400 mt-0.5" />
-                  <span className="text-sm text-slate-400">{contact.info.address}</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">{contact.info.address}</span>
                 </li>
               </ul>
             </div>

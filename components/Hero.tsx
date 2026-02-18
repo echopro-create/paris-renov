@@ -1,137 +1,193 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { content } from '../constants';
-import { ArrowRight, ShieldCheck, Clock, Users, Award, ChevronRight } from 'lucide-react';
-import { useParallax } from '../lib/hooks/useParallax';
+import { ShieldCheck, Clock, Users, Award, ChevronRight, ChevronDown } from 'lucide-react';
 
 export default function Hero() {
   const { hero, common } = content;
-  const [shouldDisableParallax, setShouldDisableParallax] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth < 768;
-    setShouldDisableParallax(prefersReducedMotion || isMobile);
+    setPrefersReducedMotion(
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
   }, []);
 
-  const { ref: bgRef, offsetY: bgOffset } = useParallax({ speed: 0.3, disabled: shouldDisableParallax });
+  // Track scroll progress of the hero section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // === Scroll-linked transforms (no sticky, just transforms) ===
+  const bgScale = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [1, 1] : [1, 1.15]);
+  const bgY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 150]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.4], prefersReducedMotion ? [0, 0] : [0, -80]);
+
+  // Stagger animation for elements on load
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   // Custom icons for stats
   const statIcons = [
-    <Award className="w-5 h-5 text-gold-400/80 mb-2" />,
-    <Users className="w-5 h-5 text-gold-400/80 mb-2" />,
-    <ShieldCheck className="w-5 h-5 text-gold-400/80 mb-2" />,
-    <Clock className="w-5 h-5 text-gold-400/80 mb-2" />,
+    <Award key="award" className="w-5 h-5" />,
+    <Users key="users" className="w-5 h-5" />,
+    <ShieldCheck key="shield" className="w-5 h-5" />,
+    <Clock key="clock" className="w-5 h-5" />,
   ];
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          ref={bgRef}
-          className="absolute inset-0 will-change-transform"
-          style={{ transform: `translateY(${bgOffset}px)` }}
-        >
-          <img
-            src="/images/hero-bg-real.webp"
-            alt="Atelier Alexei - Travaux de rénovation"
-            className="w-full h-full object-cover"
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-          />
-        </div>
+    <section
+      id="hero"
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background Image with parallax */}
+      <motion.div
+        className="absolute inset-0 will-change-transform"
+        style={{ scale: bgScale, y: bgY }}
+      >
+        <img
+          src="/images/hero-bg-real.webp"
+          alt="Atelier Alexei - Travaux de rénovation parisienne"
+          className="w-full h-full object-cover"
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+        />
+      </motion.div>
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-      </div>
+      {/* Overlay — gradient for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/65" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 pb-32 text-center">
+      {/* Content — fades and moves up on scroll */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-24 text-center"
+      >
+        {/* Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-6"
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold-400/30 bg-white/5 backdrop-blur-sm mb-6">
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-gold-400/30 bg-white/5 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
-            <span className="text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{common.expertBadge}</span>
-          </div>
-
-          {/* Title */}
-          <h1 className="font-serif text-[clamp(2rem,6vw,4.5rem)] font-bold leading-[1.05] mb-6 tracking-tight text-white text-balance">
-            {hero.title} <span className="italic text-gold-400">Parisienne.</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-base md:text-xl text-slate-300 mb-8 md:mb-10 leading-relaxed max-w-2xl mx-auto font-light text-balance px-2">
-            {hero.subtitle.split('exigence absolue')[0]}
-            <span className="text-gold-400 font-medium">exigence absolue</span>.
-          </p>
-
-          {/* CTA Buttons - Mobile Optimized */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <motion.a
-              href="#contact"
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 text-white rounded-full font-bold text-base shadow-xl hover:bg-gold-600 hover:shadow-2xl hover:scale-105 transition-all duration-300"
-            >
-              {hero.ctaPrimary}
-              <ChevronRight className="w-5 h-5" />
-            </motion.a>
-            <a
-              href="#gallery"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 border border-white/20 text-white rounded-full font-medium text-sm sm:text-base hover:bg-white/10 transition-all active:bg-white/15"
-            >
-              {hero.ctaSecondary}
-            </a>
+            <span className="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase">
+              {common.expertBadge}
+            </span>
           </div>
         </motion.div>
-      </div>
 
-      {/* Stats Bar - Compact & Subtle */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 w-full max-w-4xl px-3 sm:px-4">
-        <motion.div
+        {/* Title with stagger animation */}
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-gold-400/20 rounded-xl shadow-lg grid grid-cols-2 md:grid-cols-4 overflow-hidden"
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="font-serif text-[clamp(2rem,5.5vw,4rem)] font-bold leading-[1.05] mb-5 tracking-tight text-white [text-shadow:_0_2px_16px_rgba(0,0,0,0.4)]"
         >
+          <span className="block text-[0.6em] font-sans font-light tracking-[0.15em] uppercase text-white/80 mb-3 [text-shadow:_0_1px_10px_rgba(0,0,0,0.6)]">
+            L'Art de la
+          </span>
+          Rénovation{' '}
+          <span className="italic text-gold-400 drop-shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+            Parisienne.
+          </span>
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-base md:text-lg text-slate-300/90 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto font-light text-balance px-2"
+        >
+          {hero.subtitle.split('exigence absolue')[0]}
+          <span className="text-gold-400 font-medium">exigence absolue</span>.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+        >
+          <a
+            href="#contact"
+            className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)]"
+          >
+            {/* Gradient background */}
+            <span className="absolute inset-0 bg-gradient-to-r from-gold-500 to-gold-600 transition-all duration-300 group-hover:from-gold-600 group-hover:to-gold-500" />
+            {/* Shine effect */}
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+            <span className="relative text-white">{hero.ctaPrimary}</span>
+            <ChevronRight className="relative w-5 h-5 text-white transition-transform group-hover:translate-x-1" />
+          </a>
+          <a
+            href="#gallery"
+            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-7 py-3 border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all active:bg-white/15"
+          >
+            {hero.ctaSecondary}
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* Stats Bar at bottom */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 1.0 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-full max-w-3xl px-4"
+      >
+        <div className="bg-white/8 backdrop-blur-lg border border-white/10 rounded-xl grid grid-cols-2 md:grid-cols-4 overflow-hidden">
           {hero.stats.map((stat, i) => {
             const isNumeric = /^[0-9+]+$/.test(stat.value);
             return (
               <div
                 key={i}
-                className={`px-3 py-3 sm:px-4 sm:py-3.5 text-center flex flex-col items-center justify-center min-w-0 ${i !== hero.stats.length - 1 ? 'border-r border-gold-400/15' : ''
+                className={`px-3 py-3 text-center flex flex-col items-center justify-center ${i !== hero.stats.length - 1 ? 'border-r border-white/10' : ''
                   }`}
               >
-                {/* Icon - compact */}
-                <div className="mb-1.5">
-                  {statIcons[i] && React.cloneElement(statIcons[i] as React.ReactElement, {
-                    className: 'w-4 h-4 sm:w-4.5 sm:h-4.5 text-gold-500/80'
+                <div className="text-gold-400/60 mb-1.5">
+                  {React.cloneElement(statIcons[i] as React.ReactElement, {
+                    className: 'w-3.5 h-3.5',
                   })}
                 </div>
-
-                {/* Value - subtle gold */}
-                <div className={`
-                  ${isNumeric ? 'text-xl sm:text-2xl font-serif font-semibold' : 'text-base sm:text-lg font-sans font-medium'}
-                  text-gold-600 dark:text-gold-500 leading-none mb-1.5
-                `}>
+                <div
+                  className={`${isNumeric
+                    ? 'text-lg sm:text-xl font-serif font-semibold'
+                    : 'text-sm sm:text-base font-sans font-medium'
+                    } text-white leading-none mb-1.5`}
+                >
                   {stat.value}
                 </div>
-
-                {/* Label - small & muted */}
-                <div className="text-[9px] sm:text-[10px] md:text-xs text-slate-500 dark:text-slate-500 font-medium tracking-wide uppercase leading-tight px-1 line-clamp-2">
+                <div className="text-[9px] sm:text-[10px] md:text-xs text-white/50 font-medium tracking-wide uppercase leading-tight">
                   {stat.label}
                 </div>
               </div>
             );
           })}
+        </div>
+      </motion.div>
+
+      {/* Scroll indicator at very bottom */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 1.2, duration: 1 }}
+        style={{ opacity: contentOpacity }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pb-1"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown className="w-5 h-5 text-gold-400/50" />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -31,7 +31,7 @@ export default function WhyUs() {
   }, [isInView]);
 
   return (
-    <section id="why-us" className="py-24 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden">
+    <section id="why-us" className="py-24 md:py-32 bg-gray-50 dark:bg-slate-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">

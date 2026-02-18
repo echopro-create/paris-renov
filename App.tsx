@@ -34,6 +34,7 @@ const App: React.FC = () => {
         <Navbar />
         <main id="main-content">
           <Hero />
+
           <Services />
           <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
             <BeforeAfter />
@@ -50,6 +51,7 @@ const App: React.FC = () => {
             <Contact />
           </React.Suspense>
           <CTABanner />
+
         </main>
         <Footer />
         <WhatsAppButton />
