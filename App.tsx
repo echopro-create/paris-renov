@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from './lib/contexts/ThemeContext';
+import { useSmoothScroll } from './lib/hooks/useSmoothScroll';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -12,14 +13,13 @@ const Contact = React.lazy(() => import('./components/Contact'));
 import CTABanner from './components/CTABanner';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-
-const suspenseFallback = (
-  <div className="h-96 flex items-center justify-center bg-slate-100 dark:bg-slate-800 animate-pulse rounded-2xl m-6">
-    Chargement...
-  </div>
-);
+import SkeletonLoader from './components/SkeletonLoader';
+import ScrollToTop from './components/ScrollToTop';
 
 const App: React.FC = () => {
+  // Enable smooth scroll for all anchor links
+  useSmoothScroll();
+
   return (
     <ThemeProvider>
       {/* Skip Link for Accessibility (WCAG 2.2) */}
@@ -27,7 +27,7 @@ const App: React.FC = () => {
         href="#main-content"
         className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 bg-gold-500 text-slate-900 px-6 py-3 rounded-lg z-[100] focus-ring font-semibold"
       >
-        Пропустить навигацию
+        Aller au contenu principal
       </a>
 
       <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-gold-200 selection:text-slate-900">
@@ -35,24 +35,25 @@ const App: React.FC = () => {
         <main id="main-content">
           <Hero />
           <Services />
-          <React.Suspense fallback={suspenseFallback}>
+          <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
             <BeforeAfter />
           </React.Suspense>
           <Process />
           <WhyUs />
-          <React.Suspense fallback={suspenseFallback}>
+          <React.Suspense fallback={<SkeletonLoader type="gallery" />}>
             <Gallery />
           </React.Suspense>
-          <React.Suspense fallback={suspenseFallback}>
+          <React.Suspense fallback={<SkeletonLoader type="testimonials" />}>
             <Testimonials />
           </React.Suspense>
-          <React.Suspense fallback={suspenseFallback}>
+          <React.Suspense fallback={<SkeletonLoader type="contact" />}>
             <Contact />
           </React.Suspense>
           <CTABanner />
         </main>
         <Footer />
         <WhatsAppButton />
+        <ScrollToTop />
       </div>
     </ThemeProvider>
   );

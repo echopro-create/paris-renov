@@ -37,13 +37,13 @@ export default function Footer() {
                 {footer.description}
               </p>
               <div className="flex gap-3">
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur Instagram">
                   <Instagram className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur Facebook">
                   <Facebook className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
-                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors">
+                <a href="#" className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors" aria-label="Suivez-nous sur LinkedIn">
                   <Linkedin className="w-4 h-4 text-slate-400 hover:text-gold-400" />
                 </a>
               </div>
@@ -118,7 +118,7 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
-              © 2024 Atelier Alexei. {footer.rights}
+              © {new Date().getFullYear()} Atelier Alexei. {footer.rights}
             </p>
             <p className="text-xs text-slate-500">
               {footer.designedBy}

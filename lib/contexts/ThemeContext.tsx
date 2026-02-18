@@ -26,6 +26,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         // Toggle 'dark' class on root element for Tailwind
         document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.style.colorScheme = theme;
 
         // Persist preference
         localStorage.setItem('theme', theme);

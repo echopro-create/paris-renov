@@ -13,7 +13,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   // Scroll spy for active section highlighting
-  const activeSection = useActiveSection(['hero', 'services', 'gallery', 'testimonials', 'process']);
+  const activeSection = useActiveSection(['hero', 'services', 'why-us', 'process', 'gallery', 'testimonials', 'contact']);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,17 +43,16 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { label: 'SERVICES', href: '#services', id: 'services' },
-    { label: 'RÉALISATIONS', href: '#gallery', id: 'gallery' },
-    { label: 'TÉMOIGNAGES', href: '#testimonials', id: 'testimonials' },
-    { label: 'PROCESS', href: '#process', id: 'process' },
+    { label: nav.services, href: '#services', id: 'services' },
+    { label: nav.whyUs, href: '#why-us', id: 'why-us' },
+    { label: nav.gallery, href: '#gallery', id: 'gallery' },
+    { label: 'Témoignages', href: '#testimonials', id: 'testimonials' },
+    { label: nav.process, href: '#process', id: 'process' },
   ];
 
   const mobileNavLinks = [
     { label: nav.home, href: '#hero' },
-    { label: nav.services, href: '#services' },
-    { label: nav.whyUs, href: '#expertise' },
-    { label: nav.gallery, href: '#gallery' },
+    ...navLinks.map(link => ({ label: link.label, href: link.href })),
     { label: nav.contact, href: '#contact' },
   ];
 
@@ -66,8 +65,11 @@ export default function Navbar() {
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
+        {/* Logo - Clickable to scroll to top */}
+        <a href="#hero" className="flex items-center gap-3 group" onClick={(e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}>
           <div className="w-10 h-10 border border-gold-500 flex items-center justify-center rounded-sm group-hover:bg-gold-500/10 transition-colors">
             <span className="font-serif text-2xl text-gold-500">A</span>
           </div>
@@ -106,7 +108,7 @@ export default function Navbar() {
               ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
               : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/20'
               }`}
-            aria-label={theme === 'dark' ? 'Переключить на светлую тему' : 'Переключить на темную тему'}
+            aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -131,7 +133,7 @@ export default function Navbar() {
               ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
               : 'bg-white/10 backdrop-blur-sm text-white'
               }`}
-            aria-label={theme === 'dark' ? 'Переключить на светлую тему' : 'Переключить на темную тему'}
+            aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -148,24 +150,39 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full h-screen bg-white dark:bg-slate-900 shadow-lg lg:hidden py-6 px-6 flex flex-col gap-4 border-t border-slate-100 dark:border-slate-700 overflow-y-auto pb-32">
-          {mobileNavLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
+        <div className="fixed inset-0 z-50 bg-white dark:bg-slate-900 lg:hidden">
+          {/* Fixed Header with Close Button */}
+          <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
+            <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">ATELIER ALEXEI</span>
+            <button
               onClick={() => setIsOpen(false)}
-              className="text-lg font-medium text-slate-800 dark:text-white py-3 border-b border-slate-100 dark:border-slate-700 hover:text-gold-600 dark:hover:text-gold-400 transition-colors focus-ring"
+              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-ring"
+              aria-label={common.closeMenu}
             >
-              {link.label}
+              <X size={24} className="text-slate-900 dark:text-white" />
+            </button>
+          </div>
+
+          {/* Scrollable Menu Content */}
+          <div className="pt-20 px-6 flex flex-col gap-4 overflow-y-auto h-full pb-32">
+            {mobileNavLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-medium text-slate-800 dark:text-white py-3 border-b border-slate-100 dark:border-slate-700 hover:text-gold-600 dark:hover:text-gold-400 transition-colors focus-ring"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="mt-4 w-full text-center bg-gold-500 text-white dark:text-slate-900 py-4 rounded-full font-semibold text-lg hover:bg-gold-400 transition-colors focus-ring"
+            >
+              {nav.getQuote}
             </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={() => setIsOpen(false)}
-            className="mt-4 w-full text-center bg-gold-500 text-white dark:text-slate-900 py-4 rounded-lg font-semibold text-lg hover:bg-gold-400 transition-colors focus-ring"
-          >
-            {nav.getQuote}
-          </a>
+          </div>
         </div>
       )}
     </nav>

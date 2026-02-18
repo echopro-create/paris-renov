@@ -32,7 +32,7 @@ export const content: ContentData = {
   },
   hero: {
     title: "L'Art de la Rénovation",
-    subtitle: "Spécialiste en travaux de rénovation générale и rénovation intérieure. De la création des cloisons à la pose du parquet, nous sublimons vos espaces avec une exigence absolue.",
+    subtitle: "Spécialiste en travaux de rénovation générale et rénovation intérieure. De la création des cloisons à la pose du parquet, nous sublimons vos espaces avec une exigence absolue.",
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
@@ -53,40 +53,38 @@ export const content: ContentData = {
         id: 'general',
         title: "Rénovation Générale",
         description: "Travaux de rénovation générale : peinture, plomberie, électricité, menuiserie, carrelage sol et murs.",
-        image: "/assets/services/painting-service.webp",
-        iconName: 'Paintbrush'
+        image: "/assets/services/service_renovation_generale.png"
       },
       {
         id: 'plastering',
         title: "Plâtrerie & Aménagement",
         description: "Création des cloisons, plafonds suspendus et plâtrerie. Restructuration complète de vos espaces intérieurs.",
-        image: "/assets/services/plastering-service.webp",
-        iconName: 'Home'
+        image: "/assets/services/service_platrerie.png"
       },
       {
         id: 'spaces',
         title: "Cuisines & Bains",
         description: "Restauration des salles de bains et cuisine. Une expertise technique pour vos pièces les plus exigeantes.",
-        image: "/assets/services/bathroom-service.png",
-        iconName: 'Droplets'
+        image: "/assets/services/service_cuisine_bain.png"
       },
       {
         id: 'flooring',
         title: "Parquets & Sols",
-        description: "Couverture des sols parquet, pose и restauration. Finitions artisanales pour un sol d'exception.",
-        image: "/assets/services/parquet-service.webp",
-        iconName: 'Layers'
+        description: "Couverture des sols parquet, pose et restauration. Finitions artisanales pour un sol d'exception.",
+        image: "/assets/services/service_parquet.png"
       }
     ]
   },
   whyUs: {
+    badge: "Exigence",
     title: "L'Exigence de l'Atelier Alexei",
     subtitle: "Chaque projet est une œuvre unique, réalisée avec la rigueur et la passion qui définissent notre atelier.",
+    image: "/assets/why-us/haussmann-design.png",
     features: [
-      { title: "Garantie Décennale", desc: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
-      { title: "Devis Transparent", desc: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "FileText" },
-      { title: "Respect des Délais", desc: "Planning rigoureux et communication régulière sur l'avancement.", icon: "Clock" },
-      { title: "Artisans Qualifiés", desc: "Une équipe de compagnons expérimentés et passionnés par leur métier.", icon: "Award" }
+      { title: "Garantie Décennale", description: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
+      { title: "Devis Transparent", description: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "FileText" },
+      { title: "Respect des Délais", description: "Planning rigoureux et communication régulière sur l'avancement.", icon: "Clock" },
+      { title: "Artisans Qualifiés", description: "Une équipe de compagnons expérimentés et passionnés par leur métier.", icon: "Award" }
     ],
     quote: "L'excellence n'est pas un acte, c'est une habitude.",
     quoteAuthor: "— Alexei, Fondateur"
@@ -94,8 +92,8 @@ export const content: ContentData = {
   beforeAfter: {
     title: "Transformation",
     subtitle: "Faites glisser pour découvrir la métamorphose d'un salon Haussmannien.",
-    beforeImage: "/assets/before-after/salon-before-hd.jpg",
-    afterImage: "/assets/before-after/salon-after-hd.jpg",
+    beforeImage: "/assets/images/after_custom.png",
+    afterImage: "/assets/images/before_custom.png",
     labelBefore: "Avant",
     labelAfter: "Après"
   },
@@ -108,12 +106,74 @@ export const content: ContentData = {
       { number: "02", title: "Devis Détaillé", description: "Proposition chiffrée transparente avec choix des matériaux et planning prévisionnel." },
       { number: "03", title: "Réalisation", description: "Exécution des travaux par nos artisans qualifiés avec protection des lieux et suivi quotidien." },
       { number: "04", title: "Livraison", description: "Réception des travaux, nettoyage complet du chantier et remise des clés." }
+    ],
+    faq: [
+      {
+        question: "Combien de temps dure la phase de diagnostic ?",
+        answer: "Le diagnostic initial prend généralement entre 30 minutes et 1 heure, selon la taille de votre bien et la complexité du projet."
+      },
+      {
+        question: "Sous quel délai reçois-je mon devis ?",
+        answer: "Nous nous engageons à vous transmettre un devis détaillé sous 48 à 72 heures après la visite technique."
+      },
+      {
+        question: "Les délais de réalisation sont-ils garantis ?",
+        answer: "Oui, les délais annoncés dans le planning sont fermes et définitifs. En cas de retard de notre fait, des pénalités s'appliquent."
+      },
+      {
+        question: "Proposez-vous une garantie décennale ?",
+        answer: "Absolument. Tous nos chantiers sont couverts par une assurance décennale qui garantit les ouvrages pendant 10 ans après la livraison."
+      }
     ]
   },
   gallery: {
     badge: "RÉALISATIONS",
     title: "Nos Derniers Chantiers",
-    subtitle: "Découvrez l'excellence de nos finitions à travers nos derniers chantiers parisiens."
+    subtitle: "Découvrez l'excellence de nos finitions à travers nos derniers chantiers parisiens.",
+    items: [
+      {
+        src: "/assets/gallery/salon.png",
+        alt: "Salon haussmannien rénové à Paris",
+        title: "Salon Haussmannien",
+        location: "Paris 8e",
+        span: "md:col-span-2 md:row-span-2",
+      },
+      {
+        src: "/assets/gallery/cuisine.png",
+        alt: "Rénovation cuisine moderne et épurée",
+        title: "Cuisine Moderne",
+        location: "Neuilly",
+        span: "md:col-span-2",
+      },
+      {
+        src: "/assets/gallery/chambre.png",
+        alt: "Chambre parentale haut de gamme",
+        title: "Suite Parentale",
+        location: "Paris 16e",
+        span: "md:col-span-1",
+      },
+      {
+        src: "/assets/gallery/salle-de-bain.png",
+        alt: "Salle de bain en marbre et or",
+        title: "Salle de Bain",
+        location: "Paris 7e",
+        span: "md:col-span-1",
+      },
+      {
+        src: "/assets/gallery/dressing.png",
+        alt: "Dressing sur mesure haut de gamme",
+        title: "Dressing Sur Mesure",
+        location: "Paris 17e",
+        span: "md:col-span-2",
+      },
+      {
+        src: "/assets/gallery/entree.png",
+        alt: "Hall d'entrée prestigieux",
+        title: "Entrée & Hall",
+        location: "Paris 16e",
+        span: "md:col-span-2",
+      }
+    ]
   },
   testimonials: {
     badge: "TÉMOIGNAGES",

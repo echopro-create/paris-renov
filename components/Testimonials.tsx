@@ -9,7 +9,13 @@ export default function Testimonials() {
     <section id="testimonials" className="py-24 md:py-32 bg-slate-50 dark:bg-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 dark:bg-gold-500/20 mb-6">
             <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{testimonials.badge}</span>
           </div>
@@ -19,7 +25,7 @@ export default function Testimonials() {
           <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">
             {testimonials.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonial Cards */}
         <div className="grid md:grid-cols-3 gap-8">

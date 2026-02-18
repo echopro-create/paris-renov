@@ -1,16 +1,47 @@
-import { ReactNode } from 'react';
 
 export interface NavItem {
   label: string;
   href: string;
 }
 
-export interface ServiceItem {
-  id: string;
+export interface Stat {
+  label: string;
+  value: string;
+}
+
+export interface WhyUsFeature {
   title: string;
   description: string;
-  image: string;
-  iconName: string;
+  icon: string;
+}
+
+export interface CtaBanner {
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+}
+
+export interface CommonData {
+  learnMore: string;
+  getQuote: string;
+  whatWeOffer: string;
+  detailedQuote: string;
+  respectNorms: string;
+  expertBadge: string;
+  viewAll: string;
+  openMenu: string;
+  closeMenu: string;
+  portfolio: string;
+  workflow: string;
+  metamorphose: string;
+  dragToCompare: string;
+  clientReviews: string;
+  contactBadge: string;
+  whatsappTooltip: string;
+  callAriaLabel: string;
+  whatsappAriaLabel: string;
 }
 
 export interface Testimonial {
@@ -18,14 +49,45 @@ export interface Testimonial {
   name: string;
   location: string;
   text: string;
-  role?: string;
-  avatar?: string;
+  role: string;
+  avatar: string;
+}
+
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
 }
 
 export interface ProcessStep {
   number: string;
   title: string;
   description: string;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface SocialLink {
+  platform: string;
+  url: string;
+  icon: any;
+}
+
+export interface FooterData {
+  description: string;
+  navigation: string;
+  services: string;
+  legal: string;
+  privacy: string;
+  rights: string;
+  areas: string;
+  designedBy: string;
+  legalBody: string;
+  privacyBody: string;
 }
 
 export interface ContactForm {
@@ -62,55 +124,15 @@ export interface ContactInfo {
     phone: string;
     email: string;
     address: string;
-  };
+  }
 }
 
-export interface FooterData {
-  description: string;
-  navigation: string;
-  services: string;
-  legal: string;
-  privacy: string;
-  rights: string;
-  areas: string;
-  designedBy: string;
-  legalBody: string;
-  privacyBody: string;
-}
-
-export interface WhyUsFeature {
+export interface GalleryItem {
+  src: string;
+  alt: string;
   title: string;
-  desc: string;
-  icon: string;
-}
-
-export interface CtaBanner {
-  title: string;
-  titleHighlight: string;
-  subtitle: string;
-  ctaPrimary: string;
-  ctaSecondary: string;
-}
-
-export interface CommonData {
-  learnMore: string;
-  getQuote: string;
-  whatWeOffer: string;
-  detailedQuote: string;
-  respectNorms: string;
-  expertBadge: string;
-  viewAll: string;
-  openMenu: string;
-  closeMenu: string;
-  portfolio: string;
-  workflow: string;
-  metamorphose: string;
-  dragToCompare: string;
-  clientReviews: string;
-  contactBadge: string;
-  whatsappTooltip: string;
-  callAriaLabel: string;
-  whatsappAriaLabel: string;
+  location: string;
+  span: string;
 }
 
 export interface ContentData {
@@ -140,8 +162,10 @@ export interface ContentData {
     items: ServiceItem[];
   };
   whyUs: {
+    badge: string;
     title: string;
     subtitle: string;
+    image: string;
     features: WhyUsFeature[];
     quote?: string;
     quoteAuthor?: string;
@@ -159,11 +183,13 @@ export interface ContentData {
     title: string;
     subtitle: string;
     steps: ProcessStep[];
+    faq: FAQItem[];
   };
   gallery: {
     badge: string;
     title: string;
     subtitle: string;
+    items: GalleryItem[];
   };
   testimonials: {
     badge: string;

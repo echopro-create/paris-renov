@@ -1,4 +1,5 @@
 import { ArrowRight, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { content } from '../constants';
 
 export default function CTABanner() {
@@ -12,13 +13,20 @@ export default function CTABanner() {
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">
-                    {ctaBanner.title}{' '}
-                    <span className="text-gold-400">{ctaBanner.titleHighlight}</span>
-                </h2>
-                <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
-                    {ctaBanner.subtitle}
-                </p>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-6">
+                        {ctaBanner.title}{' '}
+                        <span className="text-gold-400">{ctaBanner.titleHighlight}</span>
+                    </h2>
+                    <p className="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+                        {ctaBanner.subtitle}
+                    </p>
+                </motion.div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a
                         href="#contact"
