@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { content } from '../constants';
-import { ShieldCheck, Clock, Users, Award, ChevronRight, ChevronDown } from 'lucide-react';
+import { ShieldCheck, Clock, Users, Award, ChevronRight } from 'lucide-react';
 
 export default function Hero() {
   const { hero, common } = content;
@@ -173,21 +173,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator at very bottom */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 1.2, duration: 1 }}
-        style={{ opacity: contentOpacity }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pb-1"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown className="w-5 h-5 text-gold-400/50" />
-        </motion.div>
-      </motion.div>
+
     </section>
   );
 }
