@@ -78,19 +78,19 @@ export default function Navbar() {
           </span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8">
+        {/* Desktop Links */}
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`relative text-xs font-bold tracking-[0.15em] uppercase transition-all focus-ring ${activeSection === link.id
-                ? isScrolled
-                  ? 'text-gold-600 dark:text-gold-400'
-                  : 'text-white'
-                : isScrolled
-                  ? 'text-slate-600 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
-                  : 'text-slate-300 hover:text-white'
+              className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors uppercase ${isScrolled
+                  ? activeSection === link.id
+                    ? 'text-gold-600 dark:text-gold-500'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
+                  : activeSection === link.id
+                    ? 'text-gold-300'
+                    : 'text-white hover:text-gold-200'
                 }`}
             >
               {link.label}
@@ -150,7 +150,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-white dark:bg-slate-900 lg:hidden">
+        <div className="fixed inset-0 z-50 bg-white/98 dark:bg-slate-900/98 backdrop-blur-2xl lg:hidden">
           {/* Fixed Header with Close Button */}
           <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
             <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">ATELIER ALEXEI</span>

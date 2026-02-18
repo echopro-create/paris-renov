@@ -141,6 +141,7 @@ export default function BeforeAfter() {
               alt="Après rénovation - Salon parisien luxueux"
               containerClassName="w-full h-full"
               className="w-full h-full object-cover select-none pointer-events-none"
+              style={{ width: containerWidth ? `${containerWidth}px` : '100%' }}
             />
             <div className="absolute top-4 right-4 bg-black/50 backdrop-blur text-white px-3 py-1 rounded text-sm font-bold z-10">
               {beforeAfter.labelAfter}
@@ -188,7 +189,7 @@ export default function BeforeAfter() {
             <div className="bg-black/60 backdrop-blur text-white px-4 py-2 rounded-full text-xs flex items-center gap-2">
               <kbd className="px-2 py-1 bg-white/20 rounded">←</kbd>
               <kbd className="px-2 py-1 bg-white/20 rounded">→</kbd>
-              <span>для перемещения</span>
+              <span>Glisser pour comparer</span>
             </div>
           </div>
 

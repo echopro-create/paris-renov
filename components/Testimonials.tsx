@@ -6,7 +6,7 @@ export default function Testimonials() {
   const { testimonials } = content;
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 bg-slate-50 dark:bg-slate-800">
+    <section id="testimonials" className="py-24 md:py-32 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div

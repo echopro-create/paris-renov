@@ -6,7 +6,7 @@ export default function WhyUs() {
   const { whyUs } = content;
 
   return (
-    <section id="why-us" className="py-24 md:py-32 bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+    <section id="why-us" className="py-24 md:py-32 bg-white dark:bg-slate-900 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -65,26 +65,26 @@ export default function WhyUs() {
             transition={{ duration: 0.6 }}
             className="order-1 lg:order-2 relative"
           >
-              {/* Main Image */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img
-                  src={whyUs.image}
-                  alt="Détail architectural"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                />
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-60" />
-              </div>
+            {/* Main Image */}
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
+              <img
+                src={whyUs.image}
+                alt="Détail architectural"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              />
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-60" />
+            </div>
 
-              {/* Decorative Elements */}
-              <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-slate-50 dark:bg-slate-800 p-4 hidden md:block">
-                <div className="w-full h-full border border-gold-500/30 flex items-center justify-center p-6 text-center">
-                  <div>
-                    <span className="block text-3xl font-serif font-bold text-gold-600 mb-1">15+</span>
-                    <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Années d'Expérience</span>
-                  </div>
+            {/* Decorative Elements */}
+            <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-slate-50 dark:bg-slate-800 p-4 hidden md:block">
+              <div className="w-full h-full border border-gold-500/30 flex items-center justify-center p-6 text-center">
+                <div>
+                  <span className="block text-3xl font-serif font-bold text-gold-600 mb-1">15+</span>
+                  <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">Années d'Expérience</span>
                 </div>
               </div>
+            </div>
           </motion.div>
         </div>
 
