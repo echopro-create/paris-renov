@@ -29,10 +29,21 @@ export default function Footer() {
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-400/30 flex items-center justify-center">
-                  <span className="text-gold-400 font-serif font-bold text-sm">A</span>
+                {/* Idea 4: Haussmann Signature in Footer - Restored */}
+                <div className="flex items-center gap-4">
+                  <div className="flex flex-col items-center">
+                    <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gold-500">
+                      <path d="M5 25H35V30H5V25Z" fill="currentColor" fillOpacity="0.1" />
+                      <path d="M8 12V25M14 12V25M20 12V25M26 12V25M32 12V25" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                      <path d="M5 12H35" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                      <path d="M5 25H35" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col border-l border-gold-500/20 pl-4 py-1">
+                    <span className="font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none">D.A. BAT</span>
+                    <span className="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">L'Excellence du Bâtiment</span>
+                  </div>
                 </div>
-                <span className="font-serif text-lg font-bold tracking-wide">ATELIER ALEXEI</span>
               </div>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                 {footer.description}
@@ -137,7 +148,7 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
-              © {new Date().getFullYear()} Atelier Alexei. {footer.rights}
+              © {new Date().getFullYear()} D.A. BAT. {footer.rights}
             </p>
             <p className="text-xs text-slate-500">
               {footer.designedBy}

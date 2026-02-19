@@ -60,8 +60,8 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${isScrolled
-          ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-slate-700/50 py-4'
-          : 'bg-transparent py-6'
+          ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-slate-700/50 py-6'
+          : 'bg-transparent py-10'
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -70,12 +70,27 @@ export default function Navbar() {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
-          <div className="w-10 h-10 border border-gold-500 flex items-center justify-center rounded-sm group-hover:bg-gold-500/10 transition-colors">
-            <span className="font-serif text-2xl text-gold-500">A</span>
+          {/* Idea 4: Haussmann Signature - Restored */}
+          <div className="relative flex items-center gap-6">
+            <div className="flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+              {/* Impactful Haussmann Balcony Icon */}
+              <svg width="64" height="64" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gold-500 filter drop-shadow-sm">
+                <path d="M5 25H35V30H5V25Z" fill="currentColor" fillOpacity="0.1" />
+                <path d="M8 12V25M14 12V25M20 12V25M26 12V25M32 12V25" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M5 12H35" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M5 25H35" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M5 30H35" stroke="currentColor" strokeWidth="1" strokeLinecap="round" className="opacity-40" />
+              </svg>
+            </div>
+            <div className="flex flex-col border-l border-gold-500/30 pl-6 py-1">
+              <span className={`font-serif text-3xl lg:text-4xl font-extrabold tracking-[0.2em] transition-colors leading-none ${isScrolled ? 'text-slate-900 dark:text-white' : 'text-white'}`}>
+                D.A. BAT
+              </span>
+              <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">
+                L'Excellence du Bâtiment
+              </span>
+            </div>
           </div>
-          <span className={`font-serif text-xl font-bold tracking-widest transition-colors uppercase ${isScrolled ? 'text-slate-900 dark:text-white' : 'text-white'}`}>
-            ATELIER ALEXEI
-          </span>
         </a>
 
         {/* Desktop Links */}
@@ -85,12 +100,12 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors uppercase ${isScrolled
-                  ? activeSection === link.id
-                    ? 'text-gold-600 dark:text-gold-500'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
-                  : activeSection === link.id
-                    ? 'text-gold-300'
-                    : 'text-white hover:text-gold-200'
+                ? activeSection === link.id
+                  ? 'text-gold-600 dark:text-gold-500'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
+                : activeSection === link.id
+                  ? 'text-gold-300'
+                  : 'text-white hover:text-gold-200'
                 }`}
             >
               {link.label}
@@ -153,7 +168,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-50 bg-white/98 dark:bg-slate-900/98 backdrop-blur-2xl lg:hidden">
           {/* Fixed Header with Close Button */}
           <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
-            <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">ATELIER ALEXEI</span>
+            <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">D.A. BAT</span>
             <button
               onClick={() => setIsOpen(false)}
               className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-ring"

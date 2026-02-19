@@ -7,7 +7,7 @@ export const content: ContentData = {
     whatWeOffer: "Ce que nous proposons :",
     detailedQuote: "Devis détaillé et gratuit",
     respectNorms: "Respect des normes en vigueur",
-    expertBadge: "ATELIER D'EXCELLENCE",
+    expertBadge: "ENTREPRISE GÉNÉRALE DE BÂTIMENT",
     viewAll: "Voir tous les projets",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
@@ -31,8 +31,8 @@ export const content: ContentData = {
     getQuote: "Devis Gratuit",
   },
   hero: {
-    title: "L'Art de la Rénovation",
-    subtitle: "Spécialiste en travaux de rénovation générale et rénovation intérieure. De la création des cloisons à la pose du parquet, nous sublimons vos espaces avec une exigence absolue.",
+    title: "D.A. BAT - Rénovation Générale",
+    subtitle: "Entreprise générale de bâtiment. Travaux de rénovation, peinture, plomberie, électricité, maçonnerie, parquets et carrelage. Nous réalisons tous vos projets avec soin et une exigence absolue.",
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
@@ -46,39 +46,39 @@ export const content: ContentData = {
     title: "Ils nous font confiance",
   },
   services: {
-    title: "Nos Pôles d'Expertise",
-    subtitle: "Votre partenaire d'excellence pour tous vos travaux de rénovation intérieure à Paris.",
+    title: "Nos Services",
+    subtitle: "Une expertise complète pour tous vos travaux de rénovation.",
     items: [
       {
         id: 'general',
-        title: "Rénovation Générale",
-        description: "Travaux de rénovation générale : peinture, plomberie, électricité, menuiserie, carrelage sol et murs.",
+        title: "Rénovation & Maçonnerie",
+        description: "Travaux de rénovation générale : maçonnerie, création de cloisons, plâtrerie. Une prise en charge complète de votre chantier.",
         image: "/assets/services/service_renovation_generale.png"
       },
       {
         id: 'plastering',
-        title: "Plâtrerie & Aménagement",
-        description: "Création des cloisons, plafonds suspendus et plâtrerie. Restructuration complète de vos espaces intérieurs.",
+        title: "Peinture & Décoration",
+        description: "Peinture intérieure et extérieure, enduits décoratifs, papiers peints. Des finitions soignées pour sublimer vos espaces.",
         image: "/assets/services/service_platrerie.png"
       },
       {
         id: 'spaces',
-        title: "Cuisines & Bains",
-        description: "Restauration des salles de bains et cuisine. Une expertise technique pour vos pièces les plus exigeantes.",
+        title: "Plomberie & Électricité",
+        description: "Installation sanitaire complète, rénovation salle de bain, mise aux normes électrique. Tous travaux de fluides et réseaux.",
         image: "/assets/services/service_cuisine_bain.png"
       },
       {
         id: 'flooring',
-        title: "Parquets & Sols",
-        description: "Couverture des sols parquet, pose et restauration. Finitions artisanales pour un sol d'exception.",
+        title: "Sols & Boiserie",
+        description: "Pose de parquet, carrelage, boiseries sur mesure. Rénovation de sols anciens et pose de revêtements modernes.",
         image: "/assets/services/service_parquet.png"
       }
     ]
   },
   whyUs: {
     badge: "Exigence",
-    title: "L'Exigence de l'Atelier Alexei",
-    subtitle: "Chaque projet est une œuvre unique, réalisée avec la rigueur et la passion qui définissent notre atelier.",
+    title: "Pourquoi D.A. BAT ?",
+    subtitle: "Votre satisfaction est notre priorité. Nous mettons notre savoir-faire au service de votre projet.",
     image: "/assets/why-us/haussmann-design.png",
     features: [
       { title: "Garantie Décennale", description: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
@@ -86,8 +86,8 @@ export const content: ContentData = {
       { title: "Respect des Délais", description: "Planning rigoureux et communication régulière sur l'avancement.", icon: "Clock" },
       { title: "Artisans Qualifiés", description: "Une équipe de compagnons expérimentés et passionnés par leur métier.", icon: "Award" }
     ],
-    quote: "L'excellence n'est pas un acte, c'est une habitude.",
-    quoteAuthor: "— Alexei, Fondateur"
+    quote: "La confiance se construit sur la qualité de nos réalisations.",
+    quoteAuthor: "— Alexei TCHOUDINOV, Gérant"
   },
   beforeAfter: {
     title: "Transformation",
@@ -184,7 +184,7 @@ export const content: ContentData = {
         id: 1,
         name: "Sophie Martin",
         location: "Paris 16e",
-        text: "Un travail absolument remarquable. L'équipe d'Alexei a transformé notre appartement haussmannien avec un souci du détail impressionnant. Les finitions sont parfaites.",
+        text: "Un travail remarquable. D.A. BAT a transformé notre appartement avec un professionnalisme exemplaire.",
         role: "Rénovation complète",
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
       },
@@ -200,7 +200,7 @@ export const content: ContentData = {
         id: 3,
         name: "Camille Dubois",
         location: "Paris 7e",
-        text: "Notre parquet en point de Hongrie a retrouvé toute sa splendeur grâce à l'Atelier Alexei. Un savoir-faire rare et une équipe à l'écoute. Merci pour cette belle transformation.",
+        text: "Notre parquet a retrouvé toute sa splendeur grâce à D.A. BAT. Un savoir-faire artisanal de qualité.",
         role: "Parquets & Sols",
         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
       }
@@ -238,8 +238,8 @@ export const content: ContentData = {
     },
     info: {
       address: "12 Avenue des Champs-Élysées, 75008 Paris",
-      phone: "+33 6 01 99 76 59",
-      email: "contact@atelier-alexei.fr",
+      phone: "06 01 99 76 59",
+      email: "tchoudinov@hotmail.fr",
       hours: "Lun - Ven: 8h00 - 19h00",
       labels: {
         phone: "Téléphone",
@@ -253,10 +253,10 @@ export const content: ContentData = {
     titleHighlight: "Votre Intérieur?",
     subtitle: "Bénéficiez d'un devis gratuit et personnalisé pour votre projet de travaux de rénovation générale à Paris.",
     ctaPrimary: "Demander un devis gratuit",
-    ctaSecondary: "+33 6 01 99 76 59"
+    ctaSecondary: "06 01 99 76 59"
   },
   footer: {
-    description: "Expert en travaux de rénovation générale et intérieure : peinture, plomberie, électricité, menuiserie, carrelage et parquet. Excellence artisanale depuis 2008.",
+    description: "D.A. BAT - Entreprise générale de bâtiment. Travaux de rénovation, peinture, plomberie, électricité, maçonnerie, boiserie, parquet et carrelage. Qualité, soin et exigence absolue.",
     navigation: "Navigation",
     services: "Savoir-faire",
     legal: "Mentions Légales",
@@ -264,7 +264,10 @@ export const content: ContentData = {
     rights: "Tous droits réservés.",
     areas: "Paris & Île-de-France",
     designedBy: "Artisanat Français d'Excellence",
-    legalBody: "Atelier Alexei SAS\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nRCS Paris B 123 456 789\nCapital social : 50 000 €\nDirecteur de la publication : Alexei [Nom]\nHébergeur : Vercel Inc.",
-    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par l'Atelier Alexei pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : contact@atelier-alexei.fr"
+    legalBody: "D.A. BAT - Alexei TCHOUDINOV\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nDirecteur de la publication : Alexei TCHOUDINOV\nContact : tchoudinov@hotmail.fr",
+    privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par D.A. BAT pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : tchoudinov@hotmail.fr"
+  },
+  social: {
+    instagram: "https://www.instagram.com/tchou_dnov/"
   }
 };

@@ -101,7 +101,7 @@ export default function Gallery() {
         {/* Instagram CTA */}
         <div className="text-center mt-12">
           <a
-            href="https://instagram.com"
+            href={content.social?.instagram || "https://instagram.com"}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300 hover:border-gold-400 hover:text-gold-600 dark:hover:text-gold-400 transition-all"

@@ -208,4 +208,7 @@ export interface ContentData {
   };
   ctaBanner: CtaBanner;
   footer: FooterData;
+  social: {
+    instagram: string;
+  };
 }
