@@ -1,9 +1,14 @@
-import { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 interface MagneticReturn {
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
   position: { x: number; y: number };
   isHovered: boolean;
+  handlers: {
+    onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
+  };
 }
 
 /**

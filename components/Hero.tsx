@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { content } from '../constants';
 import { ShieldCheck, Clock, Users, Award, ChevronRight } from 'lucide-react';
+import SkeletonImage from './SkeletonImage';
 
 export default function Hero() {
   const { hero, common } = content;
@@ -48,13 +49,13 @@ export default function Hero() {
         className="absolute inset-0 will-change-transform"
         style={{ scale: bgScale, y: bgY }}
       >
-        <img
+        <SkeletonImage
           src="/images/hero-bg-real.webp"
           alt="Atelier Alexei - Travaux de rénovation parisienne"
+          containerClassName="w-full h-full"
           className="w-full h-full object-cover"
-          fetchPriority="high"
-          loading="eager"
-          decoding="sync"
+          priority={true}
+          optimize={false}
         />
       </motion.div>
 
@@ -117,6 +118,7 @@ export default function Hero() {
         >
           <a
             href="#contact"
+            aria-label="Contacter pour un devis gratuit"
             className="group relative inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)]"
           >
             {/* Gradient background */}
@@ -128,6 +130,7 @@ export default function Hero() {
           </a>
           <a
             href="#gallery"
+            aria-label="Voir nos réalisations"
             className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-7 py-3 border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all active:bg-white/15"
           >
             {hero.ctaSecondary}

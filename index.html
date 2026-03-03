@@ -11,7 +11,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', '%VITE_GA_ID%');
   </script>
@@ -31,6 +31,9 @@
   <link rel="dns-prefetch" href="https://images.unsplash.com" />
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+  <!-- Preload Hero Image for better LCP -->
+  <link rel="preload" as="image" href="/images/hero-bg-real.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />

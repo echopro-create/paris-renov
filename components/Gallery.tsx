@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../constants';
 import { Instagram, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
@@ -42,12 +42,12 @@ export default function Gallery() {
   };
 
   // Touch handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = null;
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     touchEndX.current = e.touches[0].clientX;
   };
 
@@ -104,8 +104,8 @@ export default function Gallery() {
               key={filter}
               onClick={() => handleFilterChange(filter)}
               className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter
-                  ? 'text-slate-900 shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:border-gold-400/50'
+                ? 'text-slate-900 shadow-md'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:border-gold-400/50'
                 }`}
             >
               {activeFilter === filter && (

@@ -2,6 +2,7 @@
  * Image optimization utility for CDN
  * Supports: Unsplash, local images via Vite
  */
+import React from 'react';
 
 interface ImageOptions {
   width?: number;

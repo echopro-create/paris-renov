@@ -67,19 +67,19 @@
 - Валидация французских номеров (+33 X XX XX XX XX, 0X XX XX XX XX)
 - Форматирование номера в реальном времени
 - Визуальная индикация валидности (зелёная галочка + форматированный номер)
-- Интеграция с EmailJS (раскомментировать при настройке)
-- Обработка ошибок валидации
+- **Полная интеграция с EmailJS** (отправка писем)
+- Обработка ошибок валидации и отправки
 
 **Настройка EmailJS:**
 1. Зарегистрироваться на https://www.emailjs.com/
 2. Создать Service и Template
-3. Скопировать ключи в `.env.local`:
+3. Создать файл `.env.local` и добавить ключи (см. `.env.local.example`):
    ```
-   EMAILJS_SERVICE_ID=your_service_id
-   EMAILJS_TEMPLATE_ID=your_template_id
-   EMAILJS_PUBLIC_KEY=your_public_key
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
    ```
-4. Раскомментировать код в `Contact.tsx`
+4. Перезапустить сервер (`npm run dev`)
 
 ---
 
@@ -231,12 +231,11 @@ index.html                     # Meta tags + DNS prefetch
 
 ## 🚀 Следующие шаги (опционально)
 
-1. **Настроить EmailJS** для реальной отправки форм
-2. **Добавить Google Analytics 4** через VITE_GA_ID
-3. **Загрузить sitemap.xml** в Google Search Console
-4. **Добавить реальные фото** для отзывов вместо Unsplash
-5. **Интегрировать Calendly** для записи на замер
-6. **Добавить фильтр** для галереи по категориям
+1. **Добавить Google Analytics 4** через VITE_GA_ID
+2. **Загрузить sitemap.xml** в Google Search Console
+3. **Добавить реальные фото** для отзывов вместо Unsplash
+4. **Интегрировать Calendly** для записи на замер
+5. **Добавить фильтр** для галереи по категориям
 
 ---
 
