@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -13,28 +13,51 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+    const [userOverride, setUserOverride] = useState<boolean>(() => {
+        return localStorage.getItem('theme') !== null;
+    });
+
     const [theme, setTheme] = useState<Theme>(() => {
-        // Check localStorage first (user preference)
+        // If user has manually set a preference, use it
         const stored = localStorage.getItem('theme') as Theme | null;
         if (stored) return stored;
 
-        // Then check system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        return prefersDark ? 'dark' : 'light';
+        // Otherwise follow system preference
+        if (typeof window !== 'undefined') {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        return 'light';
     });
+
+    // Listen to system theme changes in realtime (only when user hasn't overridden)
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const handleChange = (e: MediaQueryListEvent) => {
+            if (!userOverride) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        };
+
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, [userOverride]);
 
     useEffect(() => {
         // Toggle 'dark' class on root element for Tailwind
         document.documentElement.classList.toggle('dark', theme === 'dark');
         document.documentElement.style.colorScheme = theme;
 
-        // Persist preference
-        localStorage.setItem('theme', theme);
-    }, [theme]);
+        // Persist only if user has manually toggled
+        if (userOverride) {
+            localStorage.setItem('theme', theme);
+        }
+    }, [theme, userOverride]);
 
-    const toggleTheme = () => {
+    const toggleTheme = useCallback(() => {
+        setUserOverride(true);
         setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    };
+    }, []);
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>

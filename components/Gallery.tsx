@@ -70,7 +70,7 @@ export default function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-24 md:py-32 bg-white dark:bg-slate-900">
+    <section id="gallery" className="py-24 md:py-32 bg-white dark:bg-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
@@ -228,7 +228,7 @@ export default function Gallery() {
             {/* Navigation Buttons */}
             <button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 z-50 focus-ring"
+              className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center hover:bg-white/25 transition-all hover:scale-110 z-50 focus-ring"
               aria-label="Image précédente"
             >
               <ChevronLeft className="w-6 h-6 text-white" />
@@ -236,7 +236,7 @@ export default function Gallery() {
 
             <button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 z-50 focus-ring"
+              className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center hover:bg-white/25 transition-all hover:scale-110 z-50 focus-ring"
               aria-label="Image suivante"
             >
               <ChevronRight className="w-6 h-6 text-white" />
@@ -253,8 +253,13 @@ export default function Gallery() {
               <img
                 src={filteredItems[lightboxIdx].src}
                 alt={filteredItems[lightboxIdx].alt}
-                className="max-w-full max-h-[80vh] rounded-lg object-contain cursor-zoom-in"
-                onClick={() => setZoomLevel(prev => prev === 1 ? 2 : 1)}
+                className="max-w-full max-h-[80vh] rounded-lg object-contain md:cursor-zoom-in"
+                onClick={() => {
+                  // Only allow zoom on non-touch devices
+                  if (!('ontouchstart' in window)) {
+                    setZoomLevel(prev => prev === 1 ? 2 : 1);
+                  }
+                }}
                 loading="eager"
               />
               {/* Zoom hint */}

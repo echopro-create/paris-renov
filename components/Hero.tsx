@@ -50,8 +50,8 @@ export default function Hero() {
         style={{ scale: bgScale, y: bgY }}
       >
         <SkeletonImage
-          src="/images/hero-bg-real.webp"
-          alt="Atelier Alexei - Travaux de rénovation parisienne"
+          src="/images/hero-bg-apartment.png"
+          alt="Appartement parisien rénové - D.A. BAT"
           containerClassName="w-full h-full"
           className="w-full h-full object-cover"
           priority={true}
@@ -148,16 +148,16 @@ export default function Hero() {
         <div className="bg-white/8 backdrop-blur-lg border border-white/10 rounded-xl grid grid-cols-2 md:grid-cols-4 overflow-hidden">
           {hero.stats.map((stat, i) => {
             const isNumeric = /^[0-9+]+$/.test(stat.value);
+            // On mobile (2-col): items 0,2 get right border; on desktop (4-col): all except last
+            const showBorderMobile = i % 2 === 0;
+            const showBorderDesktop = i !== hero.stats.length - 1;
             return (
               <div
                 key={i}
-                className={`px-3 py-3 text-center flex flex-col items-center justify-center ${i !== hero.stats.length - 1 ? 'border-r border-white/10' : ''
-                  }`}
+                className={`px-3 py-3 text-center flex flex-col items-center justify-center ${showBorderMobile ? 'border-r border-white/10' : ''} ${showBorderDesktop ? 'md:border-r md:border-white/10' : 'md:border-r-0'}`}
               >
-                <div className="text-gold-400/60 mb-1.5">
-                  {React.cloneElement(statIcons[i] as React.ReactElement, {
-                    className: 'w-3.5 h-3.5',
-                  })}
+                <div className="text-gold-400/60 mb-1.5 [&>svg]:w-3.5 [&>svg]:h-3.5">
+                  {statIcons[i]}
                 </div>
                 <div
                   className={`${isNumeric
@@ -167,7 +167,7 @@ export default function Hero() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-[9px] sm:text-[10px] md:text-xs text-white/50 font-medium tracking-wide uppercase leading-tight">
+                <div className="text-[11px] sm:text-xs md:text-xs text-white/50 font-medium tracking-wide uppercase leading-tight">
                   {stat.label}
                 </div>
               </div>

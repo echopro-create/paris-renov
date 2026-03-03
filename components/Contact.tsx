@@ -3,6 +3,7 @@ import { content } from '../constants';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 import { formatPhoneForDisplay } from '../lib/utils/phoneValidator';
 import { useContactForm } from '../lib/hooks/useContactForm';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 /**
  * EmailJS Configuration Guide:
@@ -15,23 +16,21 @@ import { useContactForm } from '../lib/hooks/useContactForm';
  *    VITE_EMAILJS_SERVICE_ID=...
  *    VITE_EMAILJS_TEMPLATE_ID=...
  *    VITE_EMAILJS_PUBLIC_KEY=...
+ *    VITE_TURNSTILE_SITE_KEY=...
  */
 
 export default function Contact() {
   const { contact } = content;
   const {
-    formData,
-    setFormData,
-    errors,
-    setErrors,
-    isSubmitting,
-    isSuccess,
-    isError,
-    setIsError,
-    handleSubmit,
+    state,
+    formAction,
+    isPending,
+    phone,
     handlePhoneChange,
     isValidFrenchPhone
   } = useContactForm();
+
+  const { success, error, errors } = state;
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-slate-50 dark:bg-slate-900">
@@ -64,7 +63,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-6"
           >
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Phone className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -76,7 +75,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Mail className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -88,7 +87,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <MapPin className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -98,7 +97,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Clock className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -121,78 +120,72 @@ export default function Contact() {
               <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white mb-1">{contact.formHeading}</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{contact.formSubheading}</p>
 
-              {isSuccess ? (
+              {success ? (
                 <div className="text-center py-12">
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                   <p className="text-lg font-semibold text-slate-900 dark:text-white">{contact.form.success}</p>
                 </div>
-              ) : isError ? (
+              ) : error ? (
                 <div className="text-center py-12">
                   <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
                   <p className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Une erreur est survenue</p>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-                    Nous n'avons pas pu envoyer votre demande. Veuillez réessayer ou nous contacter directement par téléphone.
+                    {state.message || "Nous n'avons pas pu envoyer votre demande. Veuillez réessayer."}
                   </p>
                   <button
-                    onClick={() => setIsError(false)}
+                    onClick={() => window.location.reload()}
                     className="px-6 py-3 bg-gold-500 text-slate-900 rounded-full font-semibold text-sm hover:bg-gold-400 transition-all"
                   >
                     Réessayer
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form action={formAction} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <input
+                        name="name"
                         type="text"
                         placeholder={contact.form.name}
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
-                      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                      {errors?.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
                       <input
+                        name="email"
                         type="email"
                         placeholder={contact.form.email}
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
-                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                      {errors?.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <input
+                        name="phone"
                         type="tel"
                         placeholder={contact.form.phone}
-                        value={formData.phone}
+                        value={phone}
                         onChange={(e) => handlePhoneChange(e.target.value)}
-                        onBlur={() => {
-                          if (formData.phone && !isValidFrenchPhone(formData.phone)) {
-                            setErrors({ ...errors, phone: 'Numéro invalide. Ex: 06 12 34 56 78' });
-                          }
-                        }}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors.phone ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors font-mono`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.phone ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors font-mono`}
                         inputMode="tel"
                         autoComplete="tel"
                       />
-                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
-                      {!errors.phone && formData.phone && isValidFrenchPhone(formData.phone) && (
+                      {errors?.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                      {!errors?.phone && phone && isValidFrenchPhone(phone) && (
                         <p className="text-green-500 text-xs mt-1 flex items-center gap-1">
                           <CheckCircle className="w-3 h-3" />
-                          {formatPhoneForDisplay(formData.phone)}
+                          {formatPhoneForDisplay(phone)}
                         </p>
                       )}
                     </div>
                     <div>
                       <select
-                        value={formData.type}
-                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                        name="type"
+                        defaultValue=""
                         className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors text-slate-600 dark:text-slate-300"
                       >
                         <option value="">{contact.form.type}</option>
@@ -207,29 +200,37 @@ export default function Contact() {
 
                   <div>
                     <textarea
+                      name="message"
                       placeholder={contact.form.message}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={4}
-                      className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors.message ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors resize-none`}
+                      className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.message ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors resize-none`}
                     />
-                    {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                    {errors?.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 text-slate-900 rounded-full font-semibold text-sm hover:bg-gold-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      contact.form.submitting
-                    ) : (
-                      <>
-                        {contact.form.submit}
-                        <ArrowRight className="w-4 h-4" />
-                      </>
+                  <div className="flex flex-col gap-4">
+                    {/* Turnstile Widget */}
+                    {import.meta.env.VITE_TURNSTILE_SITE_KEY && (
+                      <div className="flex justify-center sm:justify-start">
+                        <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} />
+                      </div>
                     )}
-                  </button>
+
+                    <button
+                      type="submit"
+                      disabled={isPending}
+                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold-500 text-slate-900 rounded-full font-semibold text-sm hover:bg-gold-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isPending ? (
+                        contact.form.submitting
+                      ) : (
+                        <>
+                          {contact.form.submit}
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </form>
               )}
             </div>

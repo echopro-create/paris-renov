@@ -133,17 +133,17 @@ export const content: ContentData = {
     filters: ["Tout", "Salle de bain", "Cuisine", "Chambre & Salon"],
     items: [
       {
-        src: "/assets/gallery/real/photo_20_2026-03-03_12-40-16.jpg",
-        alt: "Salle de bain avec carrelage graphique noir et blanc",
-        title: "Salle de Bain Graphique",
+        src: "/assets/gallery/real/photo_9_2026-03-03_12-40-16.jpg",
+        alt: "Salle de bain moderne avec finitions soignées",
+        title: "Salle de Bain Moderne",
         location: "Île-de-France",
         category: "Salle de bain",
         span: "md:col-span-2 md:row-span-2",
       },
       {
-        src: "/assets/gallery/real/photo_5_2026-03-03_12-40-16.jpg",
-        alt: "Meuble sous vasque moderne avec bois naturel",
-        title: "Meuble Vasque Design",
+        src: "/assets/gallery/real/photo_8_2026-03-03_12-40-16.jpg",
+        alt: "Rénovation salle d'eau avec douche italienne",
+        title: "Douche Italienne Épurée",
         location: "Île-de-France",
         category: "Salle de bain",
         span: "md:col-span-2",
@@ -318,7 +318,7 @@ export const content: ContentData = {
     privacy: "Politique de Confidentialité",
     rights: "Tous droits réservés.",
     areas: "Paris & Île-de-France",
-    designedBy: "Artisanat Français d'Excellence",
+    designedBy: "Travaux Soignés, Clients Satisfaits",
     legalBody: "D.A. BAT - Alexei TCHOUDINOV\nSiège social : 12 Avenue des Champs-Élysées, 75008 Paris\nDirecteur de la publication : Alexei TCHOUDINOV\nContact : tchoudinov@hotmail.fr",
     privacyBody: "Nous respectons votre vie privée. Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par D.A. BAT pour la gestion de notre clientèle.\n\nElles sont conservées pendant 3 ans et sont destinées au service commercial.\n\nConformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : tchoudinov@hotmail.fr"
   },

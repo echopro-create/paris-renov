@@ -26,13 +26,23 @@
   <meta name="theme-color" content="#D4AF37" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://atelier-alexei.fr/" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
+  <!-- PWA & Mobile Meta Tags (2026 Standards) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="D.A. BAT" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  
+  <!-- Humans & Security -->
+  <link type="text/plain" rel="author" href="/humans.txt" />
+  
   <!-- DNS Prefetch for Performance -->
   <link rel="dns-prefetch" href="https://images.unsplash.com" />
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
-  <!-- Preload Hero Image for better LCP -->
+  <!-- Preload Critical Assets -->
   <link rel="preload" as="image" href="/images/hero-bg-real.webp" type="image/webp" fetchpriority="high" />
 
   <!-- Open Graph / Facebook -->

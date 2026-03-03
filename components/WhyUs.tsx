@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { content } from '../constants';
 import { Check } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import SkeletonImage from './SkeletonImage';
 
 export default function WhyUs() {
   const { whyUs } = content;
@@ -92,10 +93,14 @@ export default function WhyUs() {
           >
             {/* Main Image */}
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-              <img
+              <SkeletonImage
                 src={whyUs.image}
                 alt="Détail architectural"
+                containerClassName="w-full h-full"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                width={800}
+                height={1000}
+                quality={85}
               />
               {/* Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-60" />

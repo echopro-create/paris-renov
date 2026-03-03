@@ -15,6 +15,9 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import SkeletonLoader from './components/SkeletonLoader';
 import ScrollToTop from './components/ScrollToTop';
+import ErrorBoundary from './components/ErrorBoundary';
+import OfflineIndicator from './components/OfflineIndicator';
+import PWAUpdateToast from './components/PWAUpdateToast';
 
 const App: React.FC = () => {
   // Enable smooth scroll for all anchor links
@@ -36,26 +39,36 @@ const App: React.FC = () => {
           <Hero />
 
           <Services />
-          <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
-            <BeforeAfter />
-          </React.Suspense>
+          <ErrorBoundary>
+            <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
+              <BeforeAfter />
+            </React.Suspense>
+          </ErrorBoundary>
           <Process />
           <WhyUs />
-          <React.Suspense fallback={<SkeletonLoader type="gallery" />}>
-            <Gallery />
-          </React.Suspense>
-          <React.Suspense fallback={<SkeletonLoader type="testimonials" />}>
-            <Testimonials />
-          </React.Suspense>
-          <React.Suspense fallback={<SkeletonLoader type="contact" />}>
-            <Contact />
-          </React.Suspense>
+          <ErrorBoundary>
+            <React.Suspense fallback={<SkeletonLoader type="gallery" />}>
+              <Gallery />
+            </React.Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <React.Suspense fallback={<SkeletonLoader type="testimonials" />}>
+              <Testimonials />
+            </React.Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <React.Suspense fallback={<SkeletonLoader type="contact" />}>
+              <Contact />
+            </React.Suspense>
+          </ErrorBoundary>
           <CTABanner />
 
         </main>
         <Footer />
         <WhatsAppButton />
         <ScrollToTop />
+        <OfflineIndicator />
+        <PWAUpdateToast />
       </div>
     </ThemeProvider>
   );

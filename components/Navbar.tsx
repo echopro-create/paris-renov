@@ -46,7 +46,7 @@ export default function Navbar() {
     { label: nav.services, href: '#services', id: 'services' },
     { label: nav.whyUs, href: '#why-us', id: 'why-us' },
     { label: nav.gallery, href: '#gallery', id: 'gallery' },
-    { label: 'Témoignages', href: '#testimonials', id: 'testimonials' },
+    { label: common.clientReviews, href: '#testimonials', id: 'testimonials' },
     { label: nav.process, href: '#process', id: 'process' },
   ];
 
@@ -87,7 +87,7 @@ export default function Navbar() {
                 D.A. BAT
               </span>
               <span className="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">
-                L'Excellence du Bâtiment
+                Votre Projet, Notre Savoir-Faire
               </span>
             </div>
           </div>
@@ -107,6 +107,7 @@ export default function Navbar() {
                   ? 'text-gold-300'
                   : 'text-white hover:text-gold-200'
                 }`}
+              aria-current={activeSection === link.id ? 'page' : undefined}
             >
               {link.label}
               {/* Active indicator */}
@@ -124,6 +125,7 @@ export default function Navbar() {
               : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/20'
               }`}
             aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
+            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -149,6 +151,7 @@ export default function Navbar() {
               : 'bg-white/10 backdrop-blur-sm text-white'
               }`}
             aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
+            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -157,6 +160,8 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className={`p-2 transition-colors focus-ring ${isScrolled ? 'text-slate-900 dark:text-white' : 'text-white'}`}
             aria-label={isOpen ? common.closeMenu : common.openMenu}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X size={24} className="text-slate-900 dark:text-white" /> : <Menu size={24} />}
           </button>
@@ -165,7 +170,13 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-white/98 dark:bg-slate-900/98 backdrop-blur-2xl lg:hidden">
+        <div
+          id="mobile-menu"
+          className="fixed inset-0 z-50 bg-white/98 dark:bg-slate-900/98 backdrop-blur-2xl lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu principal"
+        >
           {/* Fixed Header with Close Button */}
           <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
             <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">D.A. BAT</span>

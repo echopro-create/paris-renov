@@ -79,7 +79,12 @@ export default function BeforeAfter() {
     }
   };
 
-  const handleMouseDown = () => { isDragging.current = true; };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    // Allow clicking anywhere to move slider
+    handleMove(e.clientX);
+  };
+
   const handleMouseUp = () => { isDragging.current = false; };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -89,24 +94,35 @@ export default function BeforeAfter() {
     }
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    e.stopPropagation();
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDragging.current = true;
     handleMove(e.touches[0].clientX);
+    if (!hasInteracted) setHasInteracted(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDragging.current = false;
   };
 
   useEffect(() => {
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseleave', handleMouseUp);
-    document.addEventListener('touchend', handleMouseUp);
     return () => {
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseUp);
-      document.removeEventListener('touchend', handleMouseUp);
     };
   }, []);
 
   return (
-    <section className="py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <section className="py-24 bg-slate-50 dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -122,11 +138,13 @@ export default function BeforeAfter() {
 
         <div
           ref={containerRef}
-          className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl aspect-[16/9] select-none group cursor-col-resize touch-none"
+          className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl aspect-[16/9] select-none group cursor-col-resize"
+          style={{ touchAction: 'pan-y' }}
           onMouseMove={handleMouseMove}
           onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
-          onTouchStart={handleMouseDown}
+          onTouchEnd={handleTouchEnd}
           onKeyDown={handleKeyDown}
           tabIndex={0}
           role="application"
@@ -167,7 +185,7 @@ export default function BeforeAfter() {
             </div>
           </div>
 
-          {/* Slider Handle */}
+          {/* Slider Handle — 44x44px for WCAG touch target */}
           <div
             ref={handleRef}
             className={`absolute top-0 bottom-0 w-1 bg-transparent z-20 flex items-center justify-center outline-none ${isFocused ? 'ring-4 ring-gold-500/50 ring-offset-4 ring-offset-slate-900 rounded' : ''}`}
@@ -179,8 +197,8 @@ export default function BeforeAfter() {
             aria-valuemax={100}
             tabIndex={-1}
           >
-            <div className="w-10 h-10 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-gold-600 -ml-[2px] transition-transform transform hover:scale-110 active:scale-95 focus:outline-none">
-              <MoveHorizontal size={20} />
+            <div className="w-11 h-11 bg-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-gold-600 -ml-[2px] transition-transform transform hover:scale-110 active:scale-95 focus:outline-none">
+              <MoveHorizontal size={22} />
             </div>
           </div>
 

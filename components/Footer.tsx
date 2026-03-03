@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { content } from '../constants';
 import { motion } from 'framer-motion';
-import { Instagram, Facebook, Linkedin, X, MapPin, Phone, Mail } from 'lucide-react';
+import { Instagram, X, MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   const { footer, nav, contact } = content;
   const [modalContent, setModalContent] = useState<{ title: string; body: string } | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (modalContent) {
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+    } else {
+      dialog.close();
+      document.body.style.overflow = 'unset';
+    }
+  }, [modalContent]);
+
+  const handleClose = () => {
+    setModalContent(null);
+  };
 
   const navLinks = [
     { label: nav.services, href: '#services' },
@@ -41,7 +59,7 @@ export default function Footer() {
                   </div>
                   <div className="flex flex-col border-l border-gold-500/20 pl-4 py-1">
                     <span className="font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none">D.A. BAT</span>
-                    <span className="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">L'Excellence du Bâtiment</span>
+                    <span className="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">Votre Projet, Notre Savoir-Faire</span>
                   </div>
                 </div>
               </div>
@@ -50,31 +68,15 @@ export default function Footer() {
               </p>
               <div className="flex gap-3">
                 <motion.a
-                  href="#"
+                  href={content.social?.instagram || 'https://instagram.com'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
                   aria-label="Suivez-nous sur Instagram"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Instagram className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
-                  aria-label="Suivez-nous sur Facebook"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Facebook className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
-                  aria-label="Suivez-nous sur LinkedIn"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Linkedin className="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-gold-400" />
                 </motion.a>
               </div>
             </div>
@@ -157,13 +159,26 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Legal Modal */}
-      {modalContent && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => setModalContent(null)}>
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto border border-slate-200 dark:border-slate-700" onClick={(e) => e.stopPropagation()}>
+      {/* Legal Modal (Native Dialog) */}
+      <dialog
+        ref={dialogRef}
+        className="bg-transparent p-4 w-full h-full max-w-none max-h-none backdrop:bg-black/60 z-50 open:flex items-center justify-center m-0 fixed inset-0"
+        onClick={(e) => {
+          if (e.target === dialogRef.current) {
+            handleClose();
+          }
+        }}
+        onCancel={handleClose}
+      >
+        {modalContent && (
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto border border-slate-200 dark:border-slate-700 shadow-2xl relative">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white">{modalContent.title}</h3>
-              <button onClick={() => setModalContent(null)} className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700">
+              <button
+                onClick={handleClose}
+                className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                aria-label="Fermer"
+              >
                 <X className="w-4 h-4 text-slate-900 dark:text-white" />
               </button>
             </div>
@@ -171,8 +186,8 @@ export default function Footer() {
               {modalContent.body}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </dialog>
     </>
   );
 }

@@ -10,7 +10,7 @@ export default function Process() {
   const icons = [ClipboardList, FileText, Hammer, Key];
 
   return (
-    <section id="process" className="py-24 md:py-32 bg-gray-50 dark:bg-slate-950 relative overflow-hidden">
+    <section id="process" className="py-24 md:py-32 bg-gray-50 dark:bg-neutral-950 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -49,7 +49,7 @@ export default function Process() {
                   <div className="hidden md:block absolute top-[2.5rem] left-1/2 w-full h-[1px] bg-gradient-to-r from-gold-500/20 via-gold-500/60 to-gold-500/20 -z-10 transform translate-x-1/2" />
                 )}
 
-                <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-gold-500/20 rounded-xl p-8 hover:border-gold-400 dark:hover:border-gold-500/50 transition-colors duration-500 h-full flex flex-col items-center text-center shadow-sm dark:shadow-none">
+                <div className="relative bg-white dark:bg-neutral-900 border border-slate-200 dark:border-gold-500/20 rounded-xl p-8 hover:border-gold-400 dark:hover:border-gold-500/50 transition-colors duration-500 h-full flex flex-col items-center text-center shadow-sm dark:shadow-none">
                   {/* Number Badge */}
                   <div className="absolute top-4 right-4 text-xs font-mono text-gold-600/50 dark:text-gold-500/40 border border-gold-500/20 px-2 py-1 rounded">
                     {step.number}
@@ -94,7 +94,7 @@ export default function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none"
+                className="bg-white dark:bg-neutral-900/50 border border-slate-200 dark:border-neutral-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none"
               >
                 <button
                   onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
