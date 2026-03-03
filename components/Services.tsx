@@ -46,13 +46,14 @@ export default function Services() {
               <div className="aspect-[4/5] relative overflow-hidden">
                 <SkeletonImage
                   src={service.image}
-                  alt={service.title}
+                  alt={service.alt}
                   containerClassName="w-full h-full"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   width={600}
                   height={750}
                   quality={85}
                   priority={index < 2}
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

@@ -149,9 +149,11 @@ export default function Contact() {
                         name="name"
                         type="text"
                         placeholder={contact.form.name}
+                        aria-invalid={!!errors?.name}
+                        aria-describedby={errors?.name ? "name-error" : undefined}
                         className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
-                      {errors?.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                      {errors?.name && <p id="name-error" role="alert" className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
                       <label htmlFor="contact-email" className="sr-only">{contact.form.email}</label>
@@ -160,9 +162,11 @@ export default function Contact() {
                         name="email"
                         type="email"
                         placeholder={contact.form.email}
+                        aria-invalid={!!errors?.email}
+                        aria-describedby={errors?.email ? "email-error" : undefined}
                         className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
-                      {errors?.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                      {errors?.email && <p id="email-error" role="alert" className="text-red-500 text-xs mt-1">{errors.email}</p>}
                     </div>
                   </div>
 
@@ -176,11 +180,13 @@ export default function Contact() {
                         placeholder={contact.form.phone}
                         value={phone}
                         onChange={(e) => handlePhoneChange(e.target.value)}
+                        aria-invalid={!!errors?.phone}
+                        aria-describedby={errors?.phone ? "phone-error" : undefined}
                         className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.phone ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors font-mono`}
                         inputMode="tel"
                         autoComplete="tel"
                       />
-                      {errors?.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                      {errors?.phone && <p id="phone-error" role="alert" className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                       {!errors?.phone && phone && isValidFrenchPhone(phone) && (
                         <p className="text-green-500 text-xs mt-1 flex items-center gap-1">
                           <CheckCircle className="w-3 h-3" />
@@ -213,9 +219,11 @@ export default function Contact() {
                       name="message"
                       placeholder={contact.form.message}
                       rows={4}
+                      aria-invalid={!!errors?.message}
+                      aria-describedby={errors?.message ? "message-error" : undefined}
                       className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.message ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors resize-none`}
                     />
-                    {errors?.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                    {errors?.message && <p id="message-error" role="alert" className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>
 
                   <div className="flex flex-col gap-4">

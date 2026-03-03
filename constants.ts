@@ -52,26 +52,30 @@ export const content: ContentData = {
       {
         id: 'general',
         title: "Rénovation & Maçonnerie",
-        description: "Travaux de rénovation générale : maçonnerie, création de cloisons, plâtrerie. Une prise en charge complète de votre chantier.",
-        image: "/assets/services/service_renovation_generale.png"
+        description: "Travaux de rénovation générale à Paris et Île-de-France : maçonnerie, création de cloisons, plâtrerie. Une prise en charge complète de votre chantier.",
+        image: "/assets/services/service_renovation_generale.png",
+        alt: "Rénovation complète d'appartement et maçonnerie à Paris"
       },
       {
         id: 'plastering',
         title: "Peinture & Décoration",
-        description: "Peinture intérieure et extérieure, enduits décoratifs, papiers peints. Des finitions soignées pour sublimer vos espaces.",
-        image: "/assets/services/service_platrerie.png"
+        description: "Peinture intérieure et extérieure, enduits décoratifs, papiers peints. Des finitions soignées pour sublimer vos appartements parisiens.",
+        image: "/assets/services/service_platrerie.png",
+        alt: "Peinture intérieure et décoration murale soignée"
       },
       {
         id: 'spaces',
         title: "Plomberie & Électricité",
-        description: "Installation sanitaire complète, rénovation salle de bain, mise aux normes électrique. Tous travaux de fluides et réseaux.",
-        image: "/assets/services/service_cuisine_bain.png"
+        description: "Installation sanitaire complète, rénovation salle de bain, mise aux normes électrique. Tous travaux de fluides et réseaux pour votre habitat.",
+        image: "/assets/services/service_cuisine_bain.png",
+        alt: "Installation plomberie et mise aux normes électrique"
       },
       {
         id: 'flooring',
         title: "Sols & Boiserie",
-        description: "Pose de parquet, carrelage, boiseries sur mesure. Rénovation de sols anciens et pose de revêtements modernes.",
-        image: "/assets/services/service_parquet.png"
+        description: "Pose de parquet, carrelage, boiseries sur mesure. Rénovation de sols anciens (Point de Hongrie) et pose de revêtements modernes.",
+        image: "/assets/services/service_parquet.png",
+        alt: "Pose de parquet et rénovation de sols anciens à Paris"
       }
     ]
   },

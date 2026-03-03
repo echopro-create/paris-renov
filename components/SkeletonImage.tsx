@@ -11,6 +11,7 @@ interface SkeletonImageProps {
     quality?: number;
     priority?: boolean;
     optimize?: boolean;
+    sizes?: string;
 }
 
 const SkeletonImage: React.FC<SkeletonImageProps> = ({
@@ -22,7 +23,8 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
     height,
     quality = 80,
     priority = false,
-    optimize = true
+    optimize = true,
+    sizes
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -46,7 +48,7 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
             <img
                 src={optimizedSrc}
                 srcSet={srcSet}
-                sizes={width <= 400 ? '(max-width: 640px) 100vw, 400px' : '(max-width: 1024px) 50vw, 33vw'}
+                sizes={sizes || (width <= 400 ? '(max-width: 640px) 100vw, 400px' : '(max-width: 1024px) 50vw, 33vw')}
                 alt={alt}
                 width={width}
                 height={height}
