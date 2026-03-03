@@ -77,7 +77,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,avif,json,xml,txt}'],
-        globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', 'assets/images/before_custom.png', 'assets/images/after_custom.png'],
+        globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', 'assets/images/before_custom.png', 'assets/images/after_custom.png', 'images/hero-bg-apartment.png'],
         maximumFileSizeToCacheInBytes: 3000000, // Increase limit to 3MB just in case
         cleanupOutdatedCaches: true,
         runtimeCaching: [

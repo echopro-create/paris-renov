@@ -50,7 +50,7 @@ export default function Hero() {
         style={{ scale: bgScale, y: bgY }}
       >
         <SkeletonImage
-          src="/images/hero-bg-apartment.png"
+          src="/images/hero-bg-apartment.webp"
           alt="Appartement parisien rénové - D.A. BAT"
           containerClassName="w-full h-full"
           className="w-full h-full object-cover"
