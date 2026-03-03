@@ -97,6 +97,8 @@ export default function Process() {
                 className="bg-white dark:bg-neutral-900/50 border border-slate-200 dark:border-neutral-800 rounded-xl overflow-hidden shadow-sm dark:shadow-none"
               >
                 <button
+                  id={`faq-button-${index}`}
+                  aria-controls={`faq-content-${index}`}
                   onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-900/80 transition-colors focus-ring"
                   aria-expanded={openFaqIndex === index}
@@ -108,6 +110,9 @@ export default function Process() {
                   />
                 </button>
                 <div
+                  id={`faq-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-button-${index}`}
                   className={`overflow-hidden transition-all duration-300 ${openFaqIndex === index ? 'max-h-48' : 'max-h-0'
                     }`}
                 >

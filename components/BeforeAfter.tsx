@@ -102,8 +102,8 @@ export default function BeforeAfter() {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging.current) {
-      e.preventDefault();
-      e.stopPropagation();
+      // CSS touch-action: pan-y handles browser default behavior natively
+      // removing e.preventDefault() to avoid passive event warnings and scroll lock
       handleMove(e.touches[0].clientX);
     }
   };

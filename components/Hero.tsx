@@ -154,20 +154,20 @@ export default function Hero() {
             return (
               <div
                 key={i}
-                className={`px-3 py-3 text-center flex flex-col items-center justify-center ${showBorderMobile ? 'border-r border-white/10' : ''} ${showBorderDesktop ? 'md:border-r md:border-white/10' : 'md:border-r-0'}`}
+                className={`px-1.5 py-2 sm:px-3 sm:py-3 text-center flex flex-col items-center justify-center ${showBorderMobile ? 'border-r border-white/10' : ''} ${showBorderDesktop ? 'md:border-r md:border-white/10' : 'md:border-r-0'}`}
               >
-                <div className="text-gold-400/60 mb-1.5 [&>svg]:w-3.5 [&>svg]:h-3.5">
+                <div className="text-gold-400/60 mb-1 sm:mb-1.5 [&>svg]:w-3 [&>svg]:h-3 sm:[&>svg]:w-3.5 sm:[&>svg]:h-3.5">
                   {statIcons[i]}
                 </div>
                 <div
                   className={`${isNumeric
-                    ? 'text-lg sm:text-xl font-serif font-semibold'
-                    : 'text-sm sm:text-base font-sans font-medium'
-                    } text-white leading-none mb-1.5`}
+                    ? 'text-base sm:text-xl font-serif font-semibold'
+                    : 'text-[13px] sm:text-base font-sans font-medium'
+                    } text-white leading-none mb-1 sm:mb-1.5`}
                 >
                   {stat.value}
                 </div>
-                <div className="text-[11px] sm:text-xs md:text-xs text-white/50 font-medium tracking-wide uppercase leading-tight">
+                <div className="text-[9px] sm:text-xs text-white/50 font-medium tracking-wider uppercase leading-tight md:truncate max-w-full">
                   {stat.label}
                 </div>
               </div>
