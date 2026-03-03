@@ -7,6 +7,15 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <title>D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris</title>
 
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '%VITE_GA_ID%');
+  </script>
+
   <!-- Primary Meta Tags -->
   <meta name="title" content="D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris" />
   <meta name="description"
@@ -48,14 +57,14 @@
       "@context": "https://schema.org",
       "@type": "GeneralContractor",
       "name": "D.A. BAT",
-      "image": "https://atelier-alexei.fr/logo.png",
+      "image": "https://atelier-alexei.fr/og-image.jpg",
       "@id": "https://atelier-alexei.fr",
       "url": "https://atelier-alexei.fr",
       "telephone": "+33601997659",
       "email": "tchoudinov@hotmail.fr",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Paris",
+        "streetAddress": "Paris et Île-de-France",
         "addressLocality": "Paris",
         "postalCode": "75000",
         "addressCountry": "FR"
@@ -71,9 +80,14 @@
         "opens": "08:00",
         "closes": "19:00"
       },
-      "priceRange": "€€€"
+      "priceRange": "€€€",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128"
+      }
     }
-    </script>
+  </script>
 
   <!-- Fonts: Self-hosted Variable Fonts via Fontsource (imported in index.tsx) -->
 

@@ -160,14 +160,14 @@ export default function Footer() {
       {/* Legal Modal */}
       {modalContent && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => setModalContent(null)}>
-          <div className="bg-white rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto border border-slate-200 dark:border-slate-700" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-xl font-bold text-slate-900">{modalContent.title}</h3>
-              <button onClick={() => setModalContent(null)} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200">
-                <X className="w-4 h-4" />
+              <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white">{modalContent.title}</h3>
+              <button onClick={() => setModalContent(null)} className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700">
+                <X className="w-4 h-4 text-slate-900 dark:text-white" />
               </button>
             </div>
-            <div className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+            <div className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
               {modalContent.body}
             </div>
           </div>

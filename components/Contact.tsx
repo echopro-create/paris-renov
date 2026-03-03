@@ -5,6 +5,19 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle, ArrowRight,
 import emailjs from '@emailjs/browser';
 import { isValidFrenchPhone, normalizePhone, formatPhoneForDisplay } from '../lib/utils/phoneValidator';
 
+/**
+ * EmailJS Configuration Guide:
+ * 1. Create an account at https://www.emailjs.com/
+ * 2. Add a new Email Service (e.g., Gmail) -> Get Service ID
+ * 3. Create an Email Template -> Get Template ID
+ *    - Configure template variables: {{from_name}}, {{from_email}}, {{phone}}, {{project_type}}, {{message}}
+ * 4. Go to Account > API Keys -> Get Public Key
+ * 5. Add these keys to your .env.local file:
+ *    VITE_EMAILJS_SERVICE_ID=...
+ *    VITE_EMAILJS_TEMPLATE_ID=...
+ *    VITE_EMAILJS_PUBLIC_KEY=...
+ */
+
 export default function Contact() {
   const { contact } = content;
   const [formData, setFormData] = useState({
@@ -19,11 +32,14 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  // Initialize EmailJS (replace with your actual public key)
+  // Initialize EmailJS
   useEffect(() => {
-    // emailjs.init({
-    //   publicKey: 'YOUR_EMAILJS_PUBLIC_KEY', // Replace with actual key from .env
-    // });
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init({
+        publicKey: publicKey,
+      });
+    }
   }, []);
 
   const validate = () => {
@@ -48,22 +64,29 @@ export default function Contact() {
     setIsSubmitting(true);
     setIsError(false);
 
-    try {
-      // EmailJS integration - replace SERVICE_ID and TEMPLATE_ID
-      // await emailjs.send(
-      //   'YOUR_SERVICE_ID',      // Replace with your EmailJS Service ID
-      //   'YOUR_TEMPLATE_ID',     // Replace with your EmailJS Template ID
-      //   {
-      //     from_name: formData.name,
-      //     from_email: formData.email,
-      //     phone: formData.phone,
-      //     project_type: formData.type,
-      //     message: formData.message,
-      //   }
-      // );
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
-      // Fallback: Simulate API call (replace with actual EmailJS when configured)
-      await new Promise((r) => setTimeout(r, 1500));
+    if (!serviceId || !templateId) {
+      console.error('EmailJS Service ID or Template ID is missing.');
+      setIsError(true);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          project_type: formData.type || 'Non spécifié',
+          message: formData.message,
+          to_email: 'tchoudinov@hotmail.fr',
+        }
+      );
 
       setIsSuccess(true);
       setFormData({ name: '', email: '', phone: '', type: '', message: '' });

@@ -1,35 +1,73 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../constants';
 import { Instagram, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import SkeletonImage from './SkeletonImage';
-import { useParallax } from '../lib/hooks/useParallax';
 
 export default function Gallery() {
   const { gallery } = content;
+  const [activeFilter, setActiveFilter] = useState('Tout');
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
+
+  // Touch swipe refs
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  // Filtered items
+  const filteredItems = activeFilter === 'Tout'
+    ? gallery.items
+    : gallery.items.filter(item => item.category === activeFilter);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxIdx === null) return;
-
-      if (e.key === 'Escape') {
-        setLightboxIdx(null);
-        setZoomLevel(1);
-      } else if (e.key === 'ArrowLeft') {
-        setLightboxIdx(prev => prev !== null && prev > 0 ? prev - 1 : gallery.items.length - 1);
-        setZoomLevel(1);
-      } else if (e.key === 'ArrowRight') {
-        setLightboxIdx(prev => prev !== null && prev < gallery.items.length - 1 ? prev + 1 : 0);
-        setZoomLevel(1);
-      }
+      if (e.key === 'Escape') { setLightboxIdx(null); setZoomLevel(1); }
+      else if (e.key === 'ArrowLeft') { prevImage(); }
+      else if (e.key === 'ArrowRight') { nextImage(); }
     };
-
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIdx, gallery.items.length]);
+  }, [lightboxIdx, filteredItems.length]);
+
+  const prevImage = () => {
+    setLightboxIdx(prev => prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1);
+    setZoomLevel(1);
+  };
+
+  const nextImage = () => {
+    setLightboxIdx(prev => prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0);
+    setZoomLevel(1);
+  };
+
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = null;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    const SWIPE_THRESHOLD = 50;
+    if (Math.abs(diff) > SWIPE_THRESHOLD) {
+      if (diff > 0) nextImage();
+      else prevImage();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  // When filter changes, close lightbox
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
+    setLightboxIdx(null);
+  };
 
   return (
     <section id="gallery" className="py-24 md:py-32 bg-white dark:bg-slate-900">
@@ -40,7 +78,7 @@ export default function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold-500/10 dark:bg-gold-500/20 mb-6">
             <span className="text-gold-600 dark:text-gold-400 text-xs font-semibold tracking-[0.2em] uppercase">{gallery.badge}</span>
@@ -53,55 +91,103 @@ export default function Gallery() {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
-          {gallery.items.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 100
-              }}
-              className={`group relative rounded-2xl overflow-hidden cursor-pointer ${item.span} `}
-              onClick={() => setLightboxIdx(index)}
-              whileHover={{ scale: 1.02 }}
+        {/* Category Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap items-center justify-center gap-2 mb-12"
+        >
+          {gallery.filters.map((filter) => (
+            <button
+              key={filter}
+              onClick={() => handleFilterChange(filter)}
+              className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === filter
+                  ? 'text-slate-900 shadow-md'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:border-gold-400/50'
+                }`}
             >
-              <SkeletonImage
-                src={item.src}
-                alt={item.alt}
-                containerClassName="w-full h-full"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                width={800}
-                height={600}
-                quality={85}
-                priority={index < 4}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end">
-                <div>
-                  <h4 className="text-white font-semibold text-sm drop-shadow-lg">{item.title}</h4>
-                  <p className="text-slate-300 text-xs drop-shadow-md">{item.location}</p>
-                </div>
-              </div>
-              {/* Zoom hint on hover */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="bg-black/50 backdrop-blur-sm p-3 rounded-full">
-                  <ZoomIn className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </motion.div>
+              {activeFilter === filter && (
+                <motion.span
+                  layoutId="activeFilterBg"
+                  className="absolute inset-0 bg-gold-500 rounded-full"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{filter}</span>
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Bento Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]"
+          >
+            {filteredItems.map((item, index) => (
+              <motion.div
+                key={item.src}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.06,
+                  type: 'spring',
+                  stiffness: 120
+                }}
+                className={`group relative rounded-2xl overflow-hidden cursor-pointer ${item.span}`}
+                onClick={() => setLightboxIdx(index)}
+                whileHover={{ scale: 1.02 }}
+              >
+                <SkeletonImage
+                  src={item.src}
+                  alt={item.alt}
+                  containerClassName="w-full h-full"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  width={800}
+                  height={600}
+                  quality={85}
+                  priority={index < 4}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-end">
+                  <div>
+                    <h4 className="text-white font-semibold text-sm drop-shadow-lg">{item.title}</h4>
+                    <p className="text-slate-300 text-xs drop-shadow-md">{item.location}</p>
+                  </div>
+                </div>
+                {/* Zoom hint on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="bg-black/50 backdrop-blur-sm p-3 rounded-full">
+                    <ZoomIn className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Empty state */}
+        {filteredItems.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16 text-slate-400 dark:text-slate-600"
+          >
+            <p className="text-lg">Aucune réalisation dans cette catégorie</p>
+          </motion.div>
+        )}
 
         {/* Instagram CTA */}
         <div className="text-center mt-12">
           <a
-            href={content.social?.instagram || "https://instagram.com"}
+            href={content.social?.instagram || 'https://instagram.com'}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300 hover:border-gold-400 hover:text-gold-600 dark:hover:text-gold-400 transition-all"
@@ -112,38 +198,36 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Enhanced Lightbox with Navigation */}
+      {/* Enhanced Lightbox with Navigation + Swipe */}
       <AnimatePresence>
-        {lightboxIdx !== null && (
+        {lightboxIdx !== null && filteredItems[lightboxIdx] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-            onClick={() => {
-              setLightboxIdx(null);
-              setZoomLevel(1);
-            }}
+            onClick={() => { setLightboxIdx(null); setZoomLevel(1); }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Close Button */}
             <button
-              onClick={() => {
-                setLightboxIdx(null);
-                setZoomLevel(1);
-              }}
+              onClick={() => { setLightboxIdx(null); setZoomLevel(1); }}
               className="absolute top-4 right-4 md:top-6 md:right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors z-50 focus-ring"
               aria-label="Fermer"
             >
               <X className="w-5 h-5 text-white" />
             </button>
 
+            {/* Image counter */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm px-4 py-1.5 rounded-full text-white text-xs font-medium z-50">
+              {lightboxIdx + 1} / {filteredItems.length}
+            </div>
+
             {/* Navigation Buttons */}
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxIdx(prev => prev !== null && prev > 0 ? prev - 1 : gallery.items.length - 1);
-                setZoomLevel(1);
-              }}
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
               className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 z-50 focus-ring"
               aria-label="Image précédente"
             >
@@ -151,11 +235,7 @@ export default function Gallery() {
             </button>
 
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setLightboxIdx(prev => prev !== null && prev < gallery.items.length - 1 ? prev + 1 : 0);
-                setZoomLevel(1);
-              }}
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
               className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 z-50 focus-ring"
               aria-label="Image suivante"
             >
@@ -171,15 +251,15 @@ export default function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={gallery.items[lightboxIdx].src}
-                alt={gallery.items[lightboxIdx].alt}
-                className="max-w-full max-h-[85vh] rounded-lg object-contain cursor-zoom-in"
+                src={filteredItems[lightboxIdx].src}
+                alt={filteredItems[lightboxIdx].alt}
+                className="max-w-full max-h-[80vh] rounded-lg object-contain cursor-zoom-in"
                 onClick={() => setZoomLevel(prev => prev === 1 ? 2 : 1)}
                 loading="eager"
               />
               {/* Zoom hint */}
               {zoomLevel === 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm flex items-center gap-2">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm flex items-center gap-2 pointer-events-none">
                   <ZoomIn className="w-4 h-4" />
                   Cliquez pour zoomer
                 </div>
@@ -187,10 +267,11 @@ export default function Gallery() {
             </motion.div>
 
             {/* Image Info */}
-            <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 text-center text-white">
-              <h4 className="font-semibold text-base md:text-lg">{gallery.items[lightboxIdx].title}</h4>
-              <p className="text-slate-300 text-sm">{gallery.items[lightboxIdx].location}</p>
-              <p className="text-slate-400 text-xs mt-1">{lightboxIdx + 1} / {gallery.items.length}</p>
+            <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 text-center text-white pointer-events-none">
+              <h4 className="font-semibold text-base md:text-lg">{filteredItems[lightboxIdx].title}</h4>
+              <p className="text-slate-300 text-sm">{filteredItems[lightboxIdx].location}</p>
+              {/* Swipe hint for mobile */}
+              <p className="text-slate-500 text-xs mt-1 md:hidden">← Glissez pour naviguer →</p>
             </div>
           </motion.div>
         )}

@@ -133,6 +133,7 @@ export interface GalleryItem {
   title: string;
   location: string;
   span: string;
+  category?: string;
 }
 
 export interface ContentData {
@@ -189,6 +190,7 @@ export interface ContentData {
     badge: string;
     title: string;
     subtitle: string;
+    filters: string[];
     items: GalleryItem[];
   };
   testimonials: {
