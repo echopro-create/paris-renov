@@ -31,11 +31,7 @@ html {
     will-change: opacity;
 }
 
-/* Content visibility для off-screen секций */
-section:not(#hero) {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
-}
+/* Content visibility удалено, так как оно вызывает скачки макета (CLS) */
 
 /* Оптимизация для мобильных устройств */
 @media (max-width: 768px) {
