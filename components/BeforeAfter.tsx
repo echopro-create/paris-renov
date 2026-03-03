@@ -122,7 +122,7 @@ export default function BeforeAfter() {
   }, []);
 
   return (
-    <section className="py-24 bg-slate-50 dark:bg-neutral-900 overflow-hidden">
+    <section id="transformation" className="py-24 bg-slate-50 dark:bg-neutral-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -131,8 +131,8 @@ export default function BeforeAfter() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <h2 className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3">{common.metamorphose}</h2>
-          <h3 className="font-serif text-4xl text-slate-900 dark:text-white font-bold mb-4">{beforeAfter.title}</h3>
+          <span className="text-sm font-bold tracking-widest text-gold-600 uppercase mb-3 block">{common.metamorphose}</span>
+          <h2 className="font-serif text-4xl text-slate-900 dark:text-white font-bold mb-4">{beforeAfter.title}</h2>
           <p className="text-slate-600 dark:text-slate-300">{beforeAfter.subtitle}</p>
         </motion.div>
 

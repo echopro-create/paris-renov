@@ -13,22 +13,40 @@ export default function Gallery() {
   // Touch swipe refs
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const lightboxCloseRef = useRef<HTMLButtonElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
 
   // Filtered items
   const filteredItems = activeFilter === 'Tout'
     ? gallery.items
     : gallery.items.filter(item => item.category === activeFilter);
 
-  // Keyboard navigation for lightbox
+  // Keyboard navigation + focus trap for lightbox
   useEffect(() => {
+    if (lightboxIdx === null) return;
+
+    // Focus trap: focus close button when lightbox opens
+    lightboxCloseRef.current?.focus();
+    document.body.style.overflow = 'hidden';
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (lightboxIdx === null) return;
       if (e.key === 'Escape') { setLightboxIdx(null); setZoomLevel(1); }
       else if (e.key === 'ArrowLeft') { prevImage(); }
       else if (e.key === 'ArrowRight') { nextImage(); }
+      // Focus trap: keep Tab within lightbox
+      else if (e.key === 'Tab' && lightboxRef.current) {
+        const focusable = lightboxRef.current.querySelectorAll<HTMLElement>('button, [tabindex]');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
   }, [lightboxIdx, filteredItems.length]);
 
   const prevImage = () => {
@@ -52,6 +70,8 @@ export default function Gallery() {
   };
 
   const handleTouchEnd = () => {
+    // Disable swipe when zoomed in to avoid conflicts
+    if (zoomLevel > 1) return;
     if (touchStartX.current === null || touchEndX.current === null) return;
     const diff = touchStartX.current - touchEndX.current;
     const SWIPE_THRESHOLD = 50;
@@ -202,10 +222,14 @@ export default function Gallery() {
       <AnimatePresence>
         {lightboxIdx !== null && filteredItems[lightboxIdx] && (
           <motion.div
+            ref={lightboxRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Galerie photo en plein écran"
             onClick={() => { setLightboxIdx(null); setZoomLevel(1); }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -213,6 +237,7 @@ export default function Gallery() {
           >
             {/* Close Button */}
             <button
+              ref={lightboxCloseRef}
               onClick={() => { setLightboxIdx(null); setZoomLevel(1); }}
               className="absolute top-4 right-4 md:top-6 md:right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors z-50 focus-ring"
               aria-label="Fermer"
@@ -262,9 +287,9 @@ export default function Gallery() {
                 }}
                 loading="eager"
               />
-              {/* Zoom hint */}
+              {/* Zoom hint - hidden on touch devices */}
               {zoomLevel === 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm flex items-center gap-2 pointer-events-none">
+                <div className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm items-center gap-2 pointer-events-none">
                   <ZoomIn className="w-4 h-4" />
                   Cliquez pour zoomer
                 </div>

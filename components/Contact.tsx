@@ -143,7 +143,9 @@ export default function Contact() {
                 <form action={formAction} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
+                      <label htmlFor="contact-name" className="sr-only">{contact.form.name}</label>
                       <input
+                        id="contact-name"
                         name="name"
                         type="text"
                         placeholder={contact.form.name}
@@ -152,7 +154,9 @@ export default function Contact() {
                       {errors?.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
                     <div>
+                      <label htmlFor="contact-email" className="sr-only">{contact.form.email}</label>
                       <input
+                        id="contact-email"
                         name="email"
                         type="email"
                         placeholder={contact.form.email}
@@ -164,7 +168,9 @@ export default function Contact() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
+                      <label htmlFor="contact-phone" className="sr-only">{contact.form.phone}</label>
                       <input
+                        id="contact-phone"
                         name="phone"
                         type="tel"
                         placeholder={contact.form.phone}
@@ -183,7 +189,9 @@ export default function Contact() {
                       )}
                     </div>
                     <div>
+                      <label htmlFor="contact-type" className="sr-only">{contact.form.type}</label>
                       <select
+                        id="contact-type"
                         name="type"
                         defaultValue=""
                         className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors text-slate-600 dark:text-slate-300"
@@ -199,7 +207,9 @@ export default function Contact() {
                   </div>
 
                   <div>
+                    <label htmlFor="contact-message" className="sr-only">{contact.form.message}</label>
                     <textarea
+                      id="contact-message"
                       name="message"
                       placeholder={contact.form.message}
                       rows={4}

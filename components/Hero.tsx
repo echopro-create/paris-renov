@@ -60,7 +60,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Overlay — gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/65" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
 
       {/* Content — fades and moves up on scroll */}
       <motion.div

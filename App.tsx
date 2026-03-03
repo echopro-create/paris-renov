@@ -24,53 +24,55 @@ const App: React.FC = () => {
   useSmoothScroll();
 
   return (
-    <ThemeProvider>
-      {/* Skip Link for Accessibility (WCAG 2.2) */}
-      <a
-        href="#main-content"
-        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 bg-gold-500 text-slate-900 px-6 py-3 rounded-lg z-[100] focus-ring font-semibold"
-      >
-        Aller au contenu principal
-      </a>
+    <ErrorBoundary>
+      <ThemeProvider>
+        {/* Skip Link for Accessibility (WCAG 2.2) */}
+        <a
+          href="#main-content"
+          className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 bg-gold-500 text-slate-900 px-6 py-3 rounded-lg z-[100] focus-ring font-semibold"
+        >
+          Aller au contenu principal
+        </a>
 
-      <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-gold-200 selection:text-slate-900">
-        <Navbar />
-        <main id="main-content">
-          <Hero />
+        <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-gold-200 selection:text-slate-900">
+          <Navbar />
+          <main id="main-content">
+            <Hero />
 
-          <Services />
-          <ErrorBoundary>
-            <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
-              <BeforeAfter />
-            </React.Suspense>
-          </ErrorBoundary>
-          <Process />
-          <WhyUs />
-          <ErrorBoundary>
-            <React.Suspense fallback={<SkeletonLoader type="gallery" />}>
-              <Gallery />
-            </React.Suspense>
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <React.Suspense fallback={<SkeletonLoader type="testimonials" />}>
-              <Testimonials />
-            </React.Suspense>
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <React.Suspense fallback={<SkeletonLoader type="contact" />}>
-              <Contact />
-            </React.Suspense>
-          </ErrorBoundary>
-          <CTABanner />
+            <Services />
+            <ErrorBoundary>
+              <React.Suspense fallback={<SkeletonLoader type="beforeafter" />}>
+                <BeforeAfter />
+              </React.Suspense>
+            </ErrorBoundary>
+            <Process />
+            <WhyUs />
+            <ErrorBoundary>
+              <React.Suspense fallback={<SkeletonLoader type="gallery" />}>
+                <Gallery />
+              </React.Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <React.Suspense fallback={<SkeletonLoader type="testimonials" />}>
+                <Testimonials />
+              </React.Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <React.Suspense fallback={<SkeletonLoader type="contact" />}>
+                <Contact />
+              </React.Suspense>
+            </ErrorBoundary>
+            <CTABanner />
 
-        </main>
-        <Footer />
-        <WhatsAppButton />
-        <ScrollToTop />
-        <OfflineIndicator />
-        <PWAUpdateToast />
-      </div>
-    </ThemeProvider>
+          </main>
+          <Footer />
+          <WhatsAppButton />
+          <ScrollToTop />
+          <OfflineIndicator />
+          <PWAUpdateToast />
+        </div>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 

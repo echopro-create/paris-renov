@@ -40,11 +40,6 @@ section:not(#hero) {
 /* Оптимизация для мобильных устройств */
 @media (max-width: 768px) {
 
-    /* Упростить сложные анимации на мобильных */
-    * {
-        animation-duration: 0.3s !important;
-    }
-
     /* Reduce blur complexity на слабых устройствах */
     [class*="backdrop-blur"] {
         backdrop-filter: blur(8px) !important;

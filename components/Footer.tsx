@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { content } from '../constants';
 import { motion } from 'framer-motion';
 import { Instagram, X, MapPin, Phone, Mail } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Footer() {
   const { footer, nav, contact } = content;
@@ -29,7 +30,7 @@ export default function Footer() {
     { label: nav.services, href: '#services' },
     { label: nav.gallery, href: '#gallery' },
     { label: nav.process, href: '#process' },
-    { label: nav.whyUs, href: '#expertise' },
+    { label: nav.whyUs, href: '#why-us' },
     { label: nav.contact, href: '#contact' },
   ];
 
@@ -41,27 +42,18 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white pt-16 pb-8">
+      <footer className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white pt-16 pb-8 border-t border-gold-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
-                {/* Idea 4: Haussmann Signature in Footer - Restored */}
-                <div className="flex items-center gap-4">
-                  <div className="flex flex-col items-center">
-                    <svg width="48" height="48" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gold-500">
-                      <path d="M5 25H35V30H5V25Z" fill="currentColor" fillOpacity="0.1" />
-                      <path d="M8 12V25M14 12V25M20 12V25M26 12V25M32 12V25" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-                      <path d="M5 12H35" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                      <path d="M5 25H35" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                    </svg>
-                  </div>
-                  <div className="flex flex-col border-l border-gold-500/20 pl-4 py-1">
-                    <span className="font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none">D.A. BAT</span>
-                    <span className="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2">Votre Projet, Notre Savoir-Faire</span>
-                  </div>
-                </div>
+                <Logo
+                  iconSize={48}
+                  nameClassName="font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none"
+                  taglineClassName="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2"
+                  variant="dark"
+                />
               </div>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                 {footer.description}

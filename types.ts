@@ -74,7 +74,7 @@ export interface FAQItem {
 export interface SocialLink {
   platform: string;
   url: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export interface FooterData {

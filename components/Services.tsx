@@ -72,9 +72,10 @@ export default function Services() {
                     {service.title}
                   </h3>
                 </div>
-                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                {/* Mobile: always visible, Desktop: reveal on hover */}
+                <div className="grid grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
                   <div className="overflow-hidden">
-                    <p className="text-sm text-slate-200 leading-relaxed pt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <p className="text-sm text-slate-200 leading-relaxed pt-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
                       {service.description}
                     </p>
                   </div>

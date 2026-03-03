@@ -46,7 +46,7 @@ export function useContactForm() {
         if (!data.name?.trim()) errors.name = contact.form.errors.name;
         if (!data.email?.trim()) errors.email = contact.form.errors.email;
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = contact.form.errors.emailInvalid;
-        
+
         if (!data.phone?.trim()) {
             errors.phone = contact.form.errors.phone;
         } else if (!isValidFrenchPhone(data.phone)) {
@@ -55,11 +55,9 @@ export function useContactForm() {
 
         if (!data.message?.trim()) errors.message = contact.form.errors.message;
 
-        // Turnstile check (optional if key is present)
+        // Turnstile check: block submission if key is present but token is missing
         if (import.meta.env.VITE_TURNSTILE_SITE_KEY && !data.token) {
-             // If Turnstile is enabled but no token, we might want to block or warn
-             // For now, let's assume it's required if the key is there
-             // console.warn("Turnstile token missing");
+            errors.phone = 'Veuillez compléter la vérification de sécurité';
         }
 
         if (Object.keys(errors).length > 0) {
@@ -87,7 +85,7 @@ export function useContactForm() {
                     'g-recaptcha-response': data.token, // EmailJS supports this often
                 }
             );
-            
+
             // Clear phone on success
             setPhone('');
             return { success: true, error: false, errors: {} };
