@@ -90,7 +90,7 @@ export default function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-24 md:py-32 bg-white dark:bg-neutral-900">
+    <section id="gallery" className="py-24 md:py-32 bg-white dark:bg-bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
@@ -226,7 +226,7 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
             role="dialog"
             aria-modal="true"
             aria-label="Galerie photo en plein écran"
@@ -272,13 +272,13 @@ export default function Gallery() {
               initial={{ scale: 0.9 }}
               animate={{ scale: zoomLevel }}
               transition={{ duration: 0.3 }}
-              className="relative max-w-full max-h-[85vh] flex items-center justify-center"
+              className="relative w-full flex items-center justify-center px-12 sm:px-16"
               onClick={(e) => e.stopPropagation()}
             >
               <img
                 src={filteredItems[lightboxIdx].src}
                 alt={filteredItems[lightboxIdx].alt}
-                className="max-w-full max-h-[80vh] rounded-lg object-contain md:cursor-zoom-in"
+                className="max-w-full max-h-[80vh] rounded-lg object-contain md:cursor-zoom-in block mx-auto"
                 onClick={() => {
                   // Only allow zoom on non-touch devices
                   if (!('ontouchstart' in window)) {
@@ -297,7 +297,7 @@ export default function Gallery() {
             </motion.div>
 
             {/* Image Info */}
-            <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 text-center text-white pointer-events-none">
+            <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 text-center text-white pointer-events-none w-full px-4">
               <h4 className="font-semibold text-base md:text-lg">{filteredItems[lightboxIdx].title}</h4>
               <p className="text-slate-300 text-sm">{filteredItems[lightboxIdx].location}</p>
               {/* Swipe hint for mobile */}
