@@ -296,7 +296,7 @@ export const content: ContentData = {
       }
     },
     info: {
-      address: "12 Avenue des Champs-Élysées, 75008 Paris",
+      address: "Paris et Île-de-France",
       phone: "06 01 99 76 59",
       email: "tchoudinov@hotmail.fr",
       hours: "Lun - Ven: 8h00 - 19h00",
