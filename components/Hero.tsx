@@ -60,7 +60,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Overlay — gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/65" />
 
       {/* Content — fades and moves up on scroll */}
       <motion.div
@@ -87,9 +87,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.4 }}
-          className="font-serif text-[clamp(2rem,5.5vw,4rem)] font-bold leading-[1.05] mb-5 tracking-tight text-white [text-shadow:_0_2px_16px_rgba(0,0,0,0.4)]"
+          className="font-serif text-[clamp(2rem,5.5vw,4rem)] font-bold leading-[1.05] mb-5 tracking-tight text-white [text-shadow:_0_2px_20px_rgba(0,0,0,0.85),_0_4px_40px_rgba(0,0,0,0.5)]"
         >
-          <span className="block text-[0.6em] font-sans font-light tracking-[0.15em] uppercase text-white/80 mb-3 [text-shadow:_0_1px_10px_rgba(0,0,0,0.6)]">
+          <span className="block text-[0.6em] font-sans font-light tracking-[0.15em] uppercase text-white/80 mb-3 [text-shadow:_0_2px_16px_rgba(0,0,0,0.9)]">
             L'Art de la
           </span>
           Rénovation{' '}
@@ -103,7 +103,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-base md:text-lg text-slate-300/90 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto font-light text-balance px-2"
+          className="text-base md:text-lg text-slate-300/90 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto font-light text-balance px-2 [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]"
         >
           {hero.subtitle.split('exigence absolue')[0]}
           <span className="text-gold-400 font-medium">exigence absolue</span>.
