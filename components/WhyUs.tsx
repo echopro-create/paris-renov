@@ -32,7 +32,7 @@ export default function WhyUs() {
   }, [isInView]);
 
   return (
-    <section id="why-us" className="py-24 md:py-32 bg-gray-50 dark:bg-slate-900 relative overflow-hidden">
+    <section id="why-us" className="py-24 md:py-32 bg-gray-50 dark:bg-bg-secondary relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -69,7 +69,7 @@ export default function WhyUs() {
                   <div className="flex items-start gap-6 pb-8 border-b border-slate-200 dark:border-slate-700 group-last:border-0 relative">
                     <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-gold-500 transition-all duration-700 group-hover:w-full" />
 
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center text-gold-500 group-hover:border-gold-500 group-hover:text-gold-600 transition-colors duration-300">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full border border-slate-200 dark:border-neutral-700 bg-white dark:bg-bg-primary flex items-center justify-center text-gold-500 group-hover:border-gold-500 group-hover:text-gold-600 transition-colors duration-300">
                       <Check className="w-5 h-5" />
                     </div>
 
@@ -107,7 +107,7 @@ export default function WhyUs() {
             </div>
 
             {/* Decorative Elements */}
-            <div ref={counterRef} className="absolute -bottom-8 -left-8 w-48 h-48 bg-white dark:bg-slate-900 p-4 hidden md:block">
+            <div ref={counterRef} className="absolute -bottom-8 -left-8 w-48 h-48 bg-white dark:bg-bg-primary p-4 hidden md:block">
               <div className="w-full h-full border border-gold-500/30 flex items-center justify-center p-6 text-center">
                 <div>
                   <span className="block text-3xl font-serif font-bold text-gold-600 mb-1">{count}+</span>

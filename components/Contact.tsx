@@ -33,7 +33,7 @@ export default function Contact() {
   const { success, error, errors } = state;
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-slate-50 dark:bg-slate-900">
+    <section id="contact" className="py-24 md:py-32 bg-slate-50 dark:bg-bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
@@ -63,7 +63,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-2 space-y-6"
           >
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-bg-primary/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-800/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Phone className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -75,7 +75,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-bg-primary/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-800/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Mail className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -87,7 +87,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-bg-primary/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-800/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <MapPin className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -97,7 +97,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 hover:border-gold-400/50 transition-colors">
+            <div className="flex items-start gap-4 p-5 rounded-xl bg-white dark:bg-bg-primary/80 backdrop-blur-sm border border-slate-200/50 dark:border-neutral-800/50 hover:border-gold-400/50 transition-colors">
               <div className="shrink-0 w-10 h-10 rounded-xl bg-gold-500/10 dark:bg-gold-500/20 flex items-center justify-center">
                 <Clock className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               </div>
@@ -116,7 +116,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="lg:col-span-3"
           >
-            <div className="bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-200/50 dark:border-slate-700/50">
+            <div className="bg-slate-50/80 dark:bg-bg-primary/80 backdrop-blur-md rounded-2xl p-8 border border-slate-200/50 dark:border-neutral-800/50">
               <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white mb-1">{contact.formHeading}</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{contact.formSubheading}</p>
 
@@ -151,7 +151,7 @@ export default function Contact() {
                         placeholder={contact.form.name}
                         aria-invalid={!!errors?.name}
                         aria-describedby={errors?.name ? "name-error" : undefined}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-bg-primary border ${errors?.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
                       {errors?.name && <p id="name-error" role="alert" className="text-red-500 text-xs mt-1">{errors.name}</p>}
                     </div>
@@ -164,7 +164,7 @@ export default function Contact() {
                         placeholder={contact.form.email}
                         aria-invalid={!!errors?.email}
                         aria-describedby={errors?.email ? "email-error" : undefined}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-bg-primary border ${errors?.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors`}
                       />
                       {errors?.email && <p id="email-error" role="alert" className="text-red-500 text-xs mt-1">{errors.email}</p>}
                     </div>
@@ -182,7 +182,7 @@ export default function Contact() {
                         onChange={(e) => handlePhoneChange(e.target.value)}
                         aria-invalid={!!errors?.phone}
                         aria-describedby={errors?.phone ? "phone-error" : undefined}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.phone ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors font-mono`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-bg-primary border ${errors?.phone ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors font-mono`}
                         inputMode="tel"
                         autoComplete="tel"
                       />
@@ -200,7 +200,7 @@ export default function Contact() {
                         id="contact-type"
                         name="type"
                         defaultValue=""
-                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors text-slate-600 dark:text-slate-300"
+                        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-bg-primary border border-slate-200 dark:border-neutral-800 focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors text-slate-600 dark:text-slate-300"
                       >
                         <option value="">{contact.form.type}</option>
                         <option value="full">{contact.form.options.full}</option>
@@ -221,7 +221,7 @@ export default function Contact() {
                       rows={4}
                       aria-invalid={!!errors?.message}
                       aria-describedby={errors?.message ? "message-error" : undefined}
-                      className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border ${errors?.message ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors resize-none`}
+                      className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-bg-primary border ${errors?.message ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} focus:border-gold-400 focus:ring-1 focus:ring-gold-400 outline-none text-sm text-slate-900 dark:text-white transition-colors resize-none`}
                     />
                     {errors?.message && <p id="message-error" role="alert" className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>

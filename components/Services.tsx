@@ -6,7 +6,7 @@ export default function Services() {
   const { services } = content;
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-white dark:bg-slate-900">
+    <section id="services" className="py-24 md:py-32 bg-white dark:bg-bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div

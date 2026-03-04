@@ -42,7 +42,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white pt-16 pb-8 border-t border-gold-500/20">
+      <footer className="bg-slate-100 dark:bg-bg-primary text-slate-900 dark:text-white pt-16 pb-8 border-t border-gold-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
             {/* Brand */}
@@ -63,7 +63,7 @@ export default function Footer() {
                   href={content.social?.instagram || 'https://instagram.com'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
+                  className="w-9 h-9 rounded-full bg-slate-200 dark:bg-neutral-800 flex items-center justify-center hover:bg-gold-500/20 transition-colors"
                   aria-label="Suivez-nous sur Instagram"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -163,12 +163,12 @@ export default function Footer() {
         onCancel={handleClose}
       >
         {modalContent && (
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto border border-slate-200 dark:border-slate-700 shadow-2xl relative">
+          <div className="bg-white dark:bg-bg-primary rounded-2xl max-w-lg w-full p-8 max-h-[80vh] overflow-y-auto border border-slate-200 dark:border-neutral-800 shadow-2xl relative">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white">{modalContent.title}</h3>
               <button
                 onClick={handleClose}
-                className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="w-8 h-8 rounded-full bg-slate-100 dark:bg-neutral-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-neutral-700 transition-colors"
                 aria-label="Fermer"
               >
                 <X className="w-4 h-4 text-slate-900 dark:text-white" />

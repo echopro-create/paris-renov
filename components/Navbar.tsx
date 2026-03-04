@@ -63,7 +63,7 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${isScrolled
-          ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-slate-700/50 py-4 lg:py-6'
+          ? 'bg-white/70 dark:bg-bg-primary/80 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-neutral-800/50 py-4 lg:py-6'
           : 'bg-transparent py-5 lg:py-8'
         }`}
     >
@@ -109,7 +109,7 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             className={`p-2.5 rounded-full transition-all focus-ring ${isScrolled
-              ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
+              ? 'bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-neutral-700'
               : 'bg-white/10 backdrop-blur-sm text-white hover:bg-white/20'
               }`}
             aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
@@ -135,7 +135,7 @@ export default function Navbar() {
           <button
             onClick={toggleTheme}
             className={`p-2 rounded-full transition-colors focus-ring ${isScrolled
-              ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+              ? 'bg-slate-100 dark:bg-neutral-800 text-slate-900 dark:text-white'
               : 'bg-white/10 backdrop-blur-sm text-white'
               }`}
             aria-label={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
@@ -165,13 +165,13 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-50 bg-white/98 dark:bg-slate-900/98 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-50 bg-white/98 dark:bg-bg-primary/98 backdrop-blur-2xl lg:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Menu principal"
           >
             {/* Fixed Header with Close Button */}
-            <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900">
+            <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-neutral-800 bg-white dark:bg-bg-primary">
               <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">D.A. BAT</span>
               <button
                 onClick={() => setIsOpen(false)}
