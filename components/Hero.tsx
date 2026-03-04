@@ -103,7 +103,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-base md:text-lg text-slate-300/90 mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto font-light text-balance px-2 [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]"
+          className="text-base md:text-lg text-white mb-6 md:mb-8 leading-relaxed max-w-xl mx-auto font-light text-balance px-2 [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]"
         >
           {hero.subtitle.split('exigence absolue')[0]}
           <span className="text-gold-400 font-medium">exigence absolue</span>.
