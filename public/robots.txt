@@ -4,7 +4,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://atelier-alexei.fr/sitemap.xml
+Sitemap: https://da-bat.com/sitemap.xml
 
 # Crawl-delay for polite bots
 Crawl-delay: 1
