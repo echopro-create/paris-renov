@@ -65,7 +65,7 @@ export default function Hero() {
       {/* Content — fades and moves up on scroll */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-16 pb-24 text-center"
+        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-24 sm:pt-20 pb-32 sm:pb-24 text-center"
       >
         {/* Badge */}
         <motion.div
@@ -74,9 +74,9 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-6"
         >
-          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-gold-400/30 bg-white/5 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-gold-400/40 bg-black/20 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
-            <span className="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase">
+            <span className="text-gold-400 text-[11px] sm:text-xs font-semibold tracking-[0.2em] sm:tracking-[0.25em] uppercase">
               {common.expertBadge}
             </span>
           </div>
@@ -131,7 +131,7 @@ export default function Hero() {
           <a
             href="#gallery"
             aria-label="Voir nos réalisations"
-            className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 sm:px-7 py-3 border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all active:bg-white/15"
+            className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 border border-white/20 text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all active:bg-white/15"
           >
             {hero.ctaSecondary}
           </a>

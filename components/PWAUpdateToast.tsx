@@ -25,10 +25,10 @@ export default function PWAUpdateToast() {
         <AnimatePresence>
             {(offlineReady || needRefresh) && (
                 <motion.div
-                    initial={{ y: 100, opacity: 0 }}
+                    initial={{ y: -100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
-                    className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 p-4 flex flex-col gap-3"
+                    exit={{ y: -100, opacity: 0 }}
+                    className="fixed top-20 right-4 z-[70] max-w-xs w-full bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 p-4 flex flex-col gap-3"
                 >
                     <div className="flex items-start justify-between">
                         <div>

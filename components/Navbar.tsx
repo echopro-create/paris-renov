@@ -63,8 +63,8 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${isScrolled
-          ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-slate-700/50 py-6'
-          : 'bg-transparent py-10'
+          ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-2xl border-b border-white/20 dark:border-slate-700/50 py-4 lg:py-6'
+          : 'bg-transparent py-5 lg:py-8'
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -74,9 +74,9 @@ export default function Navbar() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <Logo
-            iconSize={64}
-            nameClassName={`font-serif text-3xl lg:text-4xl font-extrabold tracking-[0.2em] leading-none`}
-            taglineClassName="text-[10px] lg:text-[11px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2"
+            iconSize={40}
+            nameClassName={`font-serif text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-[0.2em] leading-none`}
+            taglineClassName="hidden sm:block text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
             variant={isScrolled ? 'dark' : 'light'}
           />
         </a>
