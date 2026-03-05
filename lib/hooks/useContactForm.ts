@@ -1,5 +1,4 @@
-import { useState, useEffect, useActionState } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState, useActionState } from 'react';
 import { content } from '../../constants';
 import { isValidFrenchPhone } from '../utils/phoneValidator';
 
@@ -18,18 +17,7 @@ const initialState: FormState = {
 
 export function useContactForm() {
     const { contact } = content;
-    // We still need local state for controlled inputs (phone formatting)
     const [phone, setPhone] = useState('');
-
-    // Initialize EmailJS
-    useEffect(() => {
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-        if (publicKey) {
-            emailjs.init({
-                publicKey: publicKey,
-            });
-        }
-    }, []);
 
     const submitAction = async (prevState: FormState, formData: FormData): Promise<FormState> => {
         const data = {
@@ -55,7 +43,7 @@ export function useContactForm() {
 
         if (!data.message?.trim()) errors.message = contact.form.errors.message;
 
-        // Turnstile check: block submission if key is present but token is missing
+        // Turnstile check
         if (import.meta.env.VITE_TURNSTILE_SITE_KEY && !data.token) {
             errors.phone = 'Veuillez compléter la vérification de sécurité';
         }
@@ -64,34 +52,30 @@ export function useContactForm() {
             return { success: false, error: false, errors };
         }
 
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-
-        if (!serviceId || !templateId) {
-            console.error('EmailJS Service ID or Template ID is missing.');
-            return { success: false, error: true, errors: {}, message: 'Configuration error' };
-        }
-
         try {
-            await emailjs.send(
-                serviceId,
-                templateId,
-                {
-                    from_name: data.name,
-                    from_email: data.email,
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
                     phone: data.phone,
-                    project_type: data.type || 'Non spécifié',
+                    type: data.type || 'Non spécifié',
                     message: data.message,
-                    'g-recaptcha-response': data.token, // EmailJS supports this often
-                }
-            );
+                }),
+            });
 
-            // Clear phone on success
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                console.error('Contact API error:', err);
+                return { success: false, error: true, errors: {}, message: 'Erreur serveur' };
+            }
+
             setPhone('');
             return { success: true, error: false, errors: {} };
         } catch (error) {
-            console.error('Form submission error:', error);
-            return { success: false, error: true, errors: {}, message: 'Network error' };
+            console.error('Network error:', error);
+            return { success: false, error: true, errors: {}, message: 'Erreur réseau' };
         }
     };
 
