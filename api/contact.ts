@@ -4,24 +4,24 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-    const { name, email, phone, type, message } = req.body;
+  const { name, email, phone, type, message } = req.body;
 
-    // Basic validation
-    if (!name || !email || !phone || !message) {
-        return res.status(400).json({ error: 'Missing required fields' });
-    }
+  // Basic validation
+  if (!name || !email || !phone || !message) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
 
-    try {
-        await resend.emails.send({
-            from: 'D.A. BAT <noreply@da-bat.com>',
-            to: 'tchoudinov@hotmail.fr',
-            replyTo: email,
-            subject: `Nouveau devis - ${name}`,
-            html: `
+  try {
+    const { data, error: resendError } = await resend.emails.send({
+      from: 'D.A. BAT <noreply@da-bat.com>',
+      to: 'tchoudinov@hotmail.fr',
+      replyTo: email,
+      subject: `Nouveau devis - ${name}`,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #B8860B; border-bottom: 2px solid #B8860B; padding-bottom: 10px;">
             Nouvelle demande de devis
@@ -50,17 +50,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           </table>
           <p style="color: #888; font-size: 12px; margin-top: 20px;">
             Envoyé depuis da-bat.com le ${new Date().toLocaleDateString('fr-FR', {
-                day: '2-digit', month: '2-digit', year: 'numeric',
-                hour: '2-digit', minute: '2-digit'
-            })}
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      })}
           </p>
         </div>
       `,
-        });
+    });
 
-        return res.status(200).json({ success: true });
-    } catch (error) {
-        console.error('Resend error:', error);
-        return res.status(500).json({ error: 'Failed to send email' });
+    if (resendError) {
+      console.error('Resend API rejected email:', JSON.stringify(resendError));
+      return res.status(500).json({ error: 'Email service error', details: resendError.message });
     }
+
+    console.log('Email sent successfully, id:', data?.id);
+    return res.status(200).json({ success: true, emailId: data?.id });
+  } catch (error) {
+    console.error('Resend exception:', error);
+    return res.status(500).json({ error: 'Failed to send email' });
+  }
 }
