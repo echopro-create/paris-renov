@@ -241,27 +241,27 @@ export const content: ContentData = {
     items: [
       {
         id: 1,
-        name: "Sophie Martin",
+        name: "Inès Ferreira",
         location: "Paris 16e",
         text: "Un travail remarquable. D.A. BAT a transformé notre appartement avec un professionnalisme exemplaire.",
         role: "Rénovation complète",
-        avatar: "/assets/testimonials/avatar-sophie.jpg"
+        avatar: "/assets/testimonials/avatar-ines.jpg"
       },
       {
         id: 2,
-        name: "Jean-Philippe Laurent",
+        name: "Rémi Blanchard",
         location: "Neuilly-sur-Seine",
         text: "Professionnalisme exemplaire du début à la fin. Le devis était précis, les délais respectés et la qualité de la peinture est exceptionnelle. Je recommande vivement.",
         role: "Peinture & Décoration",
-        avatar: "/assets/testimonials/avatar-jean-philippe.jpg"
+        avatar: "/assets/testimonials/avatar-remi.jpg"
       },
       {
         id: 3,
-        name: "Camille Dubois",
+        name: "Thibault Morel",
         location: "Paris 7e",
         text: "Notre parquet a retrouvé toute sa splendeur grâce à D.A. BAT. Un savoir-faire artisanal de qualité.",
         role: "Parquets & Sols",
-        avatar: "/assets/testimonials/avatar-camille.jpg"
+        avatar: "/assets/testimonials/avatar-thibault.jpg"
       }
     ]
   },
