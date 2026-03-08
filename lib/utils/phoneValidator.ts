@@ -10,21 +10,24 @@
 export function isValidFrenchPhone(phone: string): boolean {
   // Remove all spaces, dashes, dots and parentheses
   const cleaned = phone.replace(/[\s\-.()]/g, '');
-  
-  // Check if it matches French phone number patterns
-  // Pattern 1: +33 followed by 9 digits (without leading 0)
+
+  // Pattern 1: +33 followed by 9 digits (French international)
   const internationalPattern = /^\+33[1-9]\d{8}$/;
-  
-  // Pattern 2: 0033 followed by 9 digits (without leading 0)
+
+  // Pattern 2: 0033 followed by 9 digits
   const zeroZeroPattern = /^0033[1-9]\d{8}$/;
-  
+
   // Pattern 3: 0 followed by 9 digits (French domestic format)
   const domesticPattern = /^0[1-9]\d{8}$/;
-  
+
+  // Pattern 4: Any international number (+X... with 8-15 digits total)
+  const anyInternationalPattern = /^\+\d{8,15}$/;
+
   return (
     internationalPattern.test(cleaned) ||
     zeroZeroPattern.test(cleaned) ||
-    domesticPattern.test(cleaned)
+    domesticPattern.test(cleaned) ||
+    anyInternationalPattern.test(cleaned)
   );
 }
 
@@ -35,22 +38,22 @@ export function isValidFrenchPhone(phone: string): boolean {
 export function formatPhoneForDisplay(phone: string): string {
   // Remove all non-digit characters except +
   const cleaned = phone.replace(/[\s\-.()]/g, '');
-  
+
   // Handle international format
   if (cleaned.startsWith('+33')) {
     const digits = cleaned.slice(3);
     return formatFrenchDomestic(digits);
   }
-  
+
   if (cleaned.startsWith('0033')) {
     const digits = cleaned.slice(4);
     return formatFrenchDomestic(digits);
   }
-  
+
   if (cleaned.startsWith('0') && cleaned.length === 10) {
     return formatFrenchDomestic(cleaned.slice(1));
   }
-  
+
   return phone;
 }
 
@@ -59,10 +62,10 @@ export function formatPhoneForDisplay(phone: string): string {
  */
 function formatFrenchDomestic(digits: string): string {
   if (digits.length !== 9) return digits;
-  
+
   // Add leading 0
   const withZero = '0' + digits;
-  
+
   // Format as 0X XX XX XX XX
   return withZero.replace(/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5');
 }
@@ -73,18 +76,18 @@ function formatFrenchDomestic(digits: string): string {
  */
 export function normalizePhone(phone: string): string {
   const cleaned = phone.replace(/[\s\-.()]/g, '');
-  
+
   if (cleaned.startsWith('+33')) {
     return cleaned;
   }
-  
+
   if (cleaned.startsWith('0033')) {
     return '+' + cleaned;
   }
-  
+
   if (cleaned.startsWith('0') && cleaned.length === 10) {
     return '+33' + cleaned.slice(1);
   }
-  
+
   return phone;
 }
