@@ -90,12 +90,13 @@ export default function Hero() {
           className="font-serif text-[clamp(2rem,5.5vw,4rem)] font-bold leading-[1.05] mb-5 tracking-tight text-white [text-shadow:_0_2px_20px_rgba(0,0,0,0.85),_0_4px_40px_rgba(0,0,0,0.5)]"
         >
           <span className="block text-[0.6em] font-sans font-light tracking-[0.15em] uppercase text-white/80 mb-3 [text-shadow:_0_2px_16px_rgba(0,0,0,0.9)]">
-            L'Art de la
+            Entreprise de Rénovation à Paris
           </span>
-          Rénovation{' '}
+          Rénovation Générale{' '}
           <span className="italic text-gold-400 drop-shadow-[0_0_30px_rgba(212,175,55,0.3)]">
-            Parisienne.
+            d'Appartements.
           </span>
+          <span className="sr-only"> — Peinture, Plomberie, Électricité, Parquets en Île-de-France. Devis gratuit.</span>
         </motion.h1>
 
         {/* Subtitle */}

@@ -17,12 +17,12 @@ export default defineConfig(({ mode }) => {
       },
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.png', 'favicon.svg', 'robots.txt', 'sitemap.xml', 'apple-touch-icon.png'],
+        includeAssets: ['favicon.png', 'robots.txt', 'sitemap.xml', 'apple-touch-icon.png'],
         manifest: {
           name: 'D.A. BAT - Rénovation Générale',
           short_name: 'D.A. BAT',
           description: 'Entreprise générale de bâtiment D.A. BAT à Paris. Rénovation, Peinture & Décoration.',
-          theme_color: '#D97706',
+          theme_color: '#D4AF37',
           background_color: '#ffffff',
           display: 'standalone',
           orientation: 'portrait',

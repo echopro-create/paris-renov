@@ -245,7 +245,7 @@ export const content: ContentData = {
         location: "Paris 16e",
         text: "Un travail remarquable. D.A. BAT a transformé notre appartement avec un professionnalisme exemplaire.",
         role: "Rénovation complète",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+        avatar: "/assets/testimonials/avatar-sophie.jpg"
       },
       {
         id: 2,
@@ -253,7 +253,7 @@ export const content: ContentData = {
         location: "Neuilly-sur-Seine",
         text: "Professionnalisme exemplaire du début à la fin. Le devis était précis, les délais respectés et la qualité de la peinture est exceptionnelle. Je recommande vivement.",
         role: "Peinture & Décoration",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+        avatar: "/assets/testimonials/avatar-jean-philippe.jpg"
       },
       {
         id: 3,
@@ -261,7 +261,7 @@ export const content: ContentData = {
         location: "Paris 7e",
         text: "Notre parquet a retrouvé toute sa splendeur grâce à D.A. BAT. Un savoir-faire artisanal de qualité.",
         role: "Parquets & Sols",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+        avatar: "/assets/testimonials/avatar-camille.jpg"
       }
     ]
   },

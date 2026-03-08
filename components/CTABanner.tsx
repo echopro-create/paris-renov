@@ -37,6 +37,7 @@ export default function CTABanner() {
                     </a>
                     <a
                         href={`tel:${ctaBanner.ctaSecondary.replace(/\s/g, '')}`}
+                        aria-label={`Appeler le ${ctaBanner.ctaSecondary}`}
                         className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white rounded-full font-medium text-base hover:bg-white/10 transition-all"
                     >
                         <Phone className="w-4 h-4" />

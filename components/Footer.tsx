@@ -75,7 +75,7 @@ export default function Footer() {
 
             {/* Navigation */}
             <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.navigation}</h4>
+              <div className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.navigation}</div>
               <ul className="space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.href}>
@@ -89,7 +89,7 @@ export default function Footer() {
 
             {/* Savoir-faire */}
             <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.services}</h4>
+              <div className="text-sm font-semibold uppercase tracking-wider mb-4">{footer.services}</div>
               <ul className="space-y-3">
                 {savoirFaire.map((item) => (
                   <li key={item}>
@@ -117,7 +117,7 @@ export default function Footer() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-sm font-semibold uppercase tracking-wider mb-4">Contact</h4>
+              <div className="text-sm font-semibold uppercase tracking-wider mb-4">Contact</div>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-gold-400" />
