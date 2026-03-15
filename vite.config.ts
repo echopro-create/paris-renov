@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [
@@ -126,13 +126,13 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        output: {
+        output: !isSsrBuild ? {
           manualChunks: {
             'react-vendor': ['react', 'react-dom'],
             'ui-vendor': ['framer-motion', 'lucide-react'],
             'utils-vendor': ['@emailjs/browser', '@marsidev/react-turnstile']
           }
-        }
+        } : undefined
       }
     }
   };

@@ -13,20 +13,21 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+    const isSSR = typeof window === 'undefined';
+
     const [userOverride, setUserOverride] = useState<boolean>(() => {
+        if (isSSR) return false;
         return localStorage.getItem('theme') !== null;
     });
 
     const [theme, setTheme] = useState<Theme>(() => {
+        if (isSSR) return 'light';
         // If user has manually set a preference, use it
         const stored = localStorage.getItem('theme') as Theme | null;
         if (stored) return stored;
 
         // Otherwise follow system preference
-        if (typeof window !== 'undefined') {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        return 'light';
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     });
 
     // Listen to system theme changes in realtime (only when user hasn't overridden)
