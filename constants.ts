@@ -32,7 +32,7 @@ export const content: ContentData = {
   },
   hero: {
     title: "D.A. BAT - Rénovation Générale",
-    subtitle: "Entreprise générale de bâtiment. Travaux de rénovation, peinture, plomberie, électricité, maçonnerie, parquets et carrelage. Nous réalisons tous vos projets avec soin et une exigence absolue.",
+    subtitle: "Entreprise tous corps d'état à Paris. Travaux de rénovation d'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, parquets et carrelage. Nous réalisons tous vos projets avec soin et une exigence absolue.",
     ctaPrimary: "Demander un devis",
     ctaSecondary: "Voir nos réalisations",
     stats: [
@@ -52,29 +52,29 @@ export const content: ContentData = {
       {
         id: 'general',
         title: "Rénovation & Maçonnerie",
-        description: "Travaux de rénovation générale à Paris et Île-de-France : maçonnerie, création de cloisons, plâtrerie. Une prise en charge complète de votre chantier.",
-        image: "/assets/services/service_renovation_generale.png",
+        description: "Travaux de rénovation générale d'appartements anciens et haussmanniens à Paris et Île-de-France : maçonnerie, création de cloisons, plâtrerie. Entreprise tous corps d'état pour une prise en charge complète de votre chantier.",
+        image: "/assets/services/service_renovation_generale.webp",
         alt: "Rénovation complète d'appartement et maçonnerie à Paris"
       },
       {
         id: 'plastering',
         title: "Peinture & Décoration",
         description: "Peinture intérieure et extérieure, enduits décoratifs, papiers peints. Des finitions soignées pour sublimer vos appartements parisiens.",
-        image: "/assets/services/service_platrerie.png",
+        image: "/assets/services/service_platrerie.webp",
         alt: "Peinture intérieure et décoration murale soignée"
       },
       {
         id: 'spaces',
         title: "Plomberie & Électricité",
         description: "Installation sanitaire complète, rénovation salle de bain, mise aux normes électrique. Tous travaux de fluides et réseaux pour votre habitat.",
-        image: "/assets/services/service_cuisine_bain.png",
+        image: "/assets/services/service_cuisine_bain.webp",
         alt: "Installation plomberie et mise aux normes électrique"
       },
       {
         id: 'flooring',
         title: "Sols & Boiserie",
         description: "Pose de parquet, carrelage, boiseries sur mesure. Rénovation de sols anciens (Point de Hongrie) et pose de revêtements modernes.",
-        image: "/assets/services/service_parquet.png",
+        image: "/assets/services/service_parquet.webp",
         alt: "Pose de parquet et rénovation de sols anciens à Paris"
       }
     ]
@@ -82,8 +82,8 @@ export const content: ContentData = {
   whyUs: {
     badge: "Exigence",
     title: "Pourquoi D.A. BAT ?",
-    subtitle: "Votre satisfaction est notre priorité. Nous mettons notre savoir-faire au service de votre projet.",
-    image: "/assets/why-us/haussmann-design.png",
+    subtitle: "Contractant général pour vos travaux de rénovation. Votre satisfaction est notre priorité.",
+    image: "/assets/why-us/haussmann-design.webp",
     features: [
       { title: "Garantie Décennale", description: "Tous nos ouvrages sont couverts par une assurance décennale obligatoire.", icon: "ShieldCheck" },
       { title: "Devis Transparent", description: "Prix fermes et définitifs. Aucune surprise sur la facture finale.", icon: "FileText" },
@@ -96,8 +96,8 @@ export const content: ContentData = {
   beforeAfter: {
     title: "Transformation",
     subtitle: "Faites glisser pour découvrir la métamorphose d'un salon Haussmannien.",
-    beforeImage: "/assets/images/after_custom.png",
-    afterImage: "/assets/images/before_custom.png",
+    beforeImage: "/assets/images/after_custom.webp",
+    afterImage: "/assets/images/before_custom.webp",
     labelBefore: "Avant",
     labelAfter: "Après"
   },
@@ -315,7 +315,7 @@ export const content: ContentData = {
     ctaSecondary: "06 01 99 76 59"
   },
   footer: {
-    description: "D.A. BAT - Entreprise générale de bâtiment. Travaux de rénovation, peinture, plomberie, électricité, maçonnerie, boiserie, parquet et carrelage. Qualité, soin et exigence absolue.",
+    description: "D.A. BAT - Entreprise générale de bâtiment, tous corps d'état. Rénovation d'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, boiserie, parquet et carrelage. Qualité, soin et exigence absolue.",
     navigation: "Navigation",
     services: "Savoir-faire",
     legal: "Mentions Légales",
