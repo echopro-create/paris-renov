@@ -130,7 +130,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
           manualChunks: {
             'react-vendor': ['react', 'react-dom'],
             'ui-vendor': ['framer-motion', 'lucide-react'],
-            'utils-vendor': ['@emailjs/browser', '@marsidev/react-turnstile']
+            'utils-vendor': ['@marsidev/react-turnstile']
           }
         } : undefined
       }

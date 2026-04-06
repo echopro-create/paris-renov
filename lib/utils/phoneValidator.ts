@@ -82,7 +82,7 @@ export function normalizePhone(phone: string): string {
   }
 
   if (cleaned.startsWith('0033')) {
-    return '+' + cleaned;
+    return '+' + cleaned.slice(2);
   }
 
   if (cleaned.startsWith('0') && cleaned.length === 10) {
