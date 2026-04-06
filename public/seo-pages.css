@@ -1,0 +1,290 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 0;
+}
+
+.logo {
+  color: #f8fafc;
+  text-decoration: none;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.top-nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.top-nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.top-nav a:hover,
+.site-footer a:hover,
+.internal-link:hover strong {
+  color: #bd9b60;
+}
+
+.hero {
+  padding: 88px 0 72px;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f8fafc;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #bd9b60;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  line-height: 1.15;
+}
+
+h1 {
+  margin: 0;
+  max-width: 780px;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+h3 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+}
+
+.lead {
+  max-width: 800px;
+  margin: 20px 0 0;
+  color: #dbe4ee;
+  font-size: 1.08rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid #bd9b60;
+  background: #bd9b60;
+  color: #111827;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.button--ghost {
+  background: transparent;
+  color: #f8fafc;
+}
+
+.section {
+  padding: 64px 0;
+}
+
+.muted-section {
+  background: #eef2f7;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.stat-card,
+.section-block,
+.internal-link,
+.faq-item,
+.cta-box {
+  background: #ffffff;
+  border: 1px solid #dbe4ee;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+}
+
+.stat-card {
+  padding: 28px;
+}
+
+.stat-card strong {
+  display: block;
+  color: #bd9b60;
+  font-size: 2rem;
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.stat-card span {
+  color: #475569;
+}
+
+.article-layout {
+  display: grid;
+  gap: 22px;
+}
+
+.section-block {
+  padding: 28px;
+}
+
+.section-block p,
+.section-block li,
+.section-intro,
+.faq-item p,
+.site-footer p {
+  color: #475569;
+}
+
+.section-block ul {
+  margin: 18px 0 0;
+  padding-left: 20px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  padding: 20px 22px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq-item p {
+  margin: 14px 0 0;
+}
+
+.internal-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.internal-link {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.internal-link strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.internal-link span {
+  color: #64748b;
+}
+
+.cta-section {
+  padding-top: 0;
+}
+
+.cta-box {
+  padding: 36px;
+}
+
+.site-footer {
+  padding: 56px 0;
+  background: #0f172a;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 24px;
+}
+
+.site-footer h3,
+.site-footer a,
+.site-footer p {
+  color: #cbd5e1;
+}
+
+.site-footer a {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 900px) {
+  .site-header__inner,
+  .footer-grid,
+  .stats-grid,
+  .internal-links {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .site-header__inner {
+    justify-content: normal;
+  }
+
+  .top-nav {
+    display: none;
+  }
+}
