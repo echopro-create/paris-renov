@@ -139,7 +139,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800">
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-start gap-x-8 gap-y-4 border-t border-slate-200 dark:border-slate-800">
             <p className="text-xs text-slate-500">
               © {new Date().getFullYear()} D.A. BAT. {footer.rights}
             </p>
