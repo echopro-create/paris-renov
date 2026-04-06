@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 interface SkeletonLoaderProps {
     type: 'gallery' | 'testimonials' | 'contact' | 'beforeafter';
 }

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { content } from '../constants';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
 import { formatPhoneForDisplay } from '../lib/utils/phoneValidator';
 import { useContactForm } from '../lib/hooks/useContactForm';
 import { Turnstile } from '@marsidev/react-turnstile';

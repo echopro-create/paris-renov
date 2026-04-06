@@ -20,7 +20,7 @@ export function useContactForm() {
     const { contact } = content;
     const [phone, setPhone] = useState('');
 
-    const submitAction = async (prevState: FormState, formData: FormData): Promise<FormState> => {
+    const submitAction = async (_prevState: FormState, formData: FormData): Promise<FormState> => {
         const data = {
             name: formData.get('name') as string,
             email: formData.get('email') as string,

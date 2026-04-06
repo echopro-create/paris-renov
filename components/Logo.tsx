@@ -1,4 +1,3 @@
-import React from 'react';
 
 interface LogoProps {
     /** SVG icon size in px */

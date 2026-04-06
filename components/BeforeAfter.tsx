@@ -11,13 +11,12 @@ export default function BeforeAfter() {
   const containerRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
-  const [containerWidth, setContainerWidth] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const updateWidth = () => {
       if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
+        // Width tracked via ResizeObserver for potential future use
       }
     };
 

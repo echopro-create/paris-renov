@@ -8,10 +8,10 @@ export default function PWAUpdateToast() {
         needRefresh: [needRefresh, setNeedRefresh],
         updateServiceWorker,
     } = useRegisterSW({
-        onRegistered(r) {
+        onRegistered() {
             // SW registered — silent in production
         },
-        onRegisterError(error) {
+        onRegisterError() {
             // SW registration failed — silent in production
         },
     });

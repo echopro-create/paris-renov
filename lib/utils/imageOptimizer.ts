@@ -21,7 +21,7 @@ export function optimizeUnsplashUrl(url: string, options: ImageOptions = {}): st
     height,
     quality = 80,
     format = 'webp',
-    crop = 'center'
+    crop: _crop = 'center'
   } = options;
 
   // Check if it's already an Unsplash URL
