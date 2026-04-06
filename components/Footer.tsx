@@ -139,13 +139,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800">
             <p className="text-xs text-slate-500">
               © {new Date().getFullYear()} D.A. BAT. {footer.rights}
             </p>
             <p className="text-xs text-slate-500">
-              {footer.designedBy}
+              Сделано руками студии <a href="https://tehnobehno.site" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 font-medium transition-colors">Техно-Бэхно</a>
             </p>
           </div>
         </div>
