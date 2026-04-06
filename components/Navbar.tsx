@@ -51,7 +51,6 @@ export default function Navbar() {
     { label: nav.gallery, href: '#gallery', id: 'gallery' },
     { label: common.clientReviews, href: '#testimonials', id: 'testimonials' },
     { label: nav.process, href: '#process', id: 'process' },
-    { label: 'Pages SEO', href: '/entreprise-renovation-paris', id: 'seo' },
   ];
 
   const mobileNavLinks = [
@@ -89,18 +88,18 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`relative px-4 lg:px-2 xl:px-4 py-2 text-sm font-medium tracking-wide transition-colors uppercase whitespace-nowrap ${isScrolled
-                ? link.id !== 'seo' && activeSection === link.id
+                ? activeSection === link.id
                   ? 'text-gold-600 dark:text-gold-500'
                   : 'text-slate-700 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
-                : link.id !== 'seo' && activeSection === link.id
+                : activeSection === link.id
                   ? 'text-gold-300'
                   : 'text-white hover:text-gold-200'
                 }`}
-              aria-current={link.id !== 'seo' && activeSection === link.id ? 'page' : undefined}
+              aria-current={activeSection === link.id ? 'page' : undefined}
             >
               {link.label}
               {/* Active indicator */}
-              {link.id !== 'seo' && activeSection === link.id && (
+              {activeSection === link.id && (
                 <span className={`absolute -bottom-1 left-0 right-0 h-0.5 ${isScrolled ? 'bg-gold-600 dark:bg-gold-400' : 'bg-white'}`} />
               )}
             </a>

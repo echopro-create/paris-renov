@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/generate-seo-pages.mjs",
     "dev": "vite",
     "build": "vite build && vite build --ssr entry-server.tsx --outDir dist-server && node scripts/prerender.js",
     "build:client": "vite build",
