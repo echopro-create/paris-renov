@@ -105,8 +105,8 @@ export default function RenovationSalleDeBain() {
         <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="/assets/gallery/real/photo_9_2026-03-03_12-40-16.jpg"
-              alt="Rénovation salle de bain Paris - douche italienne carrelage grand format"
+              src="/images/hero-bg-apartment.webp"
+              alt="Rénovation salle de bain Paris - D.A. BAT"
               className="w-full h-full object-cover"
               loading="eager"
               fetchPriority="high"

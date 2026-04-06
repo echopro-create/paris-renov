@@ -110,8 +110,8 @@ export default function DevisRenovation() {
         <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="/assets/images/after_custom.webp"
-              alt="Appartement rénové à Paris - demandez votre devis gratuit"
+              src="/images/hero-bg-apartment.webp"
+              alt="Devis rénovation appartement Paris - D.A. BAT"
               className="w-full h-full object-cover"
               loading="eager"
               fetchPriority="high"

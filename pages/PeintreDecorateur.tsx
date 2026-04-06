@@ -105,8 +105,8 @@ export default function PeintreDecorateur() {
         <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="/assets/services/painting-service.webp"
-              alt="Peintre décorateur Paris - peinture intérieure appartement haussmannien"
+              src="/images/hero-bg-apartment.webp"
+              alt="Peintre décorateur Paris - D.A. BAT"
               className="w-full h-full object-cover"
               loading="eager"
               fetchPriority="high"

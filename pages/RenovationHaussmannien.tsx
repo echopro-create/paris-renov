@@ -111,8 +111,8 @@ export default function RenovationHaussmannien() {
         >
           <div className="absolute inset-0">
             <img
-              src="/assets/gallery/real/photo_45_2026-03-03_12-40-16.jpg"
-              alt="Appartement haussmannien rénové à Paris - parquet Point de Hongrie et moulures"
+              src="/images/hero-bg-apartment.webp"
+              alt="Appartement haussmannien rénové à Paris - D.A. BAT"
               className="w-full h-full object-cover"
               loading="eager"
               fetchPriority="high"
