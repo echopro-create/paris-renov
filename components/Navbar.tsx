@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { content } from '../constants';
@@ -68,10 +69,12 @@ export default function Navbar() {
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo - Clickable to scroll to top */}
-        <a href="#hero" className="flex items-center gap-3 group" onClick={(e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+        {/* Logo - Clickable to go home or scroll to top */}
+        <Link to="/" className="flex items-center gap-3 group" onClick={(e) => {
+          if (window.location.pathname === '/') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
         }}>
           <Logo
             iconSize={40}
@@ -79,7 +82,7 @@ export default function Navbar() {
             taglineClassName="hidden sm:block lg:hidden xl:block text-[9px] lg:text-[11px] uppercase tracking-[0.15em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
             variant={isScrolled ? 'dark' : 'light'}
           />
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center lg:gap-0.5 xl:gap-1">
@@ -172,7 +175,9 @@ export default function Navbar() {
           >
             {/* Fixed Header with Close Button */}
             <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-neutral-800 bg-white dark:bg-bg-primary">
-              <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">D.A. BAT</span>
+              <Link to="/" onClick={() => setIsOpen(false)} className="font-serif text-lg font-bold text-slate-900 dark:text-white">
+                D.A. BAT
+              </Link>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-ring"

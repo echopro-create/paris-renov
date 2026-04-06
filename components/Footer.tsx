@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { content } from '../constants';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Instagram, X, MapPin, Phone, Mail } from 'lucide-react';
 import Logo from './Logo';
 
@@ -55,14 +56,23 @@ export default function Footer() {
           <div className="grid md:grid-cols-5 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
             {/* Brand */}
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
+              <Link
+                to="/"
+                className="flex items-center gap-2 mb-4 group"
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
                 <Logo
                   iconSize={48}
                   nameClassName="font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none"
                   taglineClassName="text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2"
                   variant="dark"
                 />
-              </div>
+              </Link>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                 {footer.description}
               </p>
