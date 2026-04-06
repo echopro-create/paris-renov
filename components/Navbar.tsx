@@ -77,18 +77,18 @@ export default function Navbar() {
           <Logo
             iconSize={40}
             nameClassName={`font-serif text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-[0.2em] leading-none`}
-            taglineClassName="hidden sm:block text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
+            taglineClassName="hidden sm:block lg:hidden xl:block text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
             variant={isScrolled ? 'dark' : 'light'}
           />
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center lg:gap-0.5 xl:gap-1">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors uppercase ${isScrolled
+              className={`relative px-4 lg:px-2 xl:px-4 py-2 text-sm font-medium tracking-wide transition-colors uppercase whitespace-nowrap ${isScrolled
                 ? link.id !== 'seo' && activeSection === link.id
                   ? 'text-gold-600 dark:text-gold-500'
                   : 'text-slate-700 dark:text-slate-300 hover:text-gold-600 dark:hover:text-gold-400'
