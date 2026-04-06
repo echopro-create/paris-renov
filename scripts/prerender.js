@@ -1,10 +1,11 @@
 /**
- * Post-build prerender script.
- * 
- * 1. Imports the SSR-bundled entry-server module
- * 2. Calls render() to get the HTML string  
- * 3. Replaces <!--ssr-outlet--> in dist/index.html with the rendered content
- * 
+ * Post-build prerender script — Multi-route SSR.
+ *
+ * For each route:
+ * 1. Renders the route via entry-server.render(url)
+ * 2. Updates <title> and <meta description> in the HTML template
+ * 3. Writes dist/<route>/index.html
+ *
  * Usage: node scripts/prerender.js
  */
 
@@ -15,37 +16,115 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
+// Route → [title, metaDescription]
+const ROUTES_META = {
+  '/': [
+    'D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris',
+    'D.A. BAT — entreprise générale de bâtiment, tous corps d\'état à Paris. Rénovation d\'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, parquets. Devis gratuit sous 24h.',
+  ],
+  '/renovation-haussmannien-paris': [
+    'Rénovation Appartement Haussmannien Paris | D.A. BAT',
+    'Spécialiste de la rénovation d\'appartements haussmanniens à Paris. Restauration de parquets Point de Hongrie, moulures, plafonds à la française et boiseries. Devis gratuit 24h.',
+  ],
+  '/peintre-decorateur-paris': [
+    'Peintre Décorateur Paris — Peinture Intérieure Appartement | D.A. BAT',
+    'Peintre décorateur professionnel à Paris. Peinture intérieure appartement, enduits décoratifs, béton ciré, stucco. Finitions premium pour appartements parisiens. Devis gratuit.',
+  ],
+  '/renovation-salle-de-bain-paris': [
+    'Rénovation Salle de Bain Paris — Douche Italienne & Carrelage | D.A. BAT',
+    'Rénovation complète salle de bain à Paris. Pose douche italienne, carrelage grand format, plomberie, robinetterie haut de gamme. Prix et délais maîtrisés. Devis gratuit 24h.',
+  ],
+  '/pose-parquet-paris': [
+    'Pose Parquet Paris — Parquet Massif, Contrecollé & Point de Hongrie | D.A. BAT',
+    'Pose et rénovation de parquet à Paris. Parquet massif chêne, Point de Hongrie, contrecollé, stratifié. Ponçage vitrification parquet ancien. Devis gratuit sous 24h.',
+  ],
+  '/devis-renovation-paris': [
+    'Devis Rénovation Appartement Paris — Gratuit Sous 24h | D.A. BAT',
+    'Demandez votre devis rénovation appartement à Paris. Réponse garantie sous 24h. Prix rénovation au m², estimation travaux, conseil personnalisé gratuit. D.A. BAT — tous corps d\'état.',
+  ],
+};
+
 async function prerender() {
   const distPath = path.resolve(root, 'dist');
-  const htmlPath = path.resolve(distPath, 'index.html');
+  const htmlTemplatePath = path.resolve(distPath, 'index.html');
 
   // Read the built HTML template
-  let html = fs.readFileSync(htmlPath, 'utf-8');
+  const templateHtml = fs.readFileSync(htmlTemplatePath, 'utf-8');
 
-  // Import the SSR-built entry module (use file:// URL for Windows compatibility)
+  // Import the SSR-built entry module
   const ssrModulePath = path.resolve(root, 'dist-server', 'entry-server.js');
-  const { render } = await import(
-    pathToFileURL(ssrModulePath).href
-  );
+  const { render } = await import(pathToFileURL(ssrModulePath).href);
 
-  // Render the React app to string
-  const appHtml = render();
+  let successCount = 0;
 
-  // Replace the SSR outlet placeholder with rendered HTML
-  html = html.replace('<!--ssr-outlet-->', appHtml);
+  for (const [route, [title, description]] of Object.entries(ROUTES_META)) {
+    try {
+      // Render the React app for this route
+      const appHtml = render(route);
 
-  // Write the prerendered HTML back
-  fs.writeFileSync(htmlPath, html, 'utf-8');
+      // Start from the template
+      let html = templateHtml;
 
-  console.log('✅ Prerendered index.html successfully!');
-  console.log(`   HTML size: ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB`);
+      // Replace the SSR outlet
+      html = html.replace('<!--ssr-outlet-->', appHtml);
 
-  // Clean up the SSR build artifacts (non-fatal on Windows lock issues)
+      // Update <title>
+      html = html.replace(
+        /<title>[^<]*<\/title>/,
+        `<title>${title}</title>`
+      );
+
+      // Update meta description
+      html = html.replace(
+        /(<meta\s+name="description"\s+content=")[^"]*(")/,
+        `$1${description}$2`
+      );
+
+      // Update og:title
+      html = html.replace(
+        /(<meta\s+property="og:title"\s+content=")[^"]*(")/,
+        `$1${title}$2`
+      );
+
+      // Update og:description
+      html = html.replace(
+        /(<meta\s+property="og:description"\s+content=")[^"]*(")/,
+        `$1${description}$2`
+      );
+
+      // Update canonical
+      const canonicalUrl = `https://da-bat.com${route === '/' ? '/' : route}`;
+      html = html.replace(
+        /(<link\s+rel="canonical"\s+href=")[^"]*(")/,
+        `$1${canonicalUrl}$2`
+      );
+
+      // Determine output path
+      let outputPath;
+      if (route === '/') {
+        outputPath = path.resolve(distPath, 'index.html');
+      } else {
+        const routeDir = path.resolve(distPath, route.slice(1));
+        fs.mkdirSync(routeDir, { recursive: true });
+        outputPath = path.resolve(routeDir, 'index.html');
+      }
+
+      fs.writeFileSync(outputPath, html, 'utf-8');
+      console.log(`✅ Prerendered: ${route} → ${path.relative(root, outputPath)}`);
+      successCount++;
+    } catch (err) {
+      console.error(`❌ Failed to prerender ${route}:`, err);
+    }
+  }
+
+  console.log(`\n🎉 Prerendered ${successCount}/${Object.keys(ROUTES_META).length} routes successfully!`);
+
+  // Clean up the SSR build artifacts
   try {
     fs.rmSync(path.resolve(root, 'dist-server'), { recursive: true, force: true });
     console.log('🧹 Cleaned up dist-server/');
   } catch {
-    console.warn('⚠️  Could not clean dist-server/ (may be locked). You can delete it manually.');
+    console.warn('⚠️  Could not clean dist-server/ (may be locked). Delete manually.');
   }
 }
 

@@ -2,9 +2,12 @@ import '@fontsource-variable/inter';
 import '@fontsource-variable/playfair-display';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import { initSentry } from './lib/sentry';
+import { ThemeProvider } from './lib/contexts/ThemeContext';
+import ErrorBoundary from './components/ErrorBoundary';
 
 initSentry();
 
@@ -16,6 +19,12 @@ if (!rootElement) {
 ReactDOM.hydrateRoot(
   rootElement,
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );

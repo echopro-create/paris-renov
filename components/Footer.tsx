@@ -41,16 +41,11 @@ export default function Footer() {
   ];
 
   const seoLinks = [
-    { label: 'Entreprise de rénovation à Paris', href: '/entreprise-renovation-paris' },
-    { label: 'Rénovation d’appartement à Paris', href: '/renovation-appartement-paris' },
-    { label: 'Rénovation salle de bain à Paris', href: '/renovation-salle-de-bain-paris' },
-    { label: 'Rénovation cuisine à Paris', href: '/renovation-cuisine-paris' },
-    { label: 'Prix rénovation appartement Paris', href: '/prix-renovation-appartement-paris' },
-    { label: 'Rénovation haussmannien Paris', href: '/renovation-haussmannien-paris' },
-    { label: 'Pose de parquet à Paris', href: '/pose-parquet-paris' },
-    { label: 'Entreprise de peinture à Paris', href: '/peintre-paris' },
-    { label: 'Rénovation à Neuilly-sur-Seine', href: '/renovation-neuilly-sur-seine' },
-    { label: 'Rénovation à Boulogne-Billancourt', href: '/renovation-boulogne-billancourt' },
+    { label: 'Rénovation haussmannien', href: '/renovation-haussmannien-paris' },
+    { label: 'Peintre décorateur', href: '/peintre-decorateur-paris' },
+    { label: 'Rénovation salle de bain', href: '/renovation-salle-de-bain-paris' },
+    { label: 'Pose de parquet', href: '/pose-parquet-paris' },
+    { label: 'Contact & Devis', href: '/devis-renovation-paris' },
   ];
 
   return (
