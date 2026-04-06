@@ -102,7 +102,7 @@ export default function PeintreDecorateur() {
         <Navbar />
 
         {/* ── HERO ── */}
-        <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden">
+        <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <img
               src="/images/hero-bg-apartment.webp"
@@ -114,28 +114,28 @@ export default function PeintreDecorateur() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/60 to-slate-900/30" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full text-center flex flex-col items-center justify-center">
             <Breadcrumbs items={[{ label: 'Peintre Décorateur Paris' }]} />
 
-            <motion.div initial="hidden" animate="visible" variants={stagger}>
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center">
               <motion.div variants={fadeUp} className="mb-6">
                 <span className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full backdrop-blur-sm">
                   <Paintbrush size={13} /> PEINTURE & DÉCORATION
                 </span>
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 max-w-4xl">
+              <motion.h1 variants={fadeUp} className="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 max-w-4xl mx-auto leading-tight">
                 Peintre <span className="text-gold-400">Décorateur</span> à Paris —{' '}
                 Finitions d'Exception
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-lg md:text-xl text-slate-200 max-w-2xl mb-10 leading-relaxed">
+              <motion.p variants={fadeUp} className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
                 Peinture intérieure, enduits décoratifs, béton ciré, à la chaux —
                 nous habillons vos murs avec précision et sens du détail. Du T1 rénové
                 à l'appartement de standing, chaque couche est posée pour durer.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+              <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
                 <a
                   href="tel:0601997659"
                   className="inline-flex items-center gap-3 bg-gold-500 hover:bg-gold-400 text-slate-900 font-bold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-gold-500/30 hover:-translate-y-0.5"

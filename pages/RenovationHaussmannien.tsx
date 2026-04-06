@@ -106,7 +106,7 @@ export default function RenovationHaussmannien() {
 
         {/* ── HERO ── */}
         <section
-          className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden"
+          className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden"
           aria-label="Rénovation appartement haussmannien Paris"
         >
           <div className="absolute inset-0">
@@ -120,11 +120,11 @@ export default function RenovationHaussmannien() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/60 to-slate-900/30" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-32 w-full text-center flex flex-col items-center justify-center">
             <Breadcrumbs items={[{ label: 'Rénovation Appartement Haussmannien' }]} />
 
-            <motion.div initial="hidden" animate="visible" variants={stagger}>
-              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
+            <motion.div initial="hidden" animate="visible" variants={stagger} className="flex flex-col items-center">
+              <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 mb-6">
                 <span className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full backdrop-blur-sm">
                   <Building2 size={13} /> SPÉCIALISTE HAUSSMANNIEN
                 </span>
@@ -132,7 +132,7 @@ export default function RenovationHaussmannien() {
 
               <motion.h1
                 variants={fadeUp}
-                className="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 max-w-4xl"
+                className="font-serif text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 max-w-4xl mx-auto"
               >
                 Rénovation Appartement{' '}
                 <span className="text-gold-400">Haussmannien</span> à Paris
@@ -140,14 +140,14 @@ export default function RenovationHaussmannien() {
 
               <motion.p
                 variants={fadeUp}
-                className="text-lg md:text-xl text-slate-200 max-w-2xl mb-10 leading-relaxed"
+                className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed text-balance"
               >
                 Restauration experte des matériaux anciens : parquets Point de Hongrie,
                 moulures en staff, boiseries, plafonds à la française. Le charme de l'époque
                 préservé, le confort d'aujourd'hui garanti.
               </motion.p>
 
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+              <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
                 <a
                   href="tel:0601997659"
                   className="inline-flex items-center gap-3 bg-gold-500 hover:bg-gold-400 text-slate-900 font-bold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-gold-500/30 hover:-translate-y-0.5"
