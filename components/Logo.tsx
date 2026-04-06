@@ -16,8 +16,8 @@ interface LogoProps {
  */
 export default function Logo({
     iconSize = 48,
-    nameClassName = 'font-serif text-2xl lg:text-3xl font-extrabold tracking-widest leading-none',
-    taglineClassName = "text-[9px] uppercase tracking-[0.3em] text-gold-500 font-bold mt-2",
+    nameClassName = 'font-serif text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-[0.12em] leading-none',
+    taglineClassName = "hidden sm:block lg:hidden xl:block text-[9px] lg:text-[11px] uppercase tracking-[0.15em] text-gold-500 font-bold mt-1.5 whitespace-nowrap",
     variant = 'auto',
 }: LogoProps) {
     const textColorClass = variant === 'light'
@@ -27,7 +27,7 @@ export default function Logo({
             : 'text-slate-900 dark:text-white';
 
     return (
-        <div className="relative flex items-center gap-4">
+        <div className="relative flex items-center gap-3">
             <div className="flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
                 <svg
                     width={iconSize}
@@ -47,9 +47,9 @@ export default function Logo({
                     <path d="M5 30H35" stroke="currentColor" strokeWidth="1" strokeLinecap="round" className="opacity-40" />
                 </svg>
             </div>
-            <div className="flex flex-col border-l border-gold-500/30 pl-4 py-1">
-                <span className={`${nameClassName} ${textColorClass}`}>
-                    D.A. BAT
+            <div className="flex flex-col border-l border-gold-500/30 pl-3 py-1">
+                <span className={`${nameClassName} ${textColorClass} whitespace-nowrap`}>
+                    D.A.&thinsp;BAT
                 </span>
                 <span className={taglineClassName}>
                     Votre Projet, Notre Savoir-Faire

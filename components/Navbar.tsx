@@ -76,8 +76,8 @@ export default function Navbar() {
         }}>
           <Logo
             iconSize={40}
-            nameClassName={`font-serif text-xl sm:text-2xl lg:text-4xl font-extrabold tracking-[0.2em] leading-none`}
-            taglineClassName="hidden sm:block lg:hidden xl:block text-[9px] lg:text-[11px] uppercase tracking-[0.2em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
+            nameClassName={`font-serif text-lg sm:text-2xl lg:text-4xl font-extrabold tracking-[0.12em] leading-none`}
+            taglineClassName="hidden sm:block lg:hidden xl:block text-[9px] lg:text-[11px] uppercase tracking-[0.15em] text-gold-500 font-bold mt-1.5 whitespace-nowrap"
             variant={isScrolled ? 'dark' : 'light'}
           />
         </a>

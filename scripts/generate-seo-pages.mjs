@@ -1063,7 +1063,7 @@ function renderPage(page) {
 <body>
   <header class="site-header">
     <div class="container site-header__inner">
-      <a class="logo" href="/">D.A. BAT</a>
+      <a class="logo" href="/">D.A.&thinsp;BAT</a>
       <nav class="top-nav" aria-label="Navigation principale">
         <a href="/">Accueil</a>
         <a href="/#services">Services</a>
