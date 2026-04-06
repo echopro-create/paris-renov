@@ -23,7 +23,13 @@ export default class ErrorBoundary extends Component<Props, State> {
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        console.error('Uncaught error:', error, errorInfo);
+        // Log to error tracking service in production
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'exception', {
+                description: `${error.name}: ${error.message}`,
+                fatal: false,
+            });
+        }
     }
 
     private handleRetry = () => {

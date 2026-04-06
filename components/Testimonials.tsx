@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { content } from '../constants';
 import { Star, Quote } from 'lucide-react';
+import SkeletonImage from './SkeletonImage';
 
 export default function Testimonials() {
   const { testimonials } = content;
@@ -61,14 +62,14 @@ export default function Testimonials() {
               {/* Author */}
               <div className="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
                 {testimonial.avatar && (
-                  <img
+                  <SkeletonImage
                     src={testimonial.avatar}
                     alt={testimonial.name}
+                    containerClassName="w-10 h-10 rounded-full overflow-hidden ring-2 ring-gold-400/50 flex-shrink-0"
+                    className="w-full h-full object-cover"
                     width={40}
                     height={40}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-10 h-10 rounded-full object-cover ring-2 ring-gold-400/50"
+                    priority={false}
                   />
                 )}
                 <div>

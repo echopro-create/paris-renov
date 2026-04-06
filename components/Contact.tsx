@@ -5,20 +5,6 @@ import { formatPhoneForDisplay } from '../lib/utils/phoneValidator';
 import { useContactForm } from '../lib/hooks/useContactForm';
 import { Turnstile } from '@marsidev/react-turnstile';
 
-/**
- * EmailJS Configuration Guide:
- * 1. Create an account at https://www.emailjs.com/
- * 2. Add a new Email Service (e.g., Gmail) -> Get Service ID
- * 3. Create an Email Template -> Get Template ID
- *    - Configure template variables: {{from_name}}, {{from_email}}, {{phone}}, {{project_type}}, {{message}}
- * 4. Go to Account > API Keys -> Get Public Key
- * 5. Add these keys to your .env.local file:
- *    VITE_EMAILJS_SERVICE_ID=...
- *    VITE_EMAILJS_TEMPLATE_ID=...
- *    VITE_EMAILJS_PUBLIC_KEY=...
- *    VITE_TURNSTILE_SITE_KEY=...
- */
-
 export default function Contact() {
   const { contact } = content;
   const {
@@ -31,6 +17,7 @@ export default function Contact() {
   } = useContactForm();
 
   const { success, error, errors } = state;
+  const showCaptchaError = !!(state as any).captcha;
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-slate-50 dark:bg-bg-secondary">
@@ -138,6 +125,9 @@ export default function Contact() {
                   >
                     Réessayer
                   </button>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-4">
+                    Ou contactez-nous directement par téléphone : <a href={`tel:${contact.info.phone.replace(/\s/g, '')}`} className="text-gold-500 hover:text-gold-400">{contact.info.phone}</a>
+                  </p>
                 </div>
               ) : (
                 <form action={formAction} className="space-y-4">
@@ -227,6 +217,10 @@ export default function Contact() {
                   </div>
 
                   <div className="flex flex-col gap-4">
+                    {showCaptchaError && (
+                      <p role="alert" className="text-red-500 text-xs text-center">{(state as any).captcha}</p>
+                    )}
+
                     {/* Turnstile Widget */}
                     {import.meta.env.VITE_TURNSTILE_SITE_KEY && (
                       <div className="flex justify-center sm:justify-start">

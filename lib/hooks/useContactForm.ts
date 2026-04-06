@@ -7,6 +7,7 @@ interface FormState {
     error: boolean;
     errors: Record<string, string>;
     message?: string;
+    captcha?: string;
 }
 
 const initialState: FormState = {
@@ -45,7 +46,7 @@ export function useContactForm() {
 
         // Turnstile check
         if (import.meta.env.VITE_TURNSTILE_SITE_KEY && !data.token) {
-            errors.phone = 'Veuillez compléter la vérification de sécurité';
+            errors.captcha = 'Veuillez compléter la vérification de sécurité';
         }
 
         if (Object.keys(errors).length > 0) {

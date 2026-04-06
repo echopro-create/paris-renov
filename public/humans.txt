@@ -1,7 +1,7 @@
 /* TEAM */
   Designer: Illia
-  Developer: Roo (AI Assistant)
-  Site: https://atelier-alexei.fr
+  Developer: D.A. BAT Development Team
+  Site: https://da-bat.com
   Location: Paris, France
 
 /* THANKS */

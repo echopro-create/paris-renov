@@ -1,20 +1,85 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# D.A. BAT — Site Vitrine
 
-# Run and deploy your AI Studio app
+> Entreprise générale de bâtiment, tous corps d'état à Paris.
 
-This contains everything you need to run your app locally.
+**Site :** https://da-bat.com
 
-View your app in AI Studio: https://ai.studio/apps/drive/1KKrtDmQw33BPjga1jCWKBf_2bVo594nr
+## Technologies
 
-## Run Locally
+- **Framework :** React 19 + TypeScript
+- **Build :** Vite 6
+- **Styling :** Tailwind CSS v4
+- **Animations :** Framer Motion
+- **PWA :** vite-plugin-pwa
+- **SSR :** Prerendering personnalisé
+- **Déploiement :** Vercel
+- **Email :** Resend
+- **CAPTCHA :** Cloudflare Turnstile
 
-**Prerequisites:**  Node.js
+## Démarrage
 
+### Prérequis
 
-1. Install dependencies:
-   `npm install`
-2. Set the `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in [.env.local](.env.local) to your Supabase credentials
-3. Run the app:
-   `npm run dev`
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+# 1. Installer les dépendances
+npm install
+
+# 2. Configurer les variables d'environnement
+cp .env.example .env.local
+# Éditez .env.local avec vos clés API
+
+# 3. Lancer en développement
+npm run dev
+```
+
+### Build
+
+```bash
+# Build complet avec SSR prerendering
+npm run build
+
+# Preview du build de production
+npm run preview
+```
+
+## Variables d'environnement
+
+| Variable | Description | Requis |
+|---|---|---|
+| `VITE_GA_ID` | Google Analytics ID | Non |
+| `RESEND_API_KEY` | Clé API Resend (emails) | Oui |
+| `VITE_TURNSTILE_SITE_KEY` | Cloudflare Turnstile site key | Non |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret key | Non |
+
+## Structure
+
+```
+├── api/              # API routes Vercel (contact form)
+├── components/       # Composants React
+├── lib/
+│   ├── contexts/     # React contexts (Theme)
+│   ├── hooks/        # Custom React hooks
+│   └── utils/        # Utilitaires
+├── public/           # Assets statiques
+├── scripts/          # Scripts de build (prerender, optimisation)
+├── constants.ts      # Contenu du site
+├── types.ts          # Types TypeScript
+└── vite.config.ts    # Configuration Vite
+```
+
+## Fonctionnalités
+
+- ✅ SSR Prerendering pour le SEO
+- ✅ PWA avec service worker
+- ✅ Dark mode automatique
+- ✅ Formulaire de contact avec validation
+- ✅ Cloudflare Turnstile (anti-spam)
+- ✅ Lazy loading & code splitting
+- ✅ Accessibilité WCAG 2.2
+- ✅ Données structurées JSON-LD
+- ✅ Optimisation des images (WebP/AVIF)

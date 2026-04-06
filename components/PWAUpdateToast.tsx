@@ -9,10 +9,10 @@ export default function PWAUpdateToast() {
         updateServiceWorker,
     } = useRegisterSW({
         onRegistered(r) {
-            console.log('SW Registered: ' + r);
+            // SW registered — silent in production
         },
         onRegisterError(error) {
-            console.log('SW registration error', error);
+            // SW registration failed — silent in production
         },
     });
 

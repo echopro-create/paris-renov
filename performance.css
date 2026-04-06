@@ -19,33 +19,11 @@ html {
     }
 }
 
-/* Will-change для анимируемых элементов */
-.group:hover img,
-[class*="hover:scale"],
-[class*="group-hover:scale"] {
-    will-change: transform;
-}
+/* Content visibility removed — causes layout shifts (CLS) */
 
-[class*="hover:opacity"],
-[class*="group-hover:opacity"] {
-    will-change: opacity;
-}
-
-/* Content visibility удалено, так как оно вызывает скачки макета (CLS) */
-
-/* Оптимизация для мобильных устройств */
+/* Reduce backdrop-blur intensity on mobile for better performance */
 @media (max-width: 768px) {
-
-    /* Reduce blur complexity на слабых устройствах */
     [class*="backdrop-blur"] {
         backdrop-filter: blur(8px) !important;
     }
-}
-
-/* GPU acceleration для transform элементов */
-[class*="translate"],
-[class*="scale"],
-[class*="rotate"] {
-    transform: translateZ(0);
-    backface-visibility: hidden;
 }
