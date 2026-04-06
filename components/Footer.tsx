@@ -40,11 +40,20 @@ export default function Footer() {
     'Parquets & Sols',
   ];
 
+  const seoLinks = [
+    { label: 'Entreprise de rénovation à Paris', href: '/entreprise-renovation-paris' },
+    { label: 'Rénovation d’appartement à Paris', href: '/renovation-appartement-paris' },
+    { label: 'Rénovation salle de bain à Paris', href: '/renovation-salle-de-bain-paris' },
+    { label: 'Rénovation cuisine à Paris', href: '/renovation-cuisine-paris' },
+    { label: 'Prix rénovation appartement Paris', href: '/prix-renovation-appartement-paris' },
+    { label: 'Rénovation haussmannien Paris', href: '/renovation-haussmannien-paris' },
+  ];
+
   return (
     <>
       <footer className="bg-slate-100 dark:bg-bg-primary text-slate-900 dark:text-white pt-16 pb-8 border-t border-gold-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-4 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
+          <div className="grid md:grid-cols-5 gap-12 pb-12 border-b border-slate-200 dark:border-slate-800">
             {/* Brand */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
@@ -137,6 +146,19 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
+
+            <div>
+              <div className="text-sm font-semibold uppercase tracking-wider mb-4">Guides travaux</div>
+              <ul className="space-y-3">
+                {seoLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="text-sm text-slate-500 dark:text-slate-400 hover:text-gold-500 dark:hover:text-gold-400 transition-colors">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-start gap-x-8 gap-y-4 border-t border-slate-200 dark:border-slate-800">
@@ -144,7 +166,7 @@ export default function Footer() {
               © {new Date().getFullYear()} D.A. BAT. {footer.rights}
             </p>
             <p className="text-xs text-slate-500">
-              Fait avec soin par <a href="https://tehnobehno.site" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 font-medium transition-colors">Техно-Бэхно</a>
+              Сделано руками студии <a href="https://tehnobehno.site" target="_blank" rel="noopener noreferrer" className="text-gold-500 hover:text-gold-400 font-medium transition-colors">Техно-Бэхно</a>
             </p>
           </div>
         </div>
