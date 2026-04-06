@@ -276,6 +276,7 @@ export default function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <img
+                key={lightboxIdx}
                 src={filteredItems[lightboxIdx].src}
                 alt={filteredItems[lightboxIdx].alt}
                 className="max-w-full max-h-[80vh] rounded-lg object-contain md:cursor-zoom-in block mx-auto"
@@ -285,7 +286,8 @@ export default function Gallery() {
                     setZoomLevel(prev => prev === 1 ? 2 : 1);
                   }
                 }}
-                loading="eager"
+                loading="lazy"
+                fetchPriority="high"
               />
               {/* Zoom hint - hidden on touch devices */}
               {zoomLevel === 1 && (

@@ -12,6 +12,7 @@ interface SkeletonImageProps {
     priority?: boolean;
     optimize?: boolean;
     sizes?: string;
+    pictureSources?: { srcSet: string; type: string; sizes?: string }[];
 }
 
 const SkeletonImage: React.FC<SkeletonImageProps> = ({
@@ -24,7 +25,8 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
     quality = 80,
     priority = false,
     optimize = true,
-    sizes
+    sizes,
+    pictureSources
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -36,6 +38,22 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
         ? getSrcSet(optimizedSrc.split('?')[1] || '')
         : undefined;
 
+    const imgElement = (
+        <img
+            src={optimizedSrc}
+            srcSet={srcSet}
+            sizes={sizes || (width <= 400 ? '(max-width: 640px) 100vw, 400px' : '(max-width: 1024px) 50vw, 33vw')}
+            alt={alt}
+            width={width}
+            height={height}
+            onLoad={() => setIsLoaded(true)}
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
+            decoding="async"
+            className={`${className} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+    );
+
     return (
         <div className={`relative overflow-hidden bg-gray-200 dark:bg-slate-800 ${containerClassName}`}>
             {/* Shimmer Effect */}
@@ -45,19 +63,21 @@ const SkeletonImage: React.FC<SkeletonImageProps> = ({
                         style={{ backgroundSize: '1000px 100%', animationDuration: '2s', animationIterationCount: 'infinite' }} />
                 </div>
             )}
-            <img
-                src={optimizedSrc}
-                srcSet={srcSet}
-                sizes={sizes || (width <= 400 ? '(max-width: 640px) 100vw, 400px' : '(max-width: 1024px) 50vw, 33vw')}
-                alt={alt}
-                width={width}
-                height={height}
-                onLoad={() => setIsLoaded(true)}
-                loading={priority ? 'eager' : 'lazy'}
-                fetchPriority={priority ? 'high' : 'auto'}
-                decoding="async"
-                className={`${className} transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-            />
+            {pictureSources && pictureSources.length > 0 ? (
+                <picture>
+                    {pictureSources.map((source, idx) => (
+                        <source
+                            key={idx}
+                            srcSet={source.srcSet}
+                            type={source.type}
+                            sizes={source.sizes || sizes || '(max-width: 1024px) 50vw, 33vw'}
+                        />
+                    ))}
+                    {imgElement}
+                </picture>
+            ) : (
+                imgElement
+            )}
         </div>
     );
 };
