@@ -857,11 +857,13 @@ function escapeHtml(value) {
 
 function fr(value) {
   return value
+    .replaceAll('d ensemble', 'd’ensemble')
+    .replaceAll('d etat', 'd’état')
+    .replaceAll('d experience', 'd’expérience')
     .replaceAll('Renovation', 'Rénovation')
     .replaceAll('renovation', 'rénovation')
     .replaceAll('generale', 'générale')
     .replaceAll('Generale', 'Générale')
-    .replaceAll('etat', 'état')
     .replaceAll('Etats', 'États')
     .replaceAll(' a Paris', ' à Paris')
     .replaceAll(' a Neuilly-sur-Seine', ' à Neuilly-sur-Seine')
@@ -919,9 +921,6 @@ function fr(value) {
     .replaceAll('coordonne', 'coordonne')
     .replaceAll('coordonnee', 'coordonnée')
     .replaceAll('coordonnees', 'coordonnées')
-    .replaceAll('d ensemble', 'd’ensemble')
-    .replaceAll('d etat', 'd’état')
-    .replaceAll('d experience', 'd’expérience')
     .replaceAll('premiere', 'première')
     .replaceAll('interlocuteur unique', 'interlocuteur unique')
     .replaceAll('tres', 'très')
@@ -1075,6 +1074,13 @@ function renderPage(page) {
     </div>
   </header>
   <main>
+    <div class="breadcrumb-container container">
+      <nav class="breadcrumb-nav" aria-label="Fil d'ariane">
+        <a href="/">Accueil</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">${escapeHtml(fr(page.h1))}</span>
+      </nav>
+    </div>
     <section class="hero">
       <div class="container">
         <p class="eyebrow">${escapeHtml(fr(page.keyword))}</p>

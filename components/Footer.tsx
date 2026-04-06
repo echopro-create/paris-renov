@@ -47,6 +47,10 @@ export default function Footer() {
     { label: 'Rénovation cuisine à Paris', href: '/renovation-cuisine-paris' },
     { label: 'Prix rénovation appartement Paris', href: '/prix-renovation-appartement-paris' },
     { label: 'Rénovation haussmannien Paris', href: '/renovation-haussmannien-paris' },
+    { label: 'Pose de parquet à Paris', href: '/pose-parquet-paris' },
+    { label: 'Entreprise de peinture à Paris', href: '/peintre-paris' },
+    { label: 'Rénovation à Neuilly-sur-Seine', href: '/renovation-neuilly-sur-seine' },
+    { label: 'Rénovation à Boulogne-Billancourt', href: '/renovation-boulogne-billancourt' },
   ];
 
   return (
