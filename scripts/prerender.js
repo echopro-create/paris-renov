@@ -44,6 +44,30 @@ const ROUTES_META = {
   ],
 };
 
+export function getCanonicalUrl(route) {
+  return `https://da-bat.com${route === '/' ? '/' : route}`;
+}
+
+export function applyRouteSeo(html, { route, title, description }) {
+  const canonicalUrl = getCanonicalUrl(route);
+  const replacements = [
+    [/<title>[^<]*<\/title>/, `<title>${title}</title>`],
+    [/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${description}$2`],
+    [/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${title}$2`],
+    [/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${description}$2`],
+    [/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${canonicalUrl}$2`],
+    [/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${canonicalUrl}$2`],
+    [/(<meta\s+property="twitter:url"\s+content=")[^"]*(")/, `$1${canonicalUrl}$2`],
+    [/(<meta\s+property="twitter:title"\s+content=")[^"]*(")/, `$1${title}$2`],
+    [/(<meta\s+property="twitter:description"\s+content=")[^"]*(")/, `$1${description}$2`],
+  ];
+
+  return replacements.reduce(
+    (currentHtml, [pattern, replacement]) => currentHtml.replace(pattern, replacement),
+    html
+  );
+}
+
 async function prerender() {
   const distPath = path.resolve(root, 'dist');
   const htmlTemplatePath = path.resolve(distPath, 'index.html');
@@ -67,37 +91,7 @@ async function prerender() {
 
       // Replace the SSR outlet
       html = html.replace('<!--ssr-outlet-->', appHtml);
-
-      // Update <title>
-      html = html.replace(
-        /<title>[^<]*<\/title>/,
-        `<title>${title}</title>`
-      );
-
-      // Update meta description
-      html = html.replace(
-        /(<meta\s+name="description"\s+content=")[^"]*(")/,
-        `$1${description}$2`
-      );
-
-      // Update og:title
-      html = html.replace(
-        /(<meta\s+property="og:title"\s+content=")[^"]*(")/,
-        `$1${title}$2`
-      );
-
-      // Update og:description
-      html = html.replace(
-        /(<meta\s+property="og:description"\s+content=")[^"]*(")/,
-        `$1${description}$2`
-      );
-
-      // Update canonical
-      const canonicalUrl = `https://da-bat.com${route === '/' ? '/' : route}`;
-      html = html.replace(
-        /(<link\s+rel="canonical"\s+href=")[^"]*(")/,
-        `$1${canonicalUrl}$2`
-      );
+      html = applyRouteSeo(html, { route, title, description });
 
       // Determine output path
       let outputPath;
@@ -128,7 +122,13 @@ async function prerender() {
   }
 }
 
-prerender().catch((err) => {
-  console.error('❌ Prerender failed:', err);
-  process.exit(1);
-});
+const isDirectRun = process.argv[1]
+  ? pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url
+  : false;
+
+if (isDirectRun) {
+  prerender().catch((err) => {
+    console.error('❌ Prerender failed:', err);
+    process.exit(1);
+  });
+}
