@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr entry-server.tsx --outDir dist-server && node scripts/prerender.js",
     "build:client": "vite build",
+    "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
