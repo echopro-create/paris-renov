@@ -42,6 +42,12 @@ export default function Footer() {
   ];
 
   const seoLinks = [
+    { label: "Rénovation appartement", href: '/renovation-appartement-paris' },
+    { label: 'Rénovation cuisine', href: '/renovation-cuisine-paris' },
+    { label: 'Plomberie & électricité', href: '/plomberie-electricite-paris' },
+    { label: 'Maçonnerie & cloisons', href: '/maconnerie-cloisons-platrerie-paris' },
+    { label: 'Appartement ancien', href: '/renovation-appartement-ancien-paris' },
+    { label: 'Rénovation studio', href: '/renovation-studio-paris' },
     { label: 'Rénovation haussmannien', href: '/renovation-haussmannien-paris' },
     { label: 'Peintre décorateur', href: '/peintre-decorateur-paris' },
     { label: 'Rénovation salle de bain', href: '/renovation-salle-de-bain-paris' },

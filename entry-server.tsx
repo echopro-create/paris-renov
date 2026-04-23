@@ -11,10 +11,46 @@ import PeintreDecorateur from './pages/PeintreDecorateur';
 import RenovationSalleDeBain from './pages/RenovationSalleDeBain';
 import PoseParquet from './pages/PoseParquet';
 import DevisRenovation from './pages/DevisRenovation';
+import RenovationAppartement from './pages/RenovationAppartement';
+import RenovationCuisine from './pages/RenovationCuisine';
+import PlomberieElectricite from './pages/PlomberieElectricite';
+import MaconnerieCloisonsPlatrerie from './pages/MaconnerieCloisonsPlatrerie';
+import RenovationAppartementAncien from './pages/RenovationAppartementAncien';
+import RenovationStudio from './pages/RenovationStudio';
 
 // Map of static routes for SSR rendering
 const PAGE_MAP: Record<string, React.ReactElement> = {
   '/': <App />,
+  '/renovation-appartement-paris': (
+    <ThemeProvider>
+      <RenovationAppartement />
+    </ThemeProvider>
+  ),
+  '/renovation-cuisine-paris': (
+    <ThemeProvider>
+      <RenovationCuisine />
+    </ThemeProvider>
+  ),
+  '/plomberie-electricite-paris': (
+    <ThemeProvider>
+      <PlomberieElectricite />
+    </ThemeProvider>
+  ),
+  '/maconnerie-cloisons-platrerie-paris': (
+    <ThemeProvider>
+      <MaconnerieCloisonsPlatrerie />
+    </ThemeProvider>
+  ),
+  '/renovation-appartement-ancien-paris': (
+    <ThemeProvider>
+      <RenovationAppartementAncien />
+    </ThemeProvider>
+  ),
+  '/renovation-studio-paris': (
+    <ThemeProvider>
+      <RenovationStudio />
+    </ThemeProvider>
+  ),
   '/renovation-haussmannien-paris': (
     <ThemeProvider>
       <RenovationHaussmannien />

@@ -25,6 +25,12 @@ const PeintreDecorateur = React.lazy(() => import('./pages/PeintreDecorateur'));
 const RenovationSalleDeBain = React.lazy(() => import('./pages/RenovationSalleDeBain'));
 const PoseParquet = React.lazy(() => import('./pages/PoseParquet'));
 const DevisRenovation = React.lazy(() => import('./pages/DevisRenovation'));
+const RenovationAppartement = React.lazy(() => import('./pages/RenovationAppartement'));
+const RenovationCuisine = React.lazy(() => import('./pages/RenovationCuisine'));
+const PlomberieElectricite = React.lazy(() => import('./pages/PlomberieElectricite'));
+const MaconnerieCloisonsPlatrerie = React.lazy(() => import('./pages/MaconnerieCloisonsPlatrerie'));
+const RenovationAppartementAncien = React.lazy(() => import('./pages/RenovationAppartementAncien'));
+const RenovationStudio = React.lazy(() => import('./pages/RenovationStudio'));
 
 // Main page (homepage) — extracted as a component
 const HomePage: React.FC = () => {
@@ -83,6 +89,12 @@ const App: React.FC = () => {
     <React.Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center"><div className="w-8 h-8 border-4 border-gold-500 border-t-transparent rounded-full animate-spin" /></div>}>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/renovation-appartement-paris" element={<RenovationAppartement />} />
+        <Route path="/renovation-cuisine-paris" element={<RenovationCuisine />} />
+        <Route path="/plomberie-electricite-paris" element={<PlomberieElectricite />} />
+        <Route path="/maconnerie-cloisons-platrerie-paris" element={<MaconnerieCloisonsPlatrerie />} />
+        <Route path="/renovation-appartement-ancien-paris" element={<RenovationAppartementAncien />} />
+        <Route path="/renovation-studio-paris" element={<RenovationStudio />} />
         <Route path="/renovation-haussmannien-paris" element={<RenovationHaussmannien />} />
         <Route path="/peintre-decorateur-paris" element={<PeintreDecorateur />} />
         <Route path="/renovation-salle-de-bain-paris" element={<RenovationSalleDeBain />} />

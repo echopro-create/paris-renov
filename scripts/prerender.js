@@ -22,6 +22,30 @@ const ROUTES_META = {
     'D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris',
     'D.A. BAT — entreprise générale de bâtiment, tous corps d\'état à Paris. Rénovation d\'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, parquets. Devis gratuit sous 24h.',
   ],
+  '/renovation-appartement-paris': [
+    'Rénovation Appartement Paris | Entreprise Tous Corps d\'État | D.A. BAT',
+    'Rénovation d\'appartement à Paris par une entreprise tous corps d\'état. Redistribution, plomberie, électricité, peinture, sols et finitions premium. Devis gratuit sous 24h.',
+  ],
+  '/renovation-cuisine-paris': [
+    'Rénovation Cuisine Paris | Cuisine Ouverte, Pose & Réseaux | D.A. BAT',
+    'Rénovation de cuisine à Paris : dépose, implantation, plomberie, électricité, crédence, sol et finitions. Cuisine ouverte ou fermée, devis gratuit sous 24h.',
+  ],
+  '/plomberie-electricite-paris': [
+    'Plomberie Électricité Paris | Mise aux Normes & Réseaux | D.A. BAT',
+    'Plomberie et électricité en rénovation à Paris. Mise aux normes, tableau électrique, circuits, alimentation, évacuation, appareils sanitaires et coordination tous corps d\'état.',
+  ],
+  '/maconnerie-cloisons-platrerie-paris': [
+    'Maçonnerie Cloisons Plâtrerie Paris | Redistribution Intérieure | D.A. BAT',
+    'Maçonnerie intérieure, cloisons et plâtrerie à Paris. Redistribution des volumes, doublages, faux plafonds, reprises de supports et préparation avant finitions.',
+  ],
+  '/renovation-appartement-ancien-paris': [
+    'Rénovation Appartement Ancien Paris | Bâti Ancien & Finitions | D.A. BAT',
+    'Rénovation d\'appartement ancien à Paris. Reprise des réseaux, murs, plafonds, sols et finitions avec respect du bâti ancien. Devis détaillé sous 24h.',
+  ],
+  '/renovation-studio-paris': [
+    'Rénovation Studio Paris | Optimisation Petite Surface | D.A. BAT',
+    'Rénovation de studio à Paris. Optimisation de petite surface, cuisine compacte, salle d\'eau, rangements, réseaux et finitions pour résidence ou investissement locatif.',
+  ],
   '/renovation-haussmannien-paris': [
     'Rénovation Appartement Haussmannien Paris | D.A. BAT',
     'Spécialiste de la rénovation d\'appartements haussmanniens à Paris. Restauration de parquets Point de Hongrie, moulures, plafonds à la française et boiseries. Devis gratuit 24h.',
