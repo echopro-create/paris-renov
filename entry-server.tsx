@@ -17,6 +17,12 @@ import PlomberieElectricite from './pages/PlomberieElectricite';
 import MaconnerieCloisonsPlatrerie from './pages/MaconnerieCloisonsPlatrerie';
 import RenovationAppartementAncien from './pages/RenovationAppartementAncien';
 import RenovationStudio from './pages/RenovationStudio';
+import PrixRenovationAppartementParis from './pages/PrixRenovationAppartementParis';
+import DelaiRenovationAppartementParis from './pages/DelaiRenovationAppartementParis';
+import RenovationAppartementAvantApres from './pages/RenovationAppartementAvantApres';
+import RenovationPetiteSurfaceParis from './pages/RenovationPetiteSurfaceParis';
+import RenovationAppartementHautDeGammeParis from './pages/RenovationAppartementHautDeGammeParis';
+import RenovationParisCopropriete from './pages/RenovationParisCopropriete';
 
 // Map of static routes for SSR rendering
 const PAGE_MAP: Record<string, React.ReactElement> = {
@@ -74,6 +80,36 @@ const PAGE_MAP: Record<string, React.ReactElement> = {
   '/devis-renovation-paris': (
     <ThemeProvider>
       <DevisRenovation />
+    </ThemeProvider>
+  ),
+  '/prix-renovation-appartement-paris': (
+    <ThemeProvider>
+      <PrixRenovationAppartementParis />
+    </ThemeProvider>
+  ),
+  '/delai-renovation-appartement-paris': (
+    <ThemeProvider>
+      <DelaiRenovationAppartementParis />
+    </ThemeProvider>
+  ),
+  '/renovation-appartement-paris-avant-apres': (
+    <ThemeProvider>
+      <RenovationAppartementAvantApres />
+    </ThemeProvider>
+  ),
+  '/renovation-petite-surface-paris': (
+    <ThemeProvider>
+      <RenovationPetiteSurfaceParis />
+    </ThemeProvider>
+  ),
+  '/renovation-appartement-haut-de-gamme-paris': (
+    <ThemeProvider>
+      <RenovationAppartementHautDeGammeParis />
+    </ThemeProvider>
+  ),
+  '/renovation-paris-questions-copropriete': (
+    <ThemeProvider>
+      <RenovationParisCopropriete />
     </ThemeProvider>
   ),
 };

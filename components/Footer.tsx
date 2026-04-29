@@ -52,6 +52,12 @@ export default function Footer() {
     { label: 'Peintre décorateur', href: '/peintre-decorateur-paris' },
     { label: 'Rénovation salle de bain', href: '/renovation-salle-de-bain-paris' },
     { label: 'Pose de parquet', href: '/pose-parquet-paris' },
+    { label: 'Prix rénovation Paris', href: '/prix-renovation-appartement-paris' },
+    { label: 'Délais rénovation', href: '/delai-renovation-appartement-paris' },
+    { label: 'Avant / Après', href: '/renovation-appartement-paris-avant-apres' },
+    { label: 'Petite surface', href: '/renovation-petite-surface-paris' },
+    { label: 'Haut de gamme', href: '/renovation-appartement-haut-de-gamme-paris' },
+    { label: 'Copropriété', href: '/renovation-paris-questions-copropriete' },
     { label: 'Contact & Devis', href: '/devis-renovation-paris' },
   ];
 

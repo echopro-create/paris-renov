@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { seoPages } from './seoPageConfigs';
+import { seoArticles } from './seoArticleConfigs';
 
 describe('seoPageConfigs', () => {
   it('uses unique slugs and canonical URLs for every SEO page', () => {
@@ -16,6 +17,19 @@ describe('seoPageConfigs', () => {
       expect(page.relatedLinks.length).toBeGreaterThanOrEqual(4);
       expect(page.expertiseCards.length).toBe(3);
       expect(page.galleryItems.length).toBe(4);
+    }
+  });
+
+  it('uses optional guide links only for known article routes', () => {
+    const articleSlugs = new Set(seoArticles.map((article) => article.slug));
+
+    for (const page of seoPages) {
+      if (!page.guideLinks) continue;
+
+      expect(page.guideLinks.length).toBeGreaterThanOrEqual(4);
+      for (const link of page.guideLinks) {
+        expect(articleSlugs.has(link.to)).toBe(true);
+      }
     }
   });
 });

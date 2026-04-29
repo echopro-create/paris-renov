@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyRouteSeo, getCanonicalUrl } from './prerender.js';
+import { ROUTES_META, applyRouteSeo, getCanonicalUrl } from './prerender.js';
 
 const TEMPLATE = `
   <title>Home</title>
@@ -45,5 +45,23 @@ describe('prerender SEO replacements', () => {
     // Assert
     expect(html).toContain('<link rel="canonical" href="https://da-bat.com/" />');
     expect(getCanonicalUrl(route)).toBe('https://da-bat.com/');
+  });
+
+  it('includes every commercial article route in prerender metadata', () => {
+    // Arrange
+    const articleRoutes: Array<keyof typeof ROUTES_META> = [
+      '/prix-renovation-appartement-paris',
+      '/delai-renovation-appartement-paris',
+      '/renovation-appartement-paris-avant-apres',
+      '/renovation-petite-surface-paris',
+      '/renovation-appartement-haut-de-gamme-paris',
+      '/renovation-paris-questions-copropriete',
+    ];
+
+    // Act / Assert
+    for (const route of articleRoutes) {
+      expect(ROUTES_META[route]).toBeDefined();
+      expect(ROUTES_META[route][0]).toContain('D.A. BAT');
+    }
   });
 });

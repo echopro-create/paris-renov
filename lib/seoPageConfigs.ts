@@ -54,6 +54,8 @@ export interface SeoPageConfig {
   pricingItems: SeoPriceItem[];
   faqTitle: string;
   faq: SeoFaqItem[];
+  guideLinksTitle?: string;
+  guideLinks?: SeoRelatedLink[];
   relatedTitle: string;
   relatedLinks: SeoRelatedLink[];
 }
@@ -189,6 +191,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         q: "Intervenez-vous dans les coproprietes parisiennes avec contraintes ?",
         a: "Oui. Nous integrons les horaires, acces, evacuations, protection des parties communes et validations necessaires pour que le chantier reste compatible avec les exigences de l'immeuble.",
       },
+    ],
+    guideLinksTitle: 'Guides pour préparer votre rénovation',
+    guideLinks: [
+      { to: '/prix-renovation-appartement-paris', label: 'Prix rénovation', desc: 'Cadrer le budget au m² avant la visite.' },
+      { to: '/delai-renovation-appartement-paris', label: 'Délais travaux', desc: 'Comprendre les étapes d’un planning réaliste.' },
+      { to: '/renovation-appartement-paris-avant-apres', label: 'Avant/après', desc: 'Lire les transformations au-delà des photos.' },
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Anticiper accès, bruit, gravats et règles d’immeuble.' },
     ],
     relatedTitle: 'Services complementaires',
     relatedLinks: [
@@ -326,6 +335,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         a: "Nous recommandons des surfaces faciles d'entretien et resistantes a l'usage : carrelage, peintures lessivables, credences adaptees a la chaleur et plans de travail coherents avec votre budget et vos habitudes.",
       },
     ],
+    guideLinksTitle: 'Guides utiles avant de rénover une cuisine',
+    guideLinks: [
+      { to: '/prix-renovation-appartement-paris', label: 'Budget global', desc: 'Relier cuisine, réseaux et niveau de finition.' },
+      { to: '/delai-renovation-appartement-paris', label: 'Planning', desc: 'Éviter les blocages de commande et de pose.' },
+      { to: '/renovation-petite-surface-paris', label: 'Petite surface', desc: 'Optimiser une cuisine compacte dans un studio.' },
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Préparer livraisons, bruit et évacuation.' },
+    ],
     relatedTitle: 'Pages liees',
     relatedLinks: [
       { to: '/renovation-appartement-paris', label: 'Renovation appartement', desc: "Quand la cuisine s'inscrit dans un chantier global de redistribution." },
@@ -461,6 +477,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         q: "Quand faut-il traiter plomberie et electricite dans le chantier ?",
         a: "Avant les fermetures de cloisons, la pose de carrelage, la cuisine et les finitions. C'est pourquoi nous integrons toujours ces lots au calendrier general du chantier.",
       },
+    ],
+    guideLinksTitle: 'Guides liés aux réseaux techniques',
+    guideLinks: [
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Vérifier les contraintes d’immeuble avant déplacement de réseaux.' },
+      { to: '/renovation-petite-surface-paris', label: 'Petite surface', desc: 'Positionner prises, arrivées et évacuations au bon endroit.' },
+      { to: '/prix-renovation-appartement-paris', label: 'Budget', desc: 'Comprendre pourquoi les réseaux pèsent dans le devis.' },
+      { to: '/delai-renovation-appartement-paris', label: 'Délais', desc: 'Placer plomberie et électricité au bon moment du chantier.' },
     ],
     relatedTitle: 'Continuer votre parcours',
     relatedLinks: [
@@ -598,6 +621,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         a: "Oui, mais il est souvent plus pertinent de le traiter avec electricite, plomberie et finitions afin d'eviter de refaire deux fois les memes zones.",
       },
     ],
+    guideLinksTitle: 'Guides pour redistribuer un logement',
+    guideLinks: [
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Savoir ce qu’il faut cadrer avant dépose et travaux bruyants.' },
+      { to: '/delai-renovation-appartement-paris', label: 'Délais', desc: 'Comprendre l’ordre logique des lots.' },
+      { to: '/renovation-appartement-paris-avant-apres', label: 'Avant/après', desc: 'Identifier les signes d’une transformation bien exécutée.' },
+      { to: '/renovation-appartement-haut-de-gamme-paris', label: 'Haut de gamme', desc: 'Relier supports, cloisons et niveau de finition.' },
+    ],
     relatedTitle: 'A voir aussi',
     relatedLinks: [
       { to: '/renovation-appartement-paris', label: 'Renovation appartement', desc: 'Quand la redistribution est integree a un chantier complet.' },
@@ -734,6 +764,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         a: "Oui, car l'ancien reserve davantage d'inconnues. C'est pourquoi nous accordons une grande importance a la visite technique et a la lecture du bien avant chiffrage.",
       },
     ],
+    guideLinksTitle: 'Guides pour le bâti ancien',
+    guideLinks: [
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Préparer un chantier compatible avec l’immeuble.' },
+      { to: '/renovation-appartement-haut-de-gamme-paris', label: 'Haut de gamme', desc: 'Valoriser parquet, supports et finitions.' },
+      { to: '/renovation-appartement-paris-avant-apres', label: 'Avant/après', desc: 'Voir ce qu’une rénovation doit corriger techniquement.' },
+      { to: '/prix-renovation-appartement-paris', label: 'Prix', desc: 'Cadrer les surprises possibles de l’ancien.' },
+    ],
     relatedTitle: 'Approfondir votre projet',
     relatedLinks: [
       { to: '/renovation-haussmannien-paris', label: 'Haussmannien', desc: 'Pour les biens avec parquet point de Hongrie, moulures et boiseries.' },
@@ -869,6 +906,13 @@ export const seoPageConfigs: Record<string, SeoPageConfig> = {
         q: "Intervenez-vous aussi sur cuisine et salle d'eau dans un studio ?",
         a: "Oui. Ce sont meme les postes les plus structurants dans une petite surface. Nous les traitons en priorite pour gagner en fonctionnalite et en durabilite.",
       },
+    ],
+    guideLinksTitle: 'Guides pour studios et petites surfaces',
+    guideLinks: [
+      { to: '/renovation-petite-surface-paris', label: 'Petite surface', desc: 'Prioriser plan, cuisine, salle d’eau et rangements.' },
+      { to: '/prix-renovation-appartement-paris', label: 'Prix au m²', desc: 'Comprendre pourquoi un studio peut coûter plus cher au m².' },
+      { to: '/delai-renovation-appartement-paris', label: 'Délais', desc: 'Organiser un chantier court et coordonné.' },
+      { to: '/renovation-paris-questions-copropriete', label: 'Copropriété', desc: 'Gérer les contraintes d’un petit chantier en immeuble.' },
     ],
     relatedTitle: 'Pages utiles',
     relatedLinks: [

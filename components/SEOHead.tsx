@@ -8,6 +8,10 @@ interface SEOHeadProps {
   jsonLd?: object | object[];
 }
 
+function serializeJsonLd(schema: object) {
+  return JSON.stringify(schema).replace(/</g, '\\u003c');
+}
+
 export default function SEOHead({
   title,
   description,
@@ -15,6 +19,8 @@ export default function SEOHead({
   ogImage = 'https://da-bat.com/og-image.jpg',
   jsonLd,
 }: SEOHeadProps) {
+  const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
   useEffect(() => {
     // Title
     document.title = title;
@@ -74,5 +80,16 @@ export default function SEOHead({
     };
   }, [title, description, canonical, ogImage, jsonLd]);
 
-  return null;
+  return (
+    <>
+      {schemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          data-page-schema="true"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
+        />
+      ))}
+    </>
+  );
 }

@@ -5,11 +5,11 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import WhyUs from './components/WhyUs';
-const BeforeAfter = React.lazy(() => import('./components/BeforeAfter'));
+import BeforeAfter from './components/BeforeAfter';
 import Process from './components/Process';
-const Gallery = React.lazy(() => import('./components/Gallery'));
-const Testimonials = React.lazy(() => import('./components/Testimonials'));
-const Contact = React.lazy(() => import('./components/Contact'));
+import Gallery from './components/Gallery';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
 import CTABanner from './components/CTABanner';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -31,6 +31,12 @@ const PlomberieElectricite = React.lazy(() => import('./pages/PlomberieElectrici
 const MaconnerieCloisonsPlatrerie = React.lazy(() => import('./pages/MaconnerieCloisonsPlatrerie'));
 const RenovationAppartementAncien = React.lazy(() => import('./pages/RenovationAppartementAncien'));
 const RenovationStudio = React.lazy(() => import('./pages/RenovationStudio'));
+const PrixRenovationAppartementParis = React.lazy(() => import('./pages/PrixRenovationAppartementParis'));
+const DelaiRenovationAppartementParis = React.lazy(() => import('./pages/DelaiRenovationAppartementParis'));
+const RenovationAppartementAvantApres = React.lazy(() => import('./pages/RenovationAppartementAvantApres'));
+const RenovationPetiteSurfaceParis = React.lazy(() => import('./pages/RenovationPetiteSurfaceParis'));
+const RenovationAppartementHautDeGammeParis = React.lazy(() => import('./pages/RenovationAppartementHautDeGammeParis'));
+const RenovationParisCopropriete = React.lazy(() => import('./pages/RenovationParisCopropriete'));
 
 // Main page (homepage) — extracted as a component
 const HomePage: React.FC = () => {
@@ -100,6 +106,12 @@ const App: React.FC = () => {
         <Route path="/renovation-salle-de-bain-paris" element={<RenovationSalleDeBain />} />
         <Route path="/pose-parquet-paris" element={<PoseParquet />} />
         <Route path="/devis-renovation-paris" element={<DevisRenovation />} />
+        <Route path="/prix-renovation-appartement-paris" element={<PrixRenovationAppartementParis />} />
+        <Route path="/delai-renovation-appartement-paris" element={<DelaiRenovationAppartementParis />} />
+        <Route path="/renovation-appartement-paris-avant-apres" element={<RenovationAppartementAvantApres />} />
+        <Route path="/renovation-petite-surface-paris" element={<RenovationPetiteSurfaceParis />} />
+        <Route path="/renovation-appartement-haut-de-gamme-paris" element={<RenovationAppartementHautDeGammeParis />} />
+        <Route path="/renovation-paris-questions-copropriete" element={<RenovationParisCopropriete />} />
       </Routes>
     </React.Suspense>
   );

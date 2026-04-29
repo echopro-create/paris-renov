@@ -86,7 +86,7 @@ const JSON_LD = [
       },
     ],
   },
-];
+].filter((schema) => schema['@type'] !== 'FAQPage');
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },

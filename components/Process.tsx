@@ -125,24 +125,6 @@ export default function Process() {
           </div>
         </div>
 
-        {/* FAQ Schema.org JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": process.faq.map((item) => ({
-                "@type": "Question",
-                "name": item.question,
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": item.answer
-                }
-              }))
-            })
-          }}
-        />
       </div>
     </section>
   );

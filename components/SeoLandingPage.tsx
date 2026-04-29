@@ -36,18 +36,6 @@ function buildJsonLd(page: SeoPageConfig) {
     },
     {
       '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: page.faq.map((item) => ({
-        '@type': 'Question',
-        name: item.q,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.a,
-        },
-      })),
-    },
-    {
-      '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://da-bat.com/' },
@@ -239,6 +227,29 @@ export default function SeoLandingPage({ page }: SeoLandingPageProps) {
               </div>
             </div>
           </section>
+
+          {page.guideLinks && page.guideLinks.length > 0 && (
+            <section className="bg-slate-100 py-20 md:py-24">
+              <div className="mx-auto max-w-7xl px-6">
+                <h2 className="max-w-3xl font-serif text-3xl font-bold text-slate-900 md:text-5xl">
+                  {page.guideLinksTitle ?? 'Guides pour préparer votre projet'}
+                </h2>
+
+                <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                  {page.guideLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className="rounded-lg border border-slate-200 bg-white p-6 transition-all hover:-translate-y-1 hover:border-gold-400"
+                    >
+                      <div className="font-serif text-2xl font-bold text-slate-900">{link.label}</div>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">{link.desc}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="bg-slate-100 py-20 md:py-24">
             <div className="mx-auto max-w-7xl px-6">

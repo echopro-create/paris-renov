@@ -17,7 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 
 // Route → [title, metaDescription]
-const ROUTES_META = {
+export const ROUTES_META = {
   '/': [
     'D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris',
     'D.A. BAT — entreprise générale de bâtiment, tous corps d\'état à Paris. Rénovation d\'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, parquets. Devis gratuit sous 24h.',
@@ -65,6 +65,30 @@ const ROUTES_META = {
   '/devis-renovation-paris': [
     'Devis Rénovation Appartement Paris — Gratuit Sous 24h | D.A. BAT',
     'Demandez votre devis rénovation appartement à Paris. Réponse garantie sous 24h. Prix rénovation au m², estimation travaux, conseil personnalisé gratuit. D.A. BAT — tous corps d\'état.',
+  ],
+  '/prix-renovation-appartement-paris': [
+    'Prix Rénovation Appartement Paris | Budget au m² & Devis | D.A. BAT',
+    'Guide des prix de rénovation d\'appartement à Paris : budget au m², postes qui font varier le coût, arbitrages utiles et méthode de devis détaillé.',
+  ],
+  '/delai-renovation-appartement-paris': [
+    'Délai Rénovation Appartement Paris | Planning Travaux | D.A. BAT',
+    'Combien de temps prévoir pour rénover un appartement à Paris ? Planning par étape, facteurs de retard et méthode pour sécuriser les délais.',
+  ],
+  '/renovation-appartement-paris-avant-apres': [
+    'Rénovation Appartement Paris Avant Après | Exemples | D.A. BAT',
+    'Exemples de rénovation d\'appartement à Paris : avant/après, pièces transformées, arbitrages techniques et finitions qui valorisent le bien.',
+  ],
+  '/renovation-petite-surface-paris': [
+    'Rénovation Petite Surface Paris | Studio & Investissement | D.A. BAT',
+    'Guide pour rénover une petite surface à Paris : studio, cuisine compacte, salle d’eau, rangements, budget et logique d’investissement locatif.',
+  ],
+  '/renovation-appartement-haut-de-gamme-paris': [
+    'Rénovation Appartement Haut de Gamme Paris | Finitions | D.A. BAT',
+    'Rénovation haut de gamme à Paris : finitions, matériaux, parquet, peinture, salle de bain, cuisine et coordination tous corps d’état.',
+  ],
+  '/renovation-paris-questions-copropriete': [
+    'Rénovation Paris & Copropriété | Règles Travaux | D.A. BAT',
+    'Travaux de rénovation en copropriété à Paris : horaires, parties communes, bruit, gravats, autorisations et préparation du chantier.',
   ],
 };
 
