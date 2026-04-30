@@ -179,6 +179,13 @@
 9. Inspect prerendered HTML for new URLs: title, description, canonical, H1, internal links.
 10. Commit and push after successful verification.
 
+## Prerender Status 2026-04-30
+
+- Сборка приведена к build-time SSR/prerender модели: `vite build` собирает client bundle, `vite build --ssr entry-server.tsx` собирает SSR entry, затем `npm run prerender` запускает `tsx scripts/prerender.tsx`.
+- `scripts/prerender.tsx` пишет готовую HTML-разметку для 18 публичных маршрутов и обновляет route-specific title, description, canonical, Open Graph и Twitter tags.
+- Build теперь fail-fast: отсутствующий `<!--ssr-outlet-->`, пустой SSR markup, оставшийся пустой root или отсутствующие SEO placeholders считаются ошибкой сборки.
+- Проверено через `npm run test:run`, `npm run build` и поиск пустых root/SSR markers в `dist`.
+
 ## Approval Gate
 
 This plan intentionally touches more than 3 files. Per project rule, implementation must wait for user approval before code changes beyond this plan update.

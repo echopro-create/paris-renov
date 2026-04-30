@@ -5,6 +5,7 @@
 - [x] Создать 6 новых статей-гайдов под коммерческие запросы в Париже.
 - [x] Подключить новые маршруты в `App.tsx` и `entry-server.tsx`.
 - [x] Обновить `scripts/prerender.tsx`, `public/sitemap.xml` и тесты.
+- [x] Стандартизировать build-time prerender: `npm run build` запускает `tsx scripts/prerender.tsx`, пишет готовый HTML в `dist` и падает при пустом root/SSR outlet.
 - [x] Усилить внутреннюю перелинковку в SEO-страницах и футере.
 - [x] Убрать неиспользуемый GA4-блок из `index.html`.
 - [x] Прогнать тесты и production build.
