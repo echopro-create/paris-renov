@@ -6,7 +6,7 @@
  * 2. Updates <title> and <meta description> in the HTML template
  * 3. Writes dist/<route>/index.html
  *
- * Usage: node scripts/prerender.js
+ * Usage: tsx scripts/prerender.tsx
  */
 
 import fs from 'node:fs';
@@ -15,9 +15,21 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
+const SSR_OUTLET = '<!--ssr-outlet-->';
+
+type RouteMeta = readonly [title: string, description: string];
+type RouteSeo = {
+  route: string;
+  title: string;
+  description: string;
+};
+type RenderModule = {
+  render: (route: string) => string;
+};
+type StringReplacer = string | ((substring: string, ...args: string[]) => string);
 
 // Route → [title, metaDescription]
-export const ROUTES_META = {
+export const ROUTES_META: Record<string, RouteMeta> = {
   '/': [
     'D.A. BAT | Rénovation Générale, Peinture & Décoration à Paris',
     'D.A. BAT — entreprise générale de bâtiment, tous corps d\'état à Paris. Rénovation d\'appartements anciens et haussmanniens : peinture, plomberie, électricité, maçonnerie, parquets. Devis gratuit sous 24h.',
@@ -92,81 +104,168 @@ export const ROUTES_META = {
   ],
 };
 
-export function getCanonicalUrl(route) {
+export function getCanonicalUrl(route: string): string {
   return `https://da-bat.com${route === '/' ? '/' : route}`;
 }
 
-export function applyRouteSeo(html, { route, title, description }) {
+function escapeHtmlText(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function escapeHtmlAttribute(value: string): string {
+  return escapeHtmlText(value).replace(/"/g, '&quot;');
+}
+
+function replaceRequired(html: string, pattern: RegExp, replacement: StringReplacer, label: string): string {
+  if (!pattern.test(html)) {
+    throw new Error(`Missing SEO placeholder: ${label}`);
+  }
+
+  return typeof replacement === 'string'
+    ? html.replace(pattern, replacement)
+    : html.replace(pattern, replacement);
+}
+
+export function applyRouteSeo(html: string, { route, title, description }: RouteSeo): string {
   const canonicalUrl = getCanonicalUrl(route);
+  const titleText = escapeHtmlText(title);
+  const titleAttribute = escapeHtmlAttribute(title);
+  const descriptionAttribute = escapeHtmlAttribute(description);
+  const canonicalAttribute = escapeHtmlAttribute(canonicalUrl);
   const replacements = [
-    [/<title>[^<]*<\/title>/, `<title>${title}</title>`],
-    [/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${description}$2`],
-    [/(<meta\s+property="og:title"\s+content=")[^"]*(")/, `$1${title}$2`],
-    [/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${description}$2`],
-    [/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${canonicalUrl}$2`],
-    [/(<meta\s+property="og:url"\s+content=")[^"]*(")/, `$1${canonicalUrl}$2`],
-    [/(<meta\s+property="twitter:url"\s+content=")[^"]*(")/, `$1${canonicalUrl}$2`],
-    [/(<meta\s+property="twitter:title"\s+content=")[^"]*(")/, `$1${title}$2`],
-    [/(<meta\s+property="twitter:description"\s+content=")[^"]*(")/, `$1${description}$2`],
-  ];
+    [/<title>[^<]*<\/title>/, `<title>${titleText}</title>`, 'title'],
+    [
+      /(<meta\s+name="description"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${descriptionAttribute}${suffix}`,
+      'meta description',
+    ],
+    [
+      /(<meta\s+property="og:title"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${titleAttribute}${suffix}`,
+      'og:title',
+    ],
+    [
+      /(<meta\s+property="og:description"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${descriptionAttribute}${suffix}`,
+      'og:description',
+    ],
+    [
+      /(<link\s+rel="canonical"\s+href=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${canonicalAttribute}${suffix}`,
+      'canonical',
+    ],
+    [
+      /(<meta\s+property="og:url"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${canonicalAttribute}${suffix}`,
+      'og:url',
+    ],
+    [
+      /(<meta\s+property="twitter:url"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${canonicalAttribute}${suffix}`,
+      'twitter:url',
+    ],
+    [
+      /(<meta\s+property="twitter:title"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${titleAttribute}${suffix}`,
+      'twitter:title',
+    ],
+    [
+      /(<meta\s+property="twitter:description"\s+content=")[^"]*(")/,
+      (_match: string, prefix: string, suffix: string) => `${prefix}${descriptionAttribute}${suffix}`,
+      'twitter:description',
+    ],
+  ] satisfies Array<[RegExp, StringReplacer, string]>;
 
   return replacements.reduce(
-    (currentHtml, [pattern, replacement]) => currentHtml.replace(pattern, replacement),
+    (currentHtml, [pattern, replacement, label]) => replaceRequired(currentHtml, pattern, replacement, label),
     html
   );
 }
 
-async function prerender() {
-  const distPath = path.resolve(root, 'dist');
-  const htmlTemplatePath = path.resolve(distPath, 'index.html');
+function assertTemplateReady(templateHtml: string): void {
+  if (!templateHtml.includes(SSR_OUTLET)) {
+    throw new Error(`Missing SSR outlet marker: ${SSR_OUTLET}`);
+  }
+}
 
-  // Read the built HTML template
-  const templateHtml = fs.readFileSync(htmlTemplatePath, 'utf-8');
-
-  // Import the SSR-built entry module
-  const ssrModulePath = path.resolve(root, 'dist-server', 'entry-server.js');
-  const { render } = await import(pathToFileURL(ssrModulePath).href);
-
-  let successCount = 0;
-
-  for (const [route, [title, description]] of Object.entries(ROUTES_META)) {
-    try {
-      // Render the React app for this route
-      const appHtml = render(route);
-
-      // Start from the template
-      let html = templateHtml;
-
-      // Replace the SSR outlet
-      html = html.replace('<!--ssr-outlet-->', appHtml);
-      html = applyRouteSeo(html, { route, title, description });
-
-      // Determine output path
-      let outputPath;
-      if (route === '/') {
-        outputPath = path.resolve(distPath, 'index.html');
-      } else {
-        const routeDir = path.resolve(distPath, route.slice(1));
-        fs.mkdirSync(routeDir, { recursive: true });
-        outputPath = path.resolve(routeDir, 'index.html');
-      }
-
-      fs.writeFileSync(outputPath, html, 'utf-8');
-      console.log(`✅ Prerendered: ${route} → ${path.relative(root, outputPath)}`);
-      successCount++;
-    } catch (err) {
-      console.error(`❌ Failed to prerender ${route}:`, err);
-    }
+function injectAppHtml(templateHtml: string, route: string, appHtml: string): string {
+  if (!appHtml.trim()) {
+    throw new Error(`SSR returned empty markup for route "${route}"`);
   }
 
-  console.log(`\n🎉 Prerendered ${successCount}/${Object.keys(ROUTES_META).length} routes successfully!`);
+  const html = templateHtml.replace(SSR_OUTLET, appHtml);
 
-  // Clean up the SSR build artifacts
+  if (html.includes(SSR_OUTLET) || /<div id="root">\s*<\/div>/.test(html)) {
+    throw new Error(`Route "${route}" still has an empty root after prerender`);
+  }
+
+  return html;
+}
+
+async function prerender() {
+  const distPath = path.resolve(root, 'dist');
+  const distServerPath = path.resolve(root, 'dist-server');
+  const htmlTemplatePath = path.resolve(distPath, 'index.html');
+
   try {
-    fs.rmSync(path.resolve(root, 'dist-server'), { recursive: true, force: true });
-    console.log('🧹 Cleaned up dist-server/');
-  } catch {
-    console.warn('⚠️  Could not clean dist-server/ (may be locked). Delete manually.');
+    // Read the built HTML template
+    const templateHtml = fs.readFileSync(htmlTemplatePath, 'utf-8');
+    assertTemplateReady(templateHtml);
+
+    // Import the SSR-built entry module
+    const ssrModulePath = path.resolve(distServerPath, 'entry-server.js');
+    const { render } = (await import(pathToFileURL(ssrModulePath).href)) as RenderModule;
+
+    let successCount = 0;
+    const failures: string[] = [];
+    const routeEntries = Object.entries(ROUTES_META);
+
+    for (const [route, [title, description]] of routeEntries) {
+      try {
+        // Render the React app for this route
+        const appHtml = render(route);
+
+        // Start from the template
+        let html = injectAppHtml(templateHtml, route, appHtml);
+
+        html = applyRouteSeo(html, { route, title, description });
+
+        // Determine output path
+        let outputPath;
+        if (route === '/') {
+          outputPath = path.resolve(distPath, 'index.html');
+        } else {
+          const routeDir = path.resolve(distPath, route.slice(1));
+          fs.mkdirSync(routeDir, { recursive: true });
+          outputPath = path.resolve(routeDir, 'index.html');
+        }
+
+        fs.writeFileSync(outputPath, html, 'utf-8');
+        console.log(`OK: prerendered ${route} -> ${path.relative(root, outputPath)}`);
+        successCount++;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        failures.push(`${route}: ${message}`);
+        console.error(`Failed to prerender ${route}: ${message}`);
+      }
+    }
+
+    if (failures.length > 0 || successCount !== routeEntries.length) {
+      throw new Error(`Prerender failed for ${failures.length} route(s): ${failures.join('; ')}`);
+    }
+
+    console.log(`OK: prerendered ${successCount}/${routeEntries.length} routes successfully`);
+  } finally {
+    // Clean up the SSR build artifacts
+    try {
+      fs.rmSync(distServerPath, { recursive: true, force: true });
+      console.log('OK: cleaned dist-server/');
+    } catch {
+      console.warn('WARN: could not clean dist-server/ (may be locked). Delete manually.');
+    }
   }
 }
 

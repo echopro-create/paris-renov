@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ROUTES_META, applyRouteSeo, getCanonicalUrl } from './prerender.js';
+import { ROUTES_META, applyRouteSeo, getCanonicalUrl } from './prerender';
 
 const TEMPLATE = `
   <title>Home</title>

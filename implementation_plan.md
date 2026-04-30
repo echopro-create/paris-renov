@@ -86,7 +86,7 @@
 5. `lib/seoPageConfigs.ts`
 6. `lib/seoPageConfigs.test.ts`
 7. `public/sitemap.xml`
-8. `scripts/prerender.js`
+8. `scripts/prerender.tsx`
 9. `scripts/prerender.test.ts`
 10. `index.html`
 11. `task.md`
@@ -147,9 +147,9 @@
   - `69:fe258e|</urlset>`
   - Action: add article URLs with current `lastmod`.
 
-### `scripts/prerender.js`
+### `scripts/prerender.tsx`
 
-- [scripts/prerender.js](/Users/macbook/Work/paris-renov/scripts/prerender.js:20)
+- [scripts/prerender.tsx](/Users/macbook/Work/paris-renov/scripts/prerender.tsx:20)
   - `20:1f865c|const ROUTES_META = {`
   - `79:2d0ebd|};`
   - Action: add article titles/descriptions and keep canonical generation.
